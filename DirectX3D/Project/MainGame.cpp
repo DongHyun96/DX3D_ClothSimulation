@@ -1,17 +1,19 @@
 #include "Framework.h"
 #include "MainGame.h"
 
-#include "Scene/TutorialScene.h"
-#include "Scene/TextureScene.h"
-#include "Scene/GridScene.h"
-#include "Scene/TerrainScene.h"
-#include "Scene/TerrainEditorScene.h"
-#include "Scene/ModelExportScene.h"
-#include "Scene/ModelAnimationScene.h"
-#include "Scene/CollisionScene.h"
-#include "Scene/CharacterScene.h"
-#include "Scene/InstancingScene.h"
-#include "Scene/ModelInstancingScene.h"
+#include "Scene/Class/TutorialScene.h"
+#include "Scene/Class/TextureScene.h"
+#include "Scene/Class/GridScene.h"
+#include "Scene/Class/TerrainScene.h"
+#include "Scene/Class/TerrainEditorScene.h"
+#include "Scene/Class/ModelExportScene.h"
+#include "Scene/Class/ModelAnimationScene.h"
+#include "Scene/Class/CollisionScene.h"
+#include "Scene/Class/CharacterScene.h"
+#include "Scene/Class/InstancingScene.h"
+#include "Scene/Class/ModelInstancingScene.h"
+
+#include "Scene/Revolt/GameScene.h"
 
 MainGame::MainGame()
 {

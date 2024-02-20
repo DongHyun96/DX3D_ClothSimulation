@@ -78,7 +78,7 @@
     <ClInclude Include="Scene\Scene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\TutorialScene.h">
+    <ClInclude Include="Scene\Class\TutorialScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Object\Transform.h">
@@ -120,7 +120,7 @@
     <ClInclude Include="_Include\DirectXTex.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\TextureScene.h">
+    <ClInclude Include="Scene\Class\TextureScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Render\Texture\Texture.h">
@@ -150,7 +150,7 @@
     <ClInclude Include="Scene\SceneManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\GridScene.h">
+    <ClInclude Include="Scene\Class\GridScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Object\Basic\Grid.h">
@@ -168,7 +168,7 @@
     <ClInclude Include="Object\LandScape\Terrain.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\TerrainScene.h">
+    <ClInclude Include="Scene\Class\TerrainScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Utility\GameMath.h">
@@ -186,7 +186,7 @@
     <ClInclude Include="Object\LandScape\TerrainEditor.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\TerrainEditorScene.h">
+    <ClInclude Include="Scene\Class\TerrainEditorScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Render\Buffer\StructuredBuffer.h">
@@ -441,7 +441,7 @@
     <ClInclude Include="_Include\assimp\Compiler\pushpack1.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\ModelExportScene.h">
+    <ClInclude Include="Scene\Class\ModelExportScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Model\ModelExporter.h">
@@ -456,7 +456,7 @@
     <ClInclude Include="Model\Model.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\ModelAnimationScene.h">
+    <ClInclude Include="Scene\Class\ModelAnimationScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Model\ModelClip.h">
@@ -477,7 +477,7 @@
     <ClInclude Include="Object\Collider\ColliderCapsule.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\CollisionScene.h">
+    <ClInclude Include="Scene\Class\CollisionScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Render\State\BlendState.h">
@@ -492,16 +492,16 @@
     <ClInclude Include="Object\Game\Character.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\CharacterScene.h">
+    <ClInclude Include="Scene\Class\CharacterScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Object\Game\Knight.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\InstancingScene.h">
+    <ClInclude Include="Scene\Class\InstancingScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\ModelInstancingScene.h">
+    <ClInclude Include="Scene\Class\ModelInstancingScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Model\ModelInstancing.h">
@@ -511,6 +511,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Object\LandScape\SkyBox.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Revolt\GameScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -554,7 +557,7 @@
     <ClCompile Include="Object\Basic\Cube.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\TutorialScene.cpp">
+    <ClCompile Include="Scene\Class\TutorialScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Object\Transform.cpp">
@@ -587,7 +590,7 @@
     <ClCompile Include="_Include\imgui_widgets.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\TextureScene.cpp">
+    <ClCompile Include="Scene\Class\TextureScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Render\Texture\Texture.cpp">
@@ -617,7 +620,7 @@
     <ClCompile Include="Scene\SceneManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\GridScene.cpp">
+    <ClCompile Include="Scene\Class\GridScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Object\Basic\Grid.cpp">
@@ -635,7 +638,7 @@
     <ClCompile Include="Object\LandScape\Terrain.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\TerrainScene.cpp">
+    <ClCompile Include="Scene\Class\TerrainScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Utility\GameMath.cpp">
@@ -647,7 +650,7 @@
     <ClCompile Include="Object\LandScape\TerrainEditor.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\TerrainEditorScene.cpp">
+    <ClCompile Include="Scene\Class\TerrainEditorScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Render\Buffer\StructuredBuffer.cpp">
@@ -656,7 +659,7 @@
     <ClCompile Include="Render\Shader\ComputeShader.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\ModelExportScene.cpp">
+    <ClCompile Include="Scene\Class\ModelExportScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Model\ModelExporter.cpp">
@@ -668,7 +671,7 @@
     <ClCompile Include="Model\Model.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\ModelAnimationScene.cpp">
+    <ClCompile Include="Scene\Class\ModelAnimationScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Model\ModelClip.cpp">
@@ -689,7 +692,7 @@
     <ClCompile Include="Object\Collider\ColliderCapsule.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\CollisionScene.cpp">
+    <ClCompile Include="Scene\Class\CollisionScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Render\State\BlendState.cpp">
@@ -704,16 +707,16 @@
     <ClCompile Include="Object\Game\Character.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\CharacterScene.cpp">
+    <ClCompile Include="Scene\Class\CharacterScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Object\Game\Knight.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\InstancingScene.cpp">
+    <ClCompile Include="Scene\Class\InstancingScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\ModelInstancingScene.cpp">
+    <ClCompile Include="Scene\Class\ModelInstancingScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Model\ModelInstancing.cpp">
@@ -723,6 +726,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Object\LandScape\SkyBox.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Revolt\GameScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
