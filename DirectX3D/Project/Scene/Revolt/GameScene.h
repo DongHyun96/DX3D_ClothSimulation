@@ -13,5 +13,5 @@ public:
 
 private:
 
-
+	Model* wheel{};
 };

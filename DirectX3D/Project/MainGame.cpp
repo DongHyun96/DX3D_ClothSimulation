@@ -34,7 +34,10 @@ MainGame::MainGame()
     //SCENE->Create("Start", new CollisionScene);
     //SCENE->Create("Start", new CharacterScene);
     //SCENE->Create("Start", new InstancingScene);
-    SCENE->Create("Start", new ModelInstancingScene);
+    //SCENE->Create("Start", new ModelInstancingScene);
+    
+    SCENE->Create("Start", new GameScene);
+
 
 
     //SCENE->Add("Tutorial");
