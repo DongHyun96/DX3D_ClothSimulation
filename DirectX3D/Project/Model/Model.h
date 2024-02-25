@@ -24,7 +24,7 @@ public:
 
 	void AttachToBone(class ModelAnimator* model, string boneName);
 
-
+	void SaveModel();
 
 private:
 

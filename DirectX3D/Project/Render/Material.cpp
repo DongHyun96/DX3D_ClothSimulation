@@ -131,7 +131,7 @@ void Material::SelectMap(Texture** texture, string mapType, wstring clearFile)
 	ImGui::Text(mapType.c_str());
 
 	if (ImGui::ImageButton(textureID, ImVec2(50, 50)))
-		DIALOG->OpenDialog(mapType, mapType, ".png,.jpg,.tga,.dds,.TGA,.PNG,.JPG,.DDS", "_Texture/");
+		DIALOG->OpenDialog(mapType, mapType, ".png,.jpg,.tga,.dds,.bmp,.TGA,.PNG,.JPG,.DDS", "_Texture/");
 
 	ImGui::SameLine();
 
@@ -141,7 +141,7 @@ void Material::SelectMap(Texture** texture, string mapType, wstring clearFile)
 		*texture = Texture::Add(clearFile, ToWString(mapType) + clearFile);
 }
 
-void Material::Save(wstring file)
+void Material::SaveTransform(wstring file)
 {
 	BinaryWriter data(file);
 
@@ -169,7 +169,7 @@ void Material::Save(wstring file)
 	data.WriteData(buffer->data.shininess);
 }
 
-void Material::Load(wstring file)
+void Material::LoadTransform(wstring file)
 {
 	BinaryReader data(file);
 
@@ -212,7 +212,7 @@ void Material::SaveDialog(string baseDir)
 
 			file = file.substr(projectDir.size() + 1, file.size());
 
-			Save(ToWString(file));
+			SaveTransform(ToWString(file));
 		}
 
 		DIALOG->Close();
@@ -232,7 +232,7 @@ void Material::LoadDialog(string baseDir)
 
 			file = file.substr(projectDir.size() + 1, file.size());
 
-			Load(ToWString(file));
+			LoadTransform(ToWString(file));
 		}
 
 		DIALOG->Close();

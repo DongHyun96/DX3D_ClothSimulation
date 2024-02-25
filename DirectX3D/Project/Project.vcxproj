@@ -175,6 +175,7 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Object\Car\Car.h" />
     <ClInclude Include="Scene\Revolt\GameScene.h" />
     <ClInclude Include="Model\ModelAnimatorInstancing.h" />
     <ClInclude Include="Model\ModelInstancing.h" />
@@ -344,6 +345,7 @@
     <ClInclude Include="__Others\targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Object\Car\Car.cpp" />
     <ClCompile Include="Scene\Revolt\GameScene.cpp" />
     <ClCompile Include="Model\ModelAnimatorInstancing.cpp" />
     <ClCompile Include="Model\ModelInstancing.cpp" />

@@ -11,8 +11,8 @@ public:
 	
 	void Debug();
 
-	void SetParent(Transform* parent)		{ this->parent = parent; }
-	void SetPivot(const Vector3& pivot)		{ this->pivot = pivot; }
+	virtual void SetParent(Transform* parent)		{ this->parent = parent; }
+	void SetPivot(const Vector3& pivot)				{ this->pivot = pivot; }
 
 	Vector3 GetGlobalScale()	const { return globalScale; }
 	Vector3 GetGlobalRotation() const { return globalRotation; }
@@ -23,9 +23,10 @@ public:
 	Vector3 GetForwardVector()	const { return forward; }
 
 	void SetName(string name) { this->name = name; }
+	string GetName() const { return name; }
 
-	void Save();
-	void Load();
+	void SaveTransform();
+	void LoadTransform();
 
 	Matrix& GetWorld() { return world; }
 

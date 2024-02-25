@@ -43,14 +43,14 @@ void Transform::Debug()
 
 		ImGui::DragFloat3("Translation",	(float*)&translation,	1.00f, -2000.f, 200.f);
 
-		if (ImGui::Button("Save")) Save();
-		if (ImGui::Button("Load")) Load();
+		if (ImGui::Button("Save")) SaveTransform();
+		if (ImGui::Button("Load")) LoadTransform();
 
 		ImGui::TreePop();
 	}
 }
 
-void Transform::Save()
+void Transform::SaveTransform()
 {
 	BinaryWriter data("_TextData/Transform/" + name + ".transform");
 
@@ -60,7 +60,8 @@ void Transform::Save()
 	data.WriteData(pivot);
 }
 
-void Transform::Load()
+
+void Transform::LoadTransform()
 {
 	BinaryReader data("_TextData/Transform/" + name + ".transform");
 
@@ -70,7 +71,6 @@ void Transform::Load()
 	rotation	= data.ReadVector3();
 	translation = data.ReadVector3();
 	pivot		= data.ReadVector3();
-
 }
 
 void Transform::UpdateWorldMatrix()

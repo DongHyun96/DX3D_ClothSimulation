@@ -10,7 +10,6 @@ ModelInstancing::ModelInstancing(string name)
 	instanceBuffer = new VertexBuffer(instanceDatas);
 
 	SetShader(L"13_ModelInstancing");
-
 }
 
 ModelInstancing::~ModelInstancing()
@@ -53,7 +52,7 @@ void ModelInstancing::Debug()
 {
 	ImGui::Text("DrawCount : %d", drawCount);
 
-	if (ImGui::Button("Add Model"))
+	if (ImGui::Button(("Add Model " + name).c_str()))
 		AddTransform();
 
 	for (Transform* transform : transforms)
@@ -70,4 +69,30 @@ Transform* ModelInstancing::AddTransform()
 	transforms.emplace_back(transform);
 
 	return transform;
+}
+
+void ModelInstancing::SaveTransforms()
+{
+	BinaryWriter data("_TextData/Transform/" + name + ".cnt");
+	data.WriteData((UINT)(transforms.size()));
+
+	for (Transform* transform : transforms)
+		transform->SaveTransform();
+}
+
+void ModelInstancing::LoadTransforms()
+{
+	BinaryReader data("_TextData/Transform/" + name + ".cnt");
+	UINT dataSize = data.ReadUint();
+
+	for (UINT i = 0; i < dataSize; i++) AddTransform();
+
+	for (Transform* transform : transforms)
+		transform->LoadTransform();
+}
+
+void ModelInstancing::SetParent(Transform* parent)
+{
+	for (Transform* transform : transforms)
+		transform->SetParent(parent);
 }

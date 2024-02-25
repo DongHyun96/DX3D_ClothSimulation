@@ -6,12 +6,12 @@ Character::Character(string name, float radius, float height)
 	:ColliderCapsule(radius, height)
 {
 	ColliderCapsule::SetName(name + "_Collider");
-	ColliderCapsule::Load();
+	ColliderCapsule::LoadTransform();
 
 	model = new ModelAnimator(name);
 	model->SetParent(this);
 
-	Transform::Load();
+	Transform::LoadTransform();
 }
 
 Character::~Character()

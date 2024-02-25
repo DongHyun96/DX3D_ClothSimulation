@@ -12,6 +12,11 @@ public:
 
 	Transform* AddTransform();
 
+	void SaveTransforms();
+	void LoadTransforms();
+
+	void SetParent(Transform* parent) override;
+
 private:
 
 	vector<Transform*> transforms{};

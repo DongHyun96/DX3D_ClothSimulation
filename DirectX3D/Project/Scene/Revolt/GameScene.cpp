@@ -4,23 +4,32 @@
 
 GameScene::GameScene()
 {
-	wheel = new Model("Wheel");
-}
+	//model = new Model("Adeon");
 
+	adeon = new Car("Adeon");
+}
 
 GameScene::~GameScene()
 {
-	delete wheel;
+	//delete model;
+
+	delete adeon;
 }
 
 void GameScene::Update()
 {
-	wheel->Update();
+	//model->Update();
+	//
+	//if (KEY_PRESS(VK_UP)) model->translation	+=	DELTA_TIME * model->GetForwardVector() * 10.f;
+	//if (KEY_PRESS(VK_RIGHT)) model->translation +=	DELTA_TIME * model->GetRightVector() * 10.f;
+
+	adeon->Update();
 }
 
 void GameScene::Render()
 {
-	wheel->Render();
+	//model->Render();
+	adeon->Render();
 }
 
 void GameScene::PreRender()
@@ -29,5 +38,6 @@ void GameScene::PreRender()
 
 void GameScene::PostRender()
 {
-	wheel->Debug();
+	//model->Debug();
+	adeon->Debug();
 }

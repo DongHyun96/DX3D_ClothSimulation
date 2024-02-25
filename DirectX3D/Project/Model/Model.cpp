@@ -9,7 +9,7 @@ Model::Model(string name)
 	ReadMaterial();
 	ReadMesh();
 
-	Transform::Load();
+	Transform::LoadTransform();
 }
 
 Model::~Model()
@@ -69,19 +69,14 @@ void Model::Debug()
 		material->Debug();
 
 	if (ImGui::Button(("Save Model" + name).c_str()))
-	{
-		Transform::Save();
-
-		for (Material* material : materials)
-			material->Save(L"_ModelData/Material/" + ToWString(name + "/" + material->GetName()) + L".mat");
-	}
+		SaveModel();
 
 	if (ImGui::Button(("Load Model" + name).c_str()))
 	{
-		Transform::Load();
+		Transform::LoadTransform();
 
 		for (Material* material : materials)
-			material->Load(L"_ModelData/Material/" + ToWString(name + "/" + material->GetName()) + L".mat");
+			material->LoadTransform(L"_ModelData/Material/" + ToWString(name + "/" + material->GetName()) + L".mat");
 	}
 }
 
@@ -100,6 +95,14 @@ void Model::AttachToBone(ModelAnimator* model, string boneName)
 	model->sockets.emplace(boneName, socket);
 }
 
+void Model::SaveModel()
+{
+	Transform::SaveTransform();
+
+	for (Material* material : materials)
+		material->SaveTransform(L"_ModelData/Material/" + ToWString(name + "/" + material->GetName()) + L".mat");
+}
+
 void Model::ReadMaterial()
 {
 	string path = "_ModelData/Material/" + name + "/MaterialList.list";
@@ -114,7 +117,7 @@ void Model::ReadMaterial()
 
 		string file = data.ReadString();
 
-		material->Load(ToWString(file));
+		material->LoadTransform(ToWString(file));
 
 		materials.push_back(material);
 	}

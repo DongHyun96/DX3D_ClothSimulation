@@ -516,6 +516,9 @@
     <ClInclude Include="Scene\Revolt\GameScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Object\Car\Car.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -729,6 +732,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Scene\Revolt\GameScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Car\Car.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

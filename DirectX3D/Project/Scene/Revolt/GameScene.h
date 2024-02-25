@@ -13,5 +13,7 @@ public:
 
 private:
 
-	Model* wheel{};
+	Model* model{};
+
+	Car* adeon{};
 };

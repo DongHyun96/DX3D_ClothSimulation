@@ -159,6 +159,8 @@ using namespace GameMath;
 #include "Object/Game/Character.h"
 #include "Object/Game/Knight.h"
 
+#include "Object/Car/Car.h"
+
 ///////////////////////////////////////////////////
 
 #include "Scene/Scene.h"

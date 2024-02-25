@@ -18,8 +18,8 @@ public:
 
 	void SelectMap(Texture** texture, string mapType, wstring clearFile);
 
-	void Save(wstring file);
-	void Load(wstring file);
+	void SaveTransform(wstring file);
+	void LoadTransform(wstring file);
 
 	void SaveDialog(string baseDir);
 	void LoadDialog(string baseDir);

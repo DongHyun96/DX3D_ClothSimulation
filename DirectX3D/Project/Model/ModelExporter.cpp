@@ -115,7 +115,7 @@ void ModelExporter::WriteMaterial()
     {
         string path = savePath + material->GetName() + ".mat";
 
-        material->Save(ToWString(path));
+        material->SaveTransform(ToWString(path));
 
         data.WriteData(path);
 
