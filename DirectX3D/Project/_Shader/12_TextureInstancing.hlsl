@@ -1,4 +1,5 @@
 #include "Header.hlsli"
+#include "LightHeader.hlsli"
 
 struct VertexInput
 {
@@ -59,7 +60,7 @@ VertexOutput VS(VertexInput input)
 // Diffuse와 Reflection을 수정된 normal로 계산
 float4 PS(VertexOutput input) : SV_TARGET
 {
-    float3 light = normalize(lightDirection);
+    float3 light = normalize(lights[0].direction);
     
     // Normal Mapping
     float4 normalMapping = normalMap.Sample(samp, input.uv); // TODO : Sample Normal Map

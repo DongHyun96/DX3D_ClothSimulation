@@ -868,6 +868,7 @@
     <FxCompile Include="_Shader\13_ModelInstancing.hlsl" />
     <FxCompile Include="_Shader\14_ModelAnimatorInstancing.hlsl" />
     <FxCompile Include="_Shader\15_SkyBox.hlsl" />
+    <FxCompile Include="_Shader\16_Light.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="_Library\DirectXTex.lib" />
@@ -909,5 +910,6 @@
       <Filter>헤더 파일</Filter>
     </None>
     <None Include="_ModelData\Mesh\Knight.mesh" />
+    <None Include="_Shader\LightHeader.hlsli" />
   </ItemGroup>
 </Project>

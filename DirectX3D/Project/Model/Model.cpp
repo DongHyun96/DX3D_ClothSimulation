@@ -88,6 +88,12 @@ void Model::SetShader(wstring file)
 
 void Model::AttachToBone(ModelAnimator* model, string boneName)
 {
+	if (model->sockets.count(boneName) > 0)
+	{
+		this->SetParent(model->sockets[boneName]);
+		return;
+	}
+
 	Transform* socket = new Transform; // 오른손
 
 	this->SetParent(socket); // Sword의 parent를 socket으로 둠

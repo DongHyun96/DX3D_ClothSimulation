@@ -1,4 +1,5 @@
 #include "Header.hlsli"
+#include "LightHeader.hlsli"
 
 cbuffer BrushBuffer : register(b1)
 {
@@ -93,7 +94,7 @@ Texture2D secondDiffuseMap  : register(t11);
 
 float4 PS(VertexOutput input) : SV_TARGET
 {
-    float3 light = normalize(lightDirection);
+    float3 light = normalize(lights[0].direction);
     
     // Normal Mapping
     float4 normalMapping = normalMap.Sample(samp, input.uv);

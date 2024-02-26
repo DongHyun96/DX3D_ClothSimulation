@@ -1,3 +1,6 @@
+#ifndef SHADER_HLSLI
+#define SHADER_HLSLI
+
 struct Vertex
 {
     float4 pos : POSITION;
@@ -68,11 +71,7 @@ cbuffer Projection : register(b2)
     matrix proj;
 }
 
-// PS CBuffer
-cbuffer LightBuffer : register(b0)
-{
-    float3 lightDirection;
-}
+
 
 cbuffer MaterialBuffer : register(b1)
 {
@@ -92,3 +91,5 @@ Texture2D specularMap : register(t1);
 Texture2D normalMap   : register(t2);
 
 SamplerState samp     : register(s0);
+
+#endif

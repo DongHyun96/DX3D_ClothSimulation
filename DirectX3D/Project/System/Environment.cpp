@@ -75,8 +75,52 @@ void Environment::Debug()
 
 	if (ImGui::TreeNode("Light Option"))
 	{
-		ImGui::DragFloat3("Direction", (float*)&lightBuffer->data.direction, 0.1f, -1.f, 1.f);
+		if (ImGui::Button("Add"))
+			lightBuffer->data.lightCount++;
 
+		for (UINT i = 0; i < lightBuffer->data.lightCount; i++)
+			DebugLight(i);
+
+		ImGui::ColorEdit3("AmbientLight", (float*)&lightBuffer->data.ambientLight);
+		ImGui::ColorEdit3("AmbientCeil", (float*)&lightBuffer->data.ambientCeil);
+
+		ImGui::TreePop();
+	}
+}
+
+void Environment::DebugLight(int lightIndex)
+{
+	string name = "Light_" + to_string(lightIndex);
+
+	LightData& light = lightBuffer->data.lights[lightIndex];
+
+	if (ImGui::TreeNode(name.c_str()))
+	{
+		ImGui::Checkbox("Active", (bool*)&light.active);
+
+		const char* list[] = { "Directional", "Point", "Spot", "Capsule" };
+		ImGui::Combo("Type", &light.type, list, 4);
+
+		ImGui::ColorEdit4("Color", (float*)&light.color);
+
+		if (light.type == 0)
+			ImGui::SliderFloat3("Direction", (float*)&light.direction, -1, 1);
+		else
+		{
+			ImGui::DragFloat3("Position", (float*)&light.position);
+
+			if (light.type == 1)
+				ImGui::SliderFloat("Range", &light.range, 1, 1000);
+
+			if (light.type == 2)
+			{
+				ImGui::SliderFloat("InnerRange", &light.innerRange, 0, light.outerRange);
+				ImGui::SliderFloat("OuterRange", &light.outerRange, light.innerRange, 180.f);
+			}
+
+			if (light.type == 3)
+				ImGui::SliderFloat("Length", &light.length, 0, 500.f);
+		}
 		ImGui::TreePop();
 	}
 }
