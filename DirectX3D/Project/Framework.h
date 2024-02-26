@@ -126,6 +126,9 @@ using namespace GameMath;
 
 #include "Render/State/StateManager.h"
 
+#include "Render/View/DepthStencil.h"
+#include "Render/View/RenderTarget.h"
+
 #include "Object/GameObject.h"
 
 #include "Object/Basic/Cube.h"

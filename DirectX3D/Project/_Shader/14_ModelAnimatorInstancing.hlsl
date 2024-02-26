@@ -27,32 +27,11 @@ struct VertexOutput
     float3 binormal     : BINORMAL;
 };
 
-Texture2DArray transformMap : register(t0);
-
-struct Frame 
-{
-	int		clipIndex;
-	uint	frameIndex;
-	float	time;
-	float	speed;
-};
-	
-struct Motion 
-{
-	float takeTime;
-	float tweenTime;
-	float runningTime;
-	float padding;
-
-	Frame curFrame;
-    Frame nextFrame;
-};
-
 #define MAX_INSTANCE 128
 
-cbuffer FrameBuffer : register(b3)
+cbuffer FrameInstancingBuffer : register(b3)
 {
-    Motion motion[MAX_INSTANCE];
+    Motion motions[MAX_INSTANCE];
 }
 
 matrix SkinWorld(uint instanceIndex, int4 indices, float4 weights)
@@ -73,13 +52,13 @@ matrix SkinWorld(uint instanceIndex, int4 indices, float4 weights)
         int   frameIndex[2]; 
         float       time[2];     
 
-         clipIndex[0] = motion[instanceIndex].curFrame.clipIndex;
-        frameIndex[0] = motion[instanceIndex].curFrame.frameIndex;
-              time[0] = motion[instanceIndex].curFrame.time;
+         clipIndex[0] = motions[instanceIndex].curFrame.clipIndex;
+        frameIndex[0] = motions[instanceIndex].curFrame.frameIndex;
+              time[0] = motions[instanceIndex].curFrame.time;
         
-         clipIndex[1] = motion[instanceIndex].nextFrame.clipIndex;
-        frameIndex[1] = motion[instanceIndex].nextFrame.frameIndex;
-              time[1] = motion[instanceIndex].nextFrame.time;
+         clipIndex[1] = motions[instanceIndex].nextFrame.clipIndex;
+        frameIndex[1] = motions[instanceIndex].nextFrame.frameIndex;
+              time[1] = motions[instanceIndex].nextFrame.time;
         
         // indices[i] -> bone¿« index
         c[0] = transformMap.Load(int4(indices[i] * 4 + 0, frameIndex[0], clipIndex[0], 0));
@@ -117,7 +96,7 @@ matrix SkinWorld(uint instanceIndex, int4 indices, float4 weights)
 
             nextAnim = lerp(curFrame, nextFrame, time[1]);
 
-            curAnim = lerp(curAnim, nextAnim, motion[instanceIndex].tweenTime);
+            curAnim = lerp(curAnim, nextAnim, motions[instanceIndex].tweenTime);
         }
 
         transform += mul(weights[i], curAnim);

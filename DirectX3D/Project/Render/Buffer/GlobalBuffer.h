@@ -16,6 +16,31 @@ struct MatrixBuffer : public ConstBuffer<Matrix>
 	Matrix matrix{};
 };
 
+struct WorldData
+{
+	Matrix	matrix{};
+	int		hasAnimation{};
+	Vector3 padding{};
+};
+
+struct WorldBuffer : public ConstBuffer<WorldData>
+{
+	WorldBuffer()
+		:ConstBuffer(data)
+	{
+		data.matrix			= XMMatrixIdentity();
+		data.hasAnimation	= false;
+	}
+
+	void SetData(Matrix value, int hasAnimation = false)
+	{
+		data.matrix			= XMMatrixIdentity();
+		data.hasAnimation	= hasAnimation;
+	}
+
+	WorldData data{};
+};
+
 struct ViewData
 {
 	Matrix view;
@@ -55,8 +80,8 @@ struct LightData
 	float   range    = 100.f;
 
 	// Spot Light
-	float innerRange = 55.f; // Angle
-	float outerRange = 70.f; // Angle
+	float innerRange = 55.f; // Angle value
+	float outerRange = 70.f; // Angle value
 
 	// Capsule Light
 	float length = 50.f; // height

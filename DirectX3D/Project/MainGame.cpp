@@ -12,6 +12,7 @@
 #include "Scene/Class/CharacterScene.h"
 #include "Scene/Class/InstancingScene.h"
 #include "Scene/Class/ModelInstancingScene.h"
+#include "Scene/Class/LightScene.h"
 
 #include "Scene/Revolt/GameScene.h"
 
@@ -35,6 +36,7 @@ MainGame::MainGame()
     //SCENE->Create("Start", new CharacterScene);
     //SCENE->Create("Start", new InstancingScene);
     //SCENE->Create("Start", new ModelInstancingScene);
+    //SCENE->Create("Start", new LightScene);
     
     SCENE->Create("Start", new GameScene);
 
@@ -73,6 +75,8 @@ void MainGame::Render()
 {
     ENVIRONMENT->Set();
     
+    Device::GetInstance()->SetViewport();
+
     SCENE->Render();
 
 }

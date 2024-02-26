@@ -11,6 +11,8 @@ public:
 	void SetShader(wstring file);
 
 	void SetDiffuseMap(wstring file);
+	void SetDiffuseMap(Texture* texture);
+
 	void SetSpecularMap(wstring file);
 	void SetNormalMap(wstring file);
 

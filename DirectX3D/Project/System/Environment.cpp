@@ -107,10 +107,12 @@ void Environment::DebugLight(int lightIndex)
 			ImGui::SliderFloat3("Direction", (float*)&light.direction, -1, 1);
 		else
 		{
+			if (light.type != 1)
+				ImGui::SliderFloat3("Direction", (float*)&light.direction, -1, 1);
+
 			ImGui::DragFloat3("Position", (float*)&light.position);
 
-			if (light.type == 1)
-				ImGui::SliderFloat("Range", &light.range, 1, 1000);
+			ImGui::SliderFloat("Range", &light.range, 1, 1000);
 
 			if (light.type == 2)
 			{
@@ -121,6 +123,8 @@ void Environment::DebugLight(int lightIndex)
 			if (light.type == 3)
 				ImGui::SliderFloat("Length", &light.length, 0, 500.f);
 		}
+
+
 		ImGui::TreePop();
 	}
 }

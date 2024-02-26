@@ -5,8 +5,11 @@ public:
 	Texture(ID3D11ShaderResourceView* srv, ScratchImage& image);
 	~Texture();
 
+	// 기존 Add는 file을 받아와서 srv를 만들어 냄
 	static Texture* Add(wstring file);
 	static Texture* Add(wstring file, wstring key);
+
+	static Texture* Add(wstring key, ID3D11ShaderResourceView* srv);
 
 	static void Delete();
 

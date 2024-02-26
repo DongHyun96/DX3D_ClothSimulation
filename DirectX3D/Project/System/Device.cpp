@@ -96,18 +96,6 @@ void Device::CreateRenderTargetView()
 
     deviceContext->OMSetRenderTargets(1, &renderTargetView, depthStencilView);
 
-    /////////
-
-    // Viewport
-    D3D11_VIEWPORT viewPort;
-    viewPort.Width = WIN_WIDTH;
-    viewPort.Height = WIN_HEIGHT;
-    viewPort.TopLeftX = 0.f;
-    viewPort.TopLeftY = 0.f;
-    viewPort.MinDepth = 0.f;
-    viewPort.MaxDepth = 1.f;
-
-    deviceContext->RSSetViewports(1, &viewPort);
 }
 
 void Device::ClearRTV()
@@ -121,4 +109,16 @@ void Device::ClearRTV()
 void Device::Present()
 {
     swapChain->Present(0, 0);
+}
+
+void Device::SetViewport(UINT width, UINT height)
+{
+    viewPort.Width    = WIN_WIDTH;
+    viewPort.Height   = WIN_HEIGHT;
+    viewPort.TopLeftX = 0.f;
+    viewPort.TopLeftY = 0.f;
+    viewPort.MinDepth = 0.f;
+    viewPort.MaxDepth = 1.f;
+
+    deviceContext->RSSetViewports(1, &viewPort);
 }

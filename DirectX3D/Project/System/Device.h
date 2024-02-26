@@ -17,6 +17,8 @@ public:
 	ID3D11Device*		 GetDevice() const { return device; }
 	ID3D11DeviceContext* GetDC()	 const { return deviceContext; }
 
+	void SetViewport(UINT width = WIN_WIDTH, UINT height = WIN_HEIGHT);
+
 private:
 	ID3D11Device*           device;         // 무언가를 만들 때 사용, CPU를 다루는 객체 - Create하는 경우가 많음
     ID3D11DeviceContext*    deviceContext;  // 무언가를 그릴 때 사용, GPU를 다루는 객체 - Set하는 경우가 많음
@@ -25,5 +27,6 @@ private:
     ID3D11RenderTargetView* renderTargetView;
 
 	ID3D11DepthStencilView* depthStencilView;
-		
+
+	D3D11_VIEWPORT			viewPort;
 };

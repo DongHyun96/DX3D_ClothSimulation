@@ -175,6 +175,9 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Render\View\RenderTarget.h" />
+    <ClInclude Include="Render\View\DepthStencil.h" />
+    <ClInclude Include="Scene\Class\LightScene.h" />
     <ClInclude Include="Object\Car\Car.h" />
     <ClInclude Include="Scene\Revolt\GameScene.h" />
     <ClInclude Include="Model\ModelAnimatorInstancing.h" />
@@ -345,6 +348,9 @@
     <ClInclude Include="__Others\targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Render\View\RenderTarget.cpp" />
+    <ClCompile Include="Render\View\DepthStencil.cpp" />
+    <ClCompile Include="Scene\Class\LightScene.cpp" />
     <ClCompile Include="Object\Car\Car.cpp" />
     <ClCompile Include="Scene\Revolt\GameScene.cpp" />
     <ClCompile Include="Model\ModelAnimatorInstancing.cpp" />

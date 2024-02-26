@@ -38,7 +38,7 @@ void ModelAnimator::Render()
 
     DC->VSSetShaderResources(0, 1, &srv); // 클립의 Transform 정보를 srv형식으로 넘김
 
-    Model::Render();
+    Model::Render(true);
 }
 
 void ModelAnimator::Debug()

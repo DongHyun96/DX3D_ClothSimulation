@@ -15,7 +15,7 @@ public:
 
 	void Update() override;
 
-	void Render();
+	void Render(bool hasAnimation = false);
 	void RenderInstanced(UINT instanceCount);
 
 	void Debug();
