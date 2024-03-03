@@ -94,12 +94,12 @@ void Device::CreateRenderTargetView()
     
     depthBuffer->Release();
 
-    deviceContext->OMSetRenderTargets(1, &renderTargetView, depthStencilView);
-
 }
 
 void Device::ClearRTV()
 {
+    deviceContext->OMSetRenderTargets(1, &renderTargetView, depthStencilView);
+
     float clearColor[4] = { 0.f, 0.125f, 0.3f, 1.f };
     deviceContext->ClearRenderTargetView(renderTargetView, clearColor);
     deviceContext->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH, 1.f, 0.f);

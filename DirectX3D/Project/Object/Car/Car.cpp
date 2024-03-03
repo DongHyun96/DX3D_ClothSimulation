@@ -5,6 +5,7 @@
 Car::Car(string carName)
 {
 	this->name = carName + " MainTransform";
+	this->LoadTransform();
 
 	mainModel = new Model(carName);
 	mainModel->SetParent(this);
@@ -14,8 +15,6 @@ Car::Car(string carName)
 	wheels = new ModelInstancing(wheelName);
 	wheels->LoadTransforms();
 	wheels->SetParent(this);
-
-	this->LoadTransform();
 }
 
 Car::~Car()
@@ -33,6 +32,11 @@ void Car::Update()
 
 	wheels->Update();
 	//Move();
+
+	if (KEY_PRESS(VK_UP))
+		translation += forward * DELTA_TIME * 10.f;
+	if (KEY_PRESS(VK_RIGHT))
+		translation += right * DELTA_TIME * 10.f;
 }
 
 void Car::Render()

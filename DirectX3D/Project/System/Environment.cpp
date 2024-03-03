@@ -59,6 +59,9 @@ void Environment::Set()
 	persBuffer->SetVSBuffer(2);
 
 	lightBuffer->SetPSBuffer(0);
+
+	STATE->DisableAlpha();
+	STATE->EnableDepth();
 }
 
 void Environment::PostSet()
@@ -66,7 +69,8 @@ void Environment::PostSet()
 	UIViewBuffer->SetVSBuffer(1); // view
 	orthoBuffer->SetVSBuffer(2);  // projection
 
-	// TODO : ALPHA BLEND
+	STATE->EnableAlpha();
+	STATE->DisableDepth();
 }
 
 void Environment::Debug()

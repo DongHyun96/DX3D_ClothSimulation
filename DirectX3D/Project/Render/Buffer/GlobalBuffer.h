@@ -34,7 +34,7 @@ struct WorldBuffer : public ConstBuffer<WorldData>
 
 	void SetData(Matrix value, int hasAnimation = false)
 	{
-		data.matrix			= XMMatrixIdentity();
+		data.matrix			= XMMatrixTranspose(value);
 		data.hasAnimation	= hasAnimation;
 	}
 

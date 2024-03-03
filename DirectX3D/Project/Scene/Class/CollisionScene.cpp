@@ -109,15 +109,15 @@ void CollisionScene::PostRender()
 
 	crossHair->Debug();
 
-	ENVIRONMENT->PostSet();
+	//ENVIRONMENT->PostSet();
 
-	STATE->EnableAlpha();
-	STATE->DisableDepth();
+	/*STATE->EnableAlpha();
+	STATE->DisableDepth();*/
 
 	hpBar->Render();
 	crossHair->Render();
 
-	STATE->EnableDepth();
+	//STATE->EnableDepth();
 
 	static float value = 1.f;
 

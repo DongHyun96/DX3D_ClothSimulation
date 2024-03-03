@@ -27,6 +27,8 @@ void RenderTarget::Set(DepthStencil* depthStencil, Vector4 clearColor)
 
 	// Viewport도 새로 잡아줘야 함
 	Device::GetInstance()->SetViewport(width, height);
+
+	ENVIRONMENT->Set();
 }
 
 void RenderTarget::SetMultiRenderTarget(RenderTarget** targets, UINT count, DepthStencil* depthStencil, Vector4 clearColor)

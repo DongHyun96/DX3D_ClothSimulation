@@ -72,8 +72,7 @@ cbuffer Projection : register(b2)
     matrix proj;
 }
 
-
-
+// PS CBuffer
 cbuffer MaterialBuffer : register(b1)
 {
     float4  mDiffuse;

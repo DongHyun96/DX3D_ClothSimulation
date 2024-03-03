@@ -2,7 +2,7 @@
 #include "Quad.h"
 
 Quad::Quad(Vector2 size)
-	:GameObject<VertexType>(L"04_Specular"), size(size)
+	:GameObject<VertexType>(L"16_Light"), size(size)
 {
 	CreateMesh();
 }
