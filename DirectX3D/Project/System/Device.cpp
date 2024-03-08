@@ -25,7 +25,7 @@ void Device::CreateDeviceAndSwapChain()
 
         desc.BufferDesc.Width                   = WIN_WIDTH;
         desc.BufferDesc.Height                  = WIN_HEIGHT;
-        desc.BufferDesc.RefreshRate.Numerator   = 60;
+        desc.BufferDesc.RefreshRate.Numerator   = 240;
         desc.BufferDesc.RefreshRate.Denominator = 1;
         desc.BufferDesc.Format                  = DXGI_FORMAT_R8G8B8A8_UNORM;
 
@@ -113,8 +113,8 @@ void Device::Present()
 
 void Device::SetViewport(UINT width, UINT height)
 {
-    viewPort.Width    = WIN_WIDTH;
-    viewPort.Height   = WIN_HEIGHT;
+    viewPort.Width    = width;
+    viewPort.Height   = height;
     viewPort.TopLeftX = 0.f;
     viewPort.TopLeftY = 0.f;
     viewPort.MinDepth = 0.f;

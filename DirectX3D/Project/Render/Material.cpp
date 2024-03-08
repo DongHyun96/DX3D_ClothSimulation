@@ -30,7 +30,7 @@ void Material::Set()
 	vertexShader->SetShader();
 	pixelShader->SetShader();
 
-	buffer->SetPSBuffer(1);
+	buffer->SetPSBuffer(4);
 
 	// SRV
 	if (diffuseMap)

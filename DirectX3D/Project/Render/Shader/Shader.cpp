@@ -78,3 +78,24 @@ ComputeShader* Shader::AddCS(wstring file)
 
 	return (ComputeShader*)shaders[key];
 }
+
+GeometryShader* Shader::AddGS(wstring file)
+{
+	wstring path = file;
+
+	wstring key = L"GS" + file;
+
+	if (!StartsWith(file, L"_Shader/"))
+		file = L"_Shader/" + file + L".hlsl";
+
+	assert(PathFileExists(file.c_str()));
+
+	if (shaders.count(key) > 0)
+		return (GeometryShader*)shaders[key];
+
+	shaders.emplace(key, new GeometryShader(file));
+
+	shaders[key]->path = path;
+
+	return (GeometryShader*)shaders[key];
+}

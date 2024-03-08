@@ -36,7 +36,7 @@ public:
 
 	void SetIsActive(bool isActive) { this->isActive = isActive; }
 
-private:
+public:
 	void UpdateWorldMatrix();
 
 public:

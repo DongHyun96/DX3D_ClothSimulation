@@ -4,7 +4,7 @@
 Camera::Camera()
 {
 	viewBuffer = new ViewBuffer();
-	translation.z = -5.f;
+	//translation.z = -5.f;
 
 	LoadData();
 }
@@ -28,6 +28,8 @@ void Camera::Update()
 
 	if (target) TargetMode();
 	else		FreeMode();
+
+	CalculateFrustum();
 }
 
 void Camera::Set()
@@ -37,6 +39,14 @@ void Camera::Set()
 
 	viewBuffer->SetData(viewMatrix, world);
 	viewBuffer->SetVSBuffer(1);
+	viewBuffer->SetPSBuffer(1);
+}
+
+void Camera::SetView()
+{
+	Transform::Update();
+
+	Camera::Set();
 }
 
 void Camera::Debug()
@@ -217,5 +227,157 @@ Vector3 Camera::WorldToScreenPos(Vector3 worldPos)
 	screenPos.y *= WIN_HEIGHT;
 
 	return screenPos;
+}
+
+bool Camera::PointInFrustum(Vector3 point)
+{
+	for (UINT i = 0; i < 6; i++)
+	{
+		Vector3 dot = XMPlaneDotCoord(planes[i], point); // xyz 모두 똑같은 값으로 채워짐
+
+		if (dot.x < 0.f) return false;
+	}
+
+	return true;
+}
+
+bool Camera::SphereInFrustum(Vector3 center, float radius)
+{
+	Vector3 edge;
+	Vector3 dot;
+
+	for (UINT i = 0; i < 6; i++)
+	{
+		edge.x = center.x - radius;
+		edge.y = center.y - radius;
+		edge.z = center.z - radius;
+
+		dot = XMPlaneDotCoord(planes[i], edge);
+		if (dot.x > 0.0f)
+			continue;
+
+		edge.x = center.x + radius;
+		edge.y = center.y - radius;
+		edge.z = center.z - radius;
+
+		dot = XMPlaneDotCoord(planes[i], edge);
+		if (dot.x > 0.0f)
+			continue;
+
+		edge.x = center.x - radius;
+		edge.y = center.y + radius;
+		edge.z = center.z - radius;
+
+		dot = XMPlaneDotCoord(planes[i], edge);
+		if (dot.x > 0.0f)
+			continue;
+
+		edge.x = center.x - radius;
+		edge.y = center.y - radius;
+		edge.z = center.z + radius;
+
+		dot = XMPlaneDotCoord(planes[i], edge);
+		if (dot.x > 0.0f)
+			continue;
+
+
+		edge.x = center.x + radius;
+		edge.y = center.y + radius;
+		edge.z = center.z - radius;
+
+		dot = XMPlaneDotCoord(planes[i], edge);
+		if (dot.x > 0.0f)
+			continue;
+
+		edge.x = center.x + radius;
+		edge.y = center.y - radius;
+		edge.z = center.z + radius;
+
+		dot = XMPlaneDotCoord(planes[i], edge);
+		if (dot.x > 0.0f)
+			continue;
+
+		edge.x = center.x - radius;
+		edge.y = center.y + radius;
+		edge.z = center.z + radius;
+
+		dot = XMPlaneDotCoord(planes[i], edge);
+		if (dot.x > 0.0f)
+			continue;
+
+		edge.x = center.x + radius;
+		edge.y = center.y + radius;
+		edge.z = center.z + radius;
+
+		dot = XMPlaneDotCoord(planes[i], edge);
+		if (dot.x > 0.0f)
+			continue;
+
+
+		return false;
+	}
+
+	return true;
+}
+
+void Camera::CalculateFrustum()
+{
+	XMFLOAT4X4 VP{}; // ViewProjection
+
+	XMStoreFloat4x4(&VP, viewMatrix * ENVIRONMENT->GetPersMatrix());
+
+	//Left
+	a = VP._14 + VP._11;
+	b = VP._24 + VP._21;
+	c = VP._34 + VP._31;
+	d = VP._44 + VP._41;
+
+	planes[0] = XMVectorSet(a, b, c, d);
+
+	//Right
+	a = VP._14 - VP._11;
+	b = VP._24 - VP._21;
+	c = VP._34 - VP._31;
+	d = VP._44 - VP._41;
+
+	planes[1] = XMVectorSet(a, b, c, d);
+
+	//Bottom
+	a = VP._14 + VP._12;
+	b = VP._24 + VP._22;
+	c = VP._34 + VP._32;
+	d = VP._44 + VP._42;
+
+	planes[2] = XMVectorSet(a, b, c, d);
+
+	//Top
+	a = VP._14 - VP._12;
+	b = VP._24 - VP._22;
+	c = VP._34 - VP._32;
+	d = VP._44 - VP._42;
+
+	planes[3] = XMVectorSet(a, b, c, d);
+
+
+	//Near
+	a = VP._14 + VP._13;
+	b = VP._24 + VP._23;
+	c = VP._34 + VP._33;
+	d = VP._44 + VP._43;
+
+	planes[4] = XMVectorSet(a, b, c, d);
+
+	//Far
+	a = VP._14 - VP._13;
+	b = VP._24 - VP._23;
+	c = VP._34 - VP._33;
+	d = VP._44 - VP._43;
+
+	planes[5] = XMVectorSet(a, b, c, d);
+
+	for (UINT i = 0; i < 6; i++)
+	{
+		planes[i] = XMPlaneNormalize(planes[i]);
+	}
 }
 

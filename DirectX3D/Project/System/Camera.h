@@ -8,6 +8,7 @@ public:
 
 	void Update();
 	void Set();
+	void SetView();
 
 	void Debug();
 
@@ -22,6 +23,18 @@ public:
 	Vector3 WorldToScreenPos(Vector3 worldPos);
 
 	void SetTarget(Transform* target) { this->target = target; }
+
+	ViewBuffer* GetViewBuffer() const { return viewBuffer; }
+
+	// Frustum
+public:
+
+	bool PointInFrustum(Vector3 point);
+	bool SphereInFrustum(Vector3 center, float radius);
+
+private: 
+
+	void CalculateFrustum();
 
 private:
 	Matrix			viewMatrix{};
@@ -53,5 +66,9 @@ private:
 	Vector3 focusOffset{};
 
 	Matrix rotMatrix{};
+
+	XMVECTOR planes[6];
+
+	float a, b, c, d;
 
 };

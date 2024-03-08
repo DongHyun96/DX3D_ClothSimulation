@@ -19,6 +19,8 @@ public:
 	void DisableWireFrame();
 
 	void EnableAlpha();
+	void EnableAlphaToCoverage();
+	void EnableAdditive();
 	void DisableAlpha();
 
 	void EnableDepth();
@@ -26,6 +28,8 @@ public:
 
 	void SetFrontCounterClockWise();
 	void SetFrontClockWise();
+
+	void DepthWriteMaskZero();
 
 private:
 	SamplerState* sampler{};

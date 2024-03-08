@@ -3,7 +3,7 @@
 
 
 Terrain::Terrain(wstring heightMapFile)
-	:GameObject(L"08_Terrain")
+	:GameObject(L"16_Light")
 {
 	heightMap = Texture::Add(heightMapFile);
 
@@ -11,7 +11,7 @@ Terrain::Terrain(wstring heightMapFile)
 }
 
 Terrain::Terrain(wstring heightMapFile, wstring alphaMapFile)
-	:GameObject(L"08_Terrain")
+	:GameObject(L"16_Light")
 {
 	heightMap	= Texture::Add(heightMapFile);
 	alphaMap	= Texture::Add(alphaMapFile);

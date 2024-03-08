@@ -4,7 +4,8 @@
 
 ModelExportScene::ModelExportScene()
 {
-	exporter = new ModelExporter("AdeonWheel");
+	//exporter = new ModelExporter("AdeonWheel");
+	exporter = new ModelExporter("StanfordBunny");
 	exporter->ExportModel();
 	//exporter->ExportAnimation("Sad Idle");
 }

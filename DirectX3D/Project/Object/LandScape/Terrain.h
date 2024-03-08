@@ -14,7 +14,9 @@ public:
 
 	void SetSecondDiffuseMap(wstring file) { secondDiffuseMap = Texture::Add(file); }
 	
-	void Render(D3D11_PRIMITIVE_TOPOLOGY topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST) override;
+	virtual void Render(D3D11_PRIMITIVE_TOPOLOGY topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST) override;
+
+	Vector2 GetSize() const { return Vector2(width, height); }
 
 
 private:

@@ -13,8 +13,14 @@
 #include "Scene/Class/InstancingScene.h"
 #include "Scene/Class/ModelInstancingScene.h"
 #include "Scene/Class/LightScene.h"
+#include "Scene/Class/DeferredRenderScene.h"
+#include "Scene/Class/FrustumCullingScene.h"
+#include "Scene/Class/BillboardScene.h"
+#include "Scene/Class/ParticleScene.h"
+#include "Scene/Class/WaterScene.h"
 
 #include "Scene/Revolt/GameScene.h"
+#include "Scene/Revolt/MapTestScene.h"
 
 MainGame::MainGame()
 {
@@ -37,8 +43,16 @@ MainGame::MainGame()
     //SCENE->Create("Start", new InstancingScene);
     //SCENE->Create("Start", new ModelInstancingScene);
     //SCENE->Create("Start", new LightScene);
-    
-    SCENE->Create("Start", new GameScene);
+    //SCENE->Create("Start", new DeferredRenderScene);
+    //SCENE->Create("Start", new FrustumCullingScene);
+    //SCENE->Create("Start", new BillboardScene);
+    //SCENE->Create("Start", new ParticleScene);
+    SCENE->Create("Start", new WaterScene);
+
+
+
+    //SCENE->Create("Start", new GameScene);
+    //SCENE->Create("Start", new MapTestScene);
 
 
 
@@ -114,6 +128,8 @@ void MainGame::PostRender()
             SCENE->Remove("Grid");
     }
 
+    ENVIRONMENT->PostSet();
+
     SCENE->PostRender();
 
     ENVIRONMENT->Debug();
@@ -125,6 +141,8 @@ void MainGame::PostRender()
 
 void MainGame::Initialize()
 {
+    srand(time(NULL));
+
     Device::GetInstance();
     Environment::GetInstance();
     StateManager::GetInstance();

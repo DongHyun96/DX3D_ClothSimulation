@@ -111,6 +111,7 @@ using namespace GameMath;
 #include "Render/Shader/VertexShader.h"
 #include "Render/Shader/PixelShader.h"
 #include "Render/Shader/ComputeShader.h"
+#include "Render/Shader/GeometryShader.h"
 
 #include "System/Camera.h"
 #include "System/Environment.h"
@@ -137,11 +138,18 @@ using namespace GameMath;
 #include "Object/Basic/Grid.h"
 #include "Object/Basic/Sphere.h"
 
+#include "Render/Buffer/GeometryBuffer.h"
+
+#include "System/Reflection.h"
+#include "System/Refraction.h"
+
+
 #include "Object/Basic/TextureCube.h"
 
 #include "Object/LandScape/Terrain.h"
 #include "Object/LandScape/TerrainEditor.h"
 #include "Object/LandScape/SkyBox.h"
+#include "Object/LandScape/Water.h"
 
 #include "Object/Collider/Collider.h"
 #include "Object/Collider/ColliderBox.h"
@@ -149,6 +157,13 @@ using namespace GameMath;
 #include "Object/Collider/ColliderCapsule.h"
 
 #include "Object/UI/ProgressBar.h"
+
+#include "Object/Effect/Particle.h"
+#include "Object/Effect/ParticleEditor.h"
+#include "Object/Effect/Sprite.h"
+#include "Object/Effect/Spark.h"
+#include "Object/Effect/Rain.h"
+#include "Object/Effect/Snow.h"
 
 
 #include "Model/ModelData.h"

@@ -204,3 +204,51 @@ struct IntValueBuffer : public ConstBuffer<IntValueData>
 
 	IntValueData data{};
 };
+
+struct WeatherData
+{
+	Vector3 velocity = { 0, -1, 0 };
+	float distance = 100.f;
+
+	Vector4 color = { 1, 1, 1, 1 };
+
+	Vector3 origin{};
+	float time{};
+
+	Vector3 size = { 50, 50, 50 };
+	float turbulence = 0.1f;
+};
+
+struct WeatherBuffer : public ConstBuffer<WeatherData>
+{
+	WeatherBuffer()
+		:ConstBuffer(data)
+	{
+	}
+
+	WeatherData data{};
+};
+
+struct WaterData
+{
+	Vector4 color = { 1, 1, 1, 1 };
+
+	float waveTime{};
+	float waveSpeed = 0.1f;
+	float waveScale = 0.1f;
+	float waveShininess = 24.f;
+
+	float fresnel = 0.5f; // ÇÁ·¹³Ú °è¼ö
+
+	float padding[3]{};
+};
+
+struct WaterBuffer : public ConstBuffer<WaterData>
+{
+	WaterBuffer()
+		:ConstBuffer(data)
+	{
+	}
+
+	WaterData data{};
+};
