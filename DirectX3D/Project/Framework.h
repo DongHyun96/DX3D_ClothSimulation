@@ -87,6 +87,7 @@ typedef XMFLOAT4 Vector4;
 #include "Utility/Keyboard.h"
 #include "Utility/Utility.h"
 #include "Utility/GameMath.h"
+#include "Utility/PhysicsValue.h"
 
 using namespace Utility;
 using namespace GameMath;
@@ -155,6 +156,8 @@ using namespace GameMath;
 #include "Object/Collider/ColliderBox.h"
 #include "Object/Collider/ColliderSphere.h"
 #include "Object/Collider/ColliderCapsule.h"
+
+#include "Object/Collider/RigidBody/RigidSphere.h"
 
 #include "Object/UI/ProgressBar.h"
 

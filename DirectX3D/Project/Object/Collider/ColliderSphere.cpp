@@ -52,9 +52,6 @@ void ColliderSphere::CreateMesh()
 
 bool ColliderSphere::Collision(IN Ray ray, OUT HitResult* hitResult)
 {
-	// 시작 시 (0, 0)에서 모두 충돌하는 것 방지용
-	this->Update();
-
 	Vector3 O = ray.origin;
 	Vector3 D = ray.direction;
 
@@ -84,10 +81,6 @@ bool ColliderSphere::Collision(IN Ray ray, OUT HitResult* hitResult)
 
 bool ColliderSphere::Collision(ColliderSphere* other)
 {
-
-	this->Update();
-	other->Update();
-
 	float distance = (this->globalPosition - other->globalPosition).Length();
 
 	return distance < this->Radius() + other->Radius();
@@ -95,16 +88,10 @@ bool ColliderSphere::Collision(ColliderSphere* other)
 
 bool ColliderSphere::Collision(ColliderBox* other)
 {
-	this->Update();
-	other->Update();
-
 	return other->Collision(this);
 }
 
 bool ColliderSphere::Collision(ColliderCapsule* other)
 {
-	this->Update();
-	other->Update();
-
 	return other->Collision(this);
 }

@@ -10,6 +10,8 @@ public:
 
 	void Render();
 
+	Vector3 GetNormal() const { return forward * (-1); }
+
 private:
 	void CreateMesh() override;
 

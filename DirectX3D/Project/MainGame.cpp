@@ -22,6 +22,8 @@
 #include "Scene/Revolt/GameScene.h"
 #include "Scene/Revolt/MapTestScene.h"
 
+#include"Scene/RigidBodyTestScene.h"
+
 MainGame::MainGame()
 {
 	Initialize();
@@ -47,17 +49,17 @@ MainGame::MainGame()
     //SCENE->Create("Start", new FrustumCullingScene);
     //SCENE->Create("Start", new BillboardScene);
     //SCENE->Create("Start", new ParticleScene);
-    SCENE->Create("Start", new WaterScene);
-
+    //SCENE->Create("Start", new WaterScene);
 
 
     //SCENE->Create("Start", new GameScene);
     //SCENE->Create("Start", new MapTestScene);
 
+    SCENE->Create("Start", new RigidBodyTestScene);
 
 
     //SCENE->Add("Tutorial");
-    SCENE->Add("Grid");
+    //SCENE->Add("Grid");
     SCENE->Add("Start");
 
     char path[128];

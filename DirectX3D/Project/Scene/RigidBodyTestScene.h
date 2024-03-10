@@ -1,0 +1,22 @@
+#pragma once
+class RigidBodyTestScene : public Scene
+{
+public:
+	RigidBodyTestScene();
+	~RigidBodyTestScene();
+
+	void Update()		override;
+
+	void Render()		override;
+	void PreRender()	override;
+	void PostRender()	override;
+
+private:
+	Quad* floor{};
+
+	//RigidSphere* rigidSphere{};
+
+	vector<RigidSphere*> rigidSpheres{};
+
+	ColliderSphere* obstacle{};
+};

@@ -178,6 +178,9 @@
     <ClInclude Include="Object\Effect\Particle.h" />
     <ClInclude Include="Object\Effect\ParticleEditor.h" />
     <ClInclude Include="Object\Effect\Rain.h" />
+    <ClInclude Include="Object\Collider\RigidBody\RigidSphere.h" />
+    <ClInclude Include="Scene\RigidBodyTestScene.h" />
+    <ClInclude Include="Utility\PhysicsValue.h" />
     <ClInclude Include="System\Reflection.h" />
     <ClInclude Include="System\Refraction.h" />
     <ClInclude Include="Scene\Class\ParticleScene.h" />
@@ -368,6 +371,8 @@
     <ClCompile Include="Object\Effect\Particle.cpp" />
     <ClCompile Include="Object\Effect\ParticleEditor.cpp" />
     <ClCompile Include="Object\Effect\Rain.cpp" />
+    <ClCompile Include="Object\Collider\RigidBody\RigidSphere.cpp" />
+    <ClCompile Include="Scene\RigidBodyTestScene.cpp" />
     <ClCompile Include="System\Reflection.cpp" />
     <ClCompile Include="System\Refraction.cpp" />
     <ClCompile Include="Scene\Class\ParticleScene.cpp" />

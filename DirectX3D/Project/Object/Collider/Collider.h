@@ -21,7 +21,7 @@ public:
 	Collider();
 	virtual ~Collider();
 
-	void Render();
+	virtual void Render();
 
 	bool Collision(Collider* other);
 

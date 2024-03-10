@@ -41,8 +41,6 @@ void ColliderBox::CreateMesh()
 
 bool ColliderBox::Collision(IN Ray ray, OUT HitResult* hitResult)
 {
-	Transform::Update();
-
 	HitResult temp;
 
 	temp.distance = FLT_MAX;
