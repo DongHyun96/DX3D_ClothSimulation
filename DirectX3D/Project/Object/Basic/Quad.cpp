@@ -42,7 +42,7 @@ OBBQuad Quad::GetOBB() const
 
 	obbData.axis[0] = this->GetRightVector();
 	obbData.axis[1] = this->GetUpVector();
-	//obbData.axis[2] = this->GetForwardVector();
+	obbData.axis[2] = this->GetForwardVector();
 
 	return obbData;
 }

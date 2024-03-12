@@ -36,11 +36,11 @@ void RigidSphere::ClearForce()
 
 bool RigidSphere::Collision(const Quad* other)
 {
-	/*OBBQuad box = other->GetOBB();
+	OBBQuad box = other->GetOBB();
 	
 	Vector3 pos = other->GetGlobalPosition();
-	
-	for (UINT i = 0; i < 2; i++)
+
+	for (UINT i = 0; i < 3; i++)
 	{
 		float length = Vector3::Dot(box.axis[i], globalPosition - other->GetGlobalPosition());
 	
@@ -53,10 +53,10 @@ bool RigidSphere::Collision(const Quad* other)
 	
 	float distance = (globalPosition - pos).Length();
 	
-	return distance <= this->Radius();*/
+	return distance <= this->Radius();
 
-	return Vector3::Dot(globalPosition - other->GetGlobalPosition(), other->GetNormal()) < 0.00001f &&
-		   Vector3::Dot(velocity, other->GetNormal()) < 0;
+	//return Vector3::Dot(globalPosition - other->GetGlobalPosition(), other->GetNormal()) < 0.00001f &&
+	//	   Vector3::Dot(velocity, other->GetNormal()) < 0;
 }
 
 void RigidSphere::HandleCollision(const ColliderSphere* other)

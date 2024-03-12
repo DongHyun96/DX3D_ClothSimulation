@@ -1,16 +1,16 @@
 #pragma once
 
-//struct OBBQuad
-//{
-//	Vector3 axis[3]{};
-//	Vector3 halfSize{};
-//};
-
 struct OBBQuad
 {
-	Vector3 axis[2]{};
+	Vector3 axis[3]{};
 	Vector3 halfSize{};
 };
+
+//struct OBBQuad
+//{
+//	Vector3 axis[2]{};
+//	Vector3 halfSize{};
+//};
 
 class Quad : public GameObject<VertexTextureNormalTangent>
 {
