@@ -22,9 +22,9 @@ public:
 	void Debug();
 	void DebugLight(int lightIndex);
 
-	Matrix GetPersMatrix() const { return persMatrix; }
-	
-	Camera* GetMainCamera() const { return mainCamera; }
+	Matrix GetPersMatrix() const		{ return persMatrix; }
+	Camera* GetMainCamera()	const		{ return mainCamera; }
+	LightBuffer* GetLightBuffer() const { return lightBuffer; }
 
 private:
 	Matrix			persMatrix{};

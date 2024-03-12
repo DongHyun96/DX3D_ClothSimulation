@@ -4,13 +4,25 @@
 
 RigidBodyTestScene::RigidBodyTestScene()
 {
-	floor = new Quad();
+	static int index = 0;
 
-	floor->scale *= 500.f;
-	floor->rotation.x = XM_PIDIV2;
-	floor->translation.y = 0.1f;
-	floor->GetMaterial()->SetShader(L"16_Light");
-	floor->GetMaterial()->SetDiffuseMap(L"Landscape/Dirt3.png");
+	Quad* floor{};
+
+	for (UINT i = 0; i < 3; i++)
+	{
+		floor = new Quad();
+
+		floor->scale *= 250.f;
+		floor->rotation.x = XM_PIDIV2;
+		floor->translation.y = 0.1f;
+		floor->GetMaterial()->SetShader(L"16_Light");
+		floor->GetMaterial()->SetDiffuseMap(L"Landscape/Dirt3.png");
+
+		floor->SetName("RigidTestFloor_" + to_string(index++));
+		floor->LoadTransform();
+
+		floors.push_back(floor);
+	}
 
 	//rigidSphere = new RigidSphere(0.005f, 0.5f);
 	//rigidSphere->translation.y = 100.f;
@@ -34,8 +46,11 @@ RigidBodyTestScene::RigidBodyTestScene()
 
 RigidBodyTestScene::~RigidBodyTestScene()
 {
-	delete floor;
+	//delete floor;
 	//delete rigidSphere;
+
+	for (Quad* floor : floors)
+		delete floor;
 
 	for (RigidSphere* rigidSphere : rigidSpheres)
 		delete rigidSphere;
@@ -45,7 +60,10 @@ RigidBodyTestScene::~RigidBodyTestScene()
 
 void RigidBodyTestScene::Update()
 {
-	floor->Update();
+	//floor->Update();
+	for (Quad* floor : floors)
+		floor->Update();
+
 	obstacle->Update();
 
 	if (KEY_DOWN(VK_LBUTTON))
@@ -70,18 +88,26 @@ void RigidBodyTestScene::Update()
 	{
 		rigidSphere->Update();
 
-		if (rigidSphere->Collision(floor))
-			rigidSphere->HandleCollision(floor);
+		//if (rigidSphere->Collision(floor))
+		//	rigidSphere->HandleCollision(floor);
 
 		if (((ColliderSphere*)rigidSphere)->Collision(obstacle))
 			rigidSphere->HandleCollision(obstacle);
+
+		for (Quad* floor : floors)
+		{
+			if (rigidSphere->Collision(floor))
+				rigidSphere->HandleCollision(floor);
+		}
 	}
 
 }
 
 void RigidBodyTestScene::Render()
 {
-	floor->Render();
+	//floor->Render();
+	for (Quad* floor : floors)
+		floor->Render();
 
 	for (RigidSphere* rigidSphere : rigidSpheres)
 		rigidSphere->Render();
@@ -95,4 +121,6 @@ void RigidBodyTestScene::PreRender()
 
 void RigidBodyTestScene::PostRender()
 {
+	for (Quad* floor : floors)
+		floor->Debug();
 }

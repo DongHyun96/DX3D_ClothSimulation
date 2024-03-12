@@ -175,11 +175,18 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Render\Shader\HullShader.h" />
+    <ClInclude Include="Render\Shader\DomainShader.h" />
     <ClInclude Include="Object\Effect\Particle.h" />
     <ClInclude Include="Object\Effect\ParticleEditor.h" />
     <ClInclude Include="Object\Effect\Rain.h" />
     <ClInclude Include="Object\Collider\RigidBody\RigidSphere.h" />
     <ClInclude Include="Scene\RigidBodyTestScene.h" />
+    <ClInclude Include="Scene\SpringMassTestScene.h" />
+    <ClInclude Include="Object\Collider\RigidBody\Spring.h" />
+    <ClInclude Include="System\Shadow.h" />
+    <ClInclude Include="Scene\Class\TessellationScene.h" />
+    <ClInclude Include="Scene\Class\TerrainLODScene.h" />
     <ClInclude Include="Utility\PhysicsValue.h" />
     <ClInclude Include="System\Reflection.h" />
     <ClInclude Include="System\Refraction.h" />
@@ -368,11 +375,16 @@
     <ClInclude Include="__Others\targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Render\Shader\HullShader.cpp" />
+    <ClCompile Include="Render\Shader\DomainShader.cpp" />
     <ClCompile Include="Object\Effect\Particle.cpp" />
     <ClCompile Include="Object\Effect\ParticleEditor.cpp" />
     <ClCompile Include="Object\Effect\Rain.cpp" />
     <ClCompile Include="Object\Collider\RigidBody\RigidSphere.cpp" />
     <ClCompile Include="Scene\RigidBodyTestScene.cpp" />
+    <ClCompile Include="Scene\SpringMassTestScene.cpp" />
+    <ClCompile Include="Object\Collider\RigidBody\Spring.cpp" />
+    <ClCompile Include="System\Shadow.cpp" />
     <ClCompile Include="System\Reflection.cpp" />
     <ClCompile Include="System\Refraction.cpp" />
     <ClCompile Include="Scene\Class\ParticleScene.cpp" />
@@ -417,6 +429,8 @@
     <ClCompile Include="Object\Effect\Sprite.cpp" />
     <ClCompile Include="Object\Effect\Snow.cpp" />
     <ClCompile Include="Object\Effect\Spark.cpp" />
+    <ClCompile Include="Scene\Class\TessellationScene.cpp" />
+    <ClCompile Include="Scene\Class\TerrainLODScene.cpp" />
     <ClCompile Include="Utility\GameMath.cpp" />
     <ClCompile Include="Object\Basic\Grid.cpp" />
     <ClCompile Include="Render\State\RasterizerState.cpp" />
@@ -733,6 +747,18 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
     <FxCompile Include="_Shader\28_Water.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="_Shader\29_Shadow.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="_Shader\30_Triangle.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>

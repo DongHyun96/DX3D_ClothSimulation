@@ -18,11 +18,15 @@
 #include "Scene/Class/BillboardScene.h"
 #include "Scene/Class/ParticleScene.h"
 #include "Scene/Class/WaterScene.h"
+#include "Scene/Class/TessellationScene.h"
+#include "Scene/Class/TerrainLODScene.h"
+
 
 #include "Scene/Revolt/GameScene.h"
 #include "Scene/Revolt/MapTestScene.h"
 
 #include"Scene/RigidBodyTestScene.h"
+#include "Scene/SpringMassTestScene.h"
 
 MainGame::MainGame()
 {
@@ -50,12 +54,14 @@ MainGame::MainGame()
     //SCENE->Create("Start", new BillboardScene);
     //SCENE->Create("Start", new ParticleScene);
     //SCENE->Create("Start", new WaterScene);
+    //SCENE->Create("Start", new TessellationScene);
 
 
     //SCENE->Create("Start", new GameScene);
     //SCENE->Create("Start", new MapTestScene);
 
     SCENE->Create("Start", new RigidBodyTestScene);
+
 
 
     //SCENE->Add("Tutorial");

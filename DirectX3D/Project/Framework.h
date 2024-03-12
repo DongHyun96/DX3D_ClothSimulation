@@ -113,6 +113,9 @@ using namespace GameMath;
 #include "Render/Shader/PixelShader.h"
 #include "Render/Shader/ComputeShader.h"
 #include "Render/Shader/GeometryShader.h"
+#include "Render/Shader/HullShader.h"
+#include "Render/Shader/DomainShader.h"
+
 
 #include "System/Camera.h"
 #include "System/Environment.h"
@@ -144,6 +147,7 @@ using namespace GameMath;
 #include "System/Reflection.h"
 #include "System/Refraction.h"
 
+#include "System/Shadow.h"
 
 #include "Object/Basic/TextureCube.h"
 
@@ -158,6 +162,7 @@ using namespace GameMath;
 #include "Object/Collider/ColliderCapsule.h"
 
 #include "Object/Collider/RigidBody/RigidSphere.h"
+#include "Object/Collider/RigidBody/Spring.h"
 
 #include "Object/UI/ProgressBar.h"
 

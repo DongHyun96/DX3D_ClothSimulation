@@ -13,6 +13,7 @@ public:
 	void SetPSBuffer(UINT slot);
 	void SetCSBuffer(UINT slot);
 	void SetDSBuffer(UINT slot);
+	void SetHSBuffer(UINT slot);
 	void SetGSBuffer(UINT slot);
 
 	void UpdateSubresource();
@@ -76,6 +77,14 @@ inline void ConstBuffer<T>::SetDSBuffer(UINT slot)
 	UpdateSubresource();
 
 	DC->DSSetConstantBuffers(slot, 1, &constantBuffer);
+}
+
+template<typename T>
+inline void ConstBuffer<T>::SetHSBuffer(UINT slot)
+{
+	UpdateSubresource();
+
+	DC->HSSetConstantBuffers(slot, 1, &constantBuffer);
 }
 
 template<typename T>

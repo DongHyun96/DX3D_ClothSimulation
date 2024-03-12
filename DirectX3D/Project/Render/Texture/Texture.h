@@ -14,6 +14,7 @@ public:
 	static void Delete();
 
 	void PSSetShaderResources(UINT slot);
+	void DSSetShaderResources(UINT slot);
 
 	// Height map을 읽을 때 사용
 	vector<Vector4> ReadPixels();

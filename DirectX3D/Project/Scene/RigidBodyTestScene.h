@@ -12,7 +12,8 @@ public:
 	void PostRender()	override;
 
 private:
-	Quad* floor{};
+	//Quad* floor{};
+	vector<Quad*> floors{};
 
 	//RigidSphere* rigidSphere{};
 

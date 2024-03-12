@@ -120,6 +120,11 @@ void Texture::PSSetShaderResources(UINT slot)
 	DC->PSSetShaderResources(slot, 1, &srv);
 }
 
+void Texture::DSSetShaderResources(UINT slot)
+{
+	DC->DSSetShaderResources(slot, 1, &srv);
+}
+
 vector<Vector4> Texture::ReadPixels()
 {
 	uint8_t* pixels = image.GetPixels();

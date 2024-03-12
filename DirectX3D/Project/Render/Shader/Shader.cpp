@@ -99,3 +99,45 @@ GeometryShader* Shader::AddGS(wstring file)
 
 	return (GeometryShader*)shaders[key];
 }
+
+HullShader* Shader::AddHS(wstring file)
+{
+	wstring path = file;
+
+	wstring key = L"HS" + file;
+
+	if (!StartsWith(file, L"_Shader/"))
+		file = L"_Shader/" + file + L".hlsl";
+
+	assert(PathFileExists(file.c_str()));
+
+	if (shaders.count(key) > 0)
+		return (HullShader*)shaders[key];
+
+	shaders.emplace(key, new HullShader(file));
+
+	shaders[key]->path = path;
+
+	return (HullShader*)shaders[key];
+}
+
+DomainShader* Shader::AddDS(wstring file)
+{
+	wstring path = file;
+
+	wstring key = L"DS" + file;
+
+	if (!StartsWith(file, L"_Shader/"))
+		file = L"_Shader/" + file + L".hlsl";
+
+	assert(PathFileExists(file.c_str()));
+
+	if (shaders.count(key) > 0)
+		return (DomainShader*)shaders[key];
+
+	shaders.emplace(key, new DomainShader(file));
+
+	shaders[key]->path = path;
+
+	return (DomainShader*)shaders[key];
+}

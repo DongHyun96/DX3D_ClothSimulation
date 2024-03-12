@@ -16,6 +16,37 @@ void Quad::Render()
 	GameObject::Render();
 }
 
+OBBQuad Quad::GetOBB() const
+{
+	/*OBBQuad obbData{};
+
+	Vector3 halfSize =
+	{
+		size.x * 0.5f * globalScale.x,
+		0.f,
+		size.y * 0.5f * globalScale.z
+	};
+
+	obbData.axis = this->GetRightVector();
+
+	return obbData;*/
+
+	OBBQuad obbData{};
+
+	Vector3 halfSize =
+	{
+		size.x * 0.5f * globalScale.x,
+		size.y * 0.5f * globalScale.y,
+		0.f
+	};
+
+	obbData.axis[0] = this->GetRightVector();
+	obbData.axis[1] = this->GetUpVector();
+	//obbData.axis[2] = this->GetForwardVector();
+
+	return obbData;
+}
+
 void Quad::CreateMesh()
 {
 	float L = -size.x * 0.5f;
