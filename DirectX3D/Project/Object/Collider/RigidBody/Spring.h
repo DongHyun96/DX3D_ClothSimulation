@@ -17,7 +17,7 @@ private:
 	RigidSphere* particle1{};
 	RigidSphere* particle2{};
 
-	float r{};
+	float r{}; 
 	float k{};
 
 };

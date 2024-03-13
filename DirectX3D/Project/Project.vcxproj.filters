@@ -1067,7 +1067,6 @@
     <FxCompile Include="_Shader\29_Shadow.hlsl" />
     <FxCompile Include="_Shader\30_Triangle.hlsl" />
     <FxCompile Include="_Shader\31_TerrainLOD.hlsl" />
-    <FxCompile Include="_Shader\32_Spring.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="_Library\DirectXTex.lib" />

@@ -18,7 +18,6 @@ void Spring::Update()
 
 void Spring::Render()
 {
-
 }
 
 void Spring::AddForce()

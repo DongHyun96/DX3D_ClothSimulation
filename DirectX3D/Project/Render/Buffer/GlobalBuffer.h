@@ -253,9 +253,20 @@ struct WaterBuffer : public ConstBuffer<WaterData>
 	WaterData data{};
 };
 
-struct SpringBuffer
-{
-	Vector3 startPos{};
-	Vector3 endPos{};
-	float padding[2];
-};
+
+//struct SpringData
+//{
+//	Vector3 startPos{};
+//	Vector3 endPos{};
+//	float	padding[2];
+//};
+//
+//struct SpringBuffer : public ConstBuffer<SpringData>
+//{
+//	SpringBuffer()
+//		:ConstBuffer(data)
+//	{
+//	}
+//
+//	SpringData data{};
+//};
