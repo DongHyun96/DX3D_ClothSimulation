@@ -153,6 +153,7 @@ using namespace GameMath;
 
 #include "Object/LandScape/Terrain.h"
 #include "Object/LandScape/TerrainEditor.h"
+#include "Object/LandScape/TerrainLOD.h"
 #include "Object/LandScape/SkyBox.h"
 #include "Object/LandScape/Water.h"
 

@@ -14,7 +14,6 @@ Cube::~Cube()
 
 void Cube::Render()
 {
-
     GameObject::Render();
 }
 

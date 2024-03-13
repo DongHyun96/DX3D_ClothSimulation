@@ -28,7 +28,7 @@ void Environment::CreatePerspective()
 {
 	persBuffer = new MatrixBuffer();
 
-	persMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV4, WIN_WIDTH / WIN_HEIGHT, 0.1f, 1000.f);
+	persMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV4, WIN_WIDTH / WIN_HEIGHT, 0.1f, 10000.f);
 }
 
 void Environment::CreateOrthoGraphic()
@@ -58,6 +58,7 @@ void Environment::Set()
 	persBuffer->SetData(persMatrix);
 	persBuffer->SetVSBuffer(2);
 	persBuffer->SetPSBuffer(2);
+	persBuffer->SetDSBuffer(2);
 
 	lightBuffer->SetPSBuffer(0);
 

@@ -40,6 +40,8 @@ void Camera::Set()
 	viewBuffer->SetData(viewMatrix, world);
 	viewBuffer->SetVSBuffer(1);
 	viewBuffer->SetPSBuffer(1);
+	viewBuffer->SetHSBuffer(1);
+	viewBuffer->SetDSBuffer(1);
 }
 
 void Camera::SetView()

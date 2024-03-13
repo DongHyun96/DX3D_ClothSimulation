@@ -13,4 +13,13 @@ public:
 
 private:
 
+	void Init();
+
+private:
+
+	Quad* floor{};
+
+	vector<RigidSphere*>	particles{};
+	vector<Spring*>			springs{};
+
 };

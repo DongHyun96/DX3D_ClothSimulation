@@ -609,6 +609,9 @@
     <ClInclude Include="Object\Collider\RigidBody\Spring.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Object\LandScape\TerrainLOD.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -914,6 +917,9 @@
     <ClCompile Include="Object\Collider\RigidBody\Spring.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Object\LandScape\TerrainLOD.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="__Others\Project.rc">
@@ -1060,6 +1066,7 @@
     <FxCompile Include="_Shader\28_Water.hlsl" />
     <FxCompile Include="_Shader\29_Shadow.hlsl" />
     <FxCompile Include="_Shader\30_Triangle.hlsl" />
+    <FxCompile Include="_Shader\31_TerrainLOD.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="_Library\DirectXTex.lib" />

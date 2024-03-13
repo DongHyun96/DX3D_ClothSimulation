@@ -18,18 +18,19 @@ void Spring::Update()
 
 void Spring::Render()
 {
+
 }
 
 void Spring::AddForce()
 {
-	/*
 	// Using spring force law
-		glm::vec3 F = -(k * (length(particle2.position - particle1.position) - r) + K_D * dot(particle2.velocity - particle1.velocity, normalize(particle2.position - particle1.position))) * normalize(particle2.position - particle1.position);
-		
-		particle1.addForce(-F);
-		particle2.addForce(F);
-	*/
+	Vector3 p1_to_p2 = particle2->GetGlobalPosition() - particle1->GetGlobalPosition();
 
-	/*Vector3 F = -(k * (particle2->GetGlobalPosition() - particle1->GetGlobalPosition()).Length()- r) +
-		        K_D * Vector3::Dot(particle2->GetVelocity() - particle1->GetVelocity(), GetNormalized(particle2->GetGlobalPosition() - particle1->GetGlobalPosition()))*/
+	Vector3 F = -(k * (p1_to_p2.Length() - r) +
+		        K_D *
+				Vector3::Dot(particle2->GetVelocity() - particle1->GetVelocity(), p1_to_p2.GetNormalized())) *
+		        (p1_to_p2).GetNormalized();
+
+	particle1->AddForce(-F);
+	particle2->AddForce(F);
 }

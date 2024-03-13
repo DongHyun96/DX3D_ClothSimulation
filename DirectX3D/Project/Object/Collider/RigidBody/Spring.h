@@ -12,6 +12,8 @@ public:
 
 private:
 
+	Cube* cube{};
+
 	RigidSphere* particle1{};
 	RigidSphere* particle2{};
 
