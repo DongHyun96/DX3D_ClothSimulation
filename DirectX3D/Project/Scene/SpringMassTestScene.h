@@ -19,7 +19,11 @@ private:
 
 	Quad* floor{};
 
-	vector<RigidSphere*>	particles{};
-	vector<Spring*>			springs{};
+	//vector<RigidSphere*>	particles{};
+	//vector<Spring*>			springs{};
+
+	RigidSphere* p1{};
+	RigidSphere* p2{};
+	Spring* spring{};
 
 };

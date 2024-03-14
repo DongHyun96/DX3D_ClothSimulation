@@ -73,17 +73,29 @@ void Transform::LoadTransform()
 	pivot		= data.ReadVector3();
 }
 
+void Transform::SetRotationMatrix(Vector3 rotAxis, float angle)
+{
+	if (rotAxis.Length() <= 0.f) return;
+
+	customRotMat = XMMatrixRotationAxis(rotAxis, angle);
+
+	isCustomRotSet = true;
+}
+
 void Transform::UpdateWorldMatrix()
 {
 	Matrix S	= XMMatrixScaling(scale.x, scale.y, scale.z);
-	Matrix R	= XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z);
+
+	Matrix R	= (!isCustomRotSet) ? XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z) :
+									  customRotMat;
+
 	Matrix T	= XMMatrixTranslation(translation.x, translation.y, translation.z);
 
 	Matrix P	= XMMatrixTranslation(pivot.x, pivot.y, pivot.z);
 	Matrix IP	= XMMatrixInverse(nullptr, P);
 
 	world = IP * S * R * T * P;
-
+	
 	if (parent) world *= parent->world;
 
 	XMFLOAT4X4 fWorld;
@@ -104,4 +116,5 @@ void Transform::UpdateWorldMatrix()
 	globalRotation	= outR; // 주의 outR은 Quaternion의 값 (오일러 각이 아님)
 	globalPosition	= outT;
 
+	isCustomRotSet = false;
 }

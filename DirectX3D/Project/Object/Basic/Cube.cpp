@@ -81,3 +81,4 @@ void Cube::CreateMesh()
 
     mesh = new Mesh(vertices, indices);
 }
+

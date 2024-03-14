@@ -67,7 +67,7 @@ MainGame::MainGame()
 
 
     //SCENE->Add("Tutorial");
-    //SCENE->Add("Grid");
+    SCENE->Add("Grid");
     SCENE->Add("Start");
 
     char path[128];

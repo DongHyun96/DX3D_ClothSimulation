@@ -36,6 +36,8 @@ public:
 
 	void SetIsActive(bool isActive) { this->isActive = isActive; }
 
+	void SetRotationMatrix(Vector3 rotAxis, float angle);
+
 public:
 	void UpdateWorldMatrix();
 
@@ -44,6 +46,11 @@ public:
 	Vector3 scale{1.f, 1.f, 1.f};
 	Vector3 rotation{};
 	Vector3 translation{};
+
+private:
+	
+	Matrix	customRotMat{};
+	bool isCustomRotSet{};
 
 protected:
 
@@ -65,4 +72,5 @@ protected:
 	static UINT index;
 
 	bool isActive = true;
+
 };
