@@ -12,15 +12,16 @@ public:
 	void Render();
 
 	void ClearForce();
+
 	void AddForce(const Vector3& force) { this->force += force; }
+
+	void AddVelocity();
+
+	void UpdateRigidBody(const float& timeRate = 1.f); // Step
 
 	void SetFixed(const bool& fixed) { this->fixed = fixed; }
 
 	Vector3 GetVelocity() const { return velocity; }
-
-private:
-
-	void UpdateRigidBody(); // Step
 
 public: // 충돌검사 및 충돌처리
 

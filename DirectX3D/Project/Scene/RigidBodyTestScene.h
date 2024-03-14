@@ -12,6 +12,10 @@ public:
 	void PostRender()	override;
 
 private:
+
+	void HandleInput();
+
+private:
 	//Quad* floor{};
 	vector<Quad*> floors{};
 

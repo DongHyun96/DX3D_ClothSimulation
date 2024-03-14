@@ -2,13 +2,13 @@
 class Spring
 {
 public:
-	Spring(RigidSphere* p1, RigidSphere* p2, Vector4 color = {1, 0, 0, 1}, float k = DEFAULT_K_SPRING);
+	Spring(RigidSphere* p1, RigidSphere* p2, float k = DEFAULT_K_SPRING, Vector4 color = {1, 0, 0, 1});
 	~Spring();
 
 	void Update();
 	void Render();
 
-	void AddForce();
+	void AddForceToParticles();
 
 	void Debug();
 

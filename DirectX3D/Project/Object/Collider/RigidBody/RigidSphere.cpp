@@ -15,13 +15,6 @@ RigidSphere::~RigidSphere()
 void RigidSphere::Update()
 {
 	ColliderSphere::Update();
-
-	ClearForce();
-
-	AddForce(GRAVITY * mass);
-	AddForce(velocity * (-K_DRAG));
-
-	UpdateRigidBody();
 }
 
 void RigidSphere::Render()
@@ -36,7 +29,7 @@ void RigidSphere::ClearForce()
 
 bool RigidSphere::Collision(const Quad* other)
 {
-	OBBQuad box = other->GetOBB();
+	/*OBBQuad box = other->GetOBB();
 	
 	Vector3 pos = other->GetGlobalPosition();
 
@@ -53,10 +46,10 @@ bool RigidSphere::Collision(const Quad* other)
 	
 	float distance = (globalPosition - pos).Length();
 	
-	return distance <= this->Radius();
+	return distance <= this->Radius();*/
 
-	//return Vector3::Dot(globalPosition - other->GetGlobalPosition(), other->GetNormal()) < 0.00001f &&
-	//	   Vector3::Dot(velocity, other->GetNormal()) < 0;
+	return Vector3::Dot(globalPosition - other->GetGlobalPosition(), other->GetNormal()) < 0.00001f &&
+		   Vector3::Dot(velocity, other->GetNormal()) < 0;
 }
 
 void RigidSphere::HandleCollision(const ColliderSphere* other)
@@ -91,7 +84,13 @@ void RigidSphere::HandleCollision(const Terrain* terrain)
 {
 }
 
-void RigidSphere::UpdateRigidBody()
+void RigidSphere::AddVelocity()
+{
+	AddForce(GRAVITY * mass);
+	AddForce(velocity * (-K_DRAG));
+}
+
+void RigidSphere::UpdateRigidBody(const float& timeRate)
 {
 	if (fixed)
 	{
@@ -99,6 +98,6 @@ void RigidSphere::UpdateRigidBody()
 		return;
 	}
 
-	velocity	+= (force / mass) * (DELTA_TIME);
-	translation += velocity * (DELTA_TIME);
+	velocity	+= (force / mass) * (DELTA_TIME / timeRate);
+	translation += velocity * (DELTA_TIME / timeRate);
 }

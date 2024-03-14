@@ -58,6 +58,13 @@ RigidBodyTestScene::~RigidBodyTestScene()
 	delete obstacle;
 }
 
+/*
+	Clear All forces
+	Particle Add force(Gravity, own velocity)
+	Spring Add force to each Particles
+	Particle steps(UpdateRigidBody)
+	ResolveCollisions
+*/
 void RigidBodyTestScene::Update()
 {
 	//floor->Update();
@@ -66,27 +73,17 @@ void RigidBodyTestScene::Update()
 
 	obstacle->Update();
 
-	if (KEY_DOWN(VK_LBUTTON))
-	{
-		for (RigidSphere* rigidSphere : rigidSpheres)
-			rigidSphere->SetFixed(false);
-	}
-	if (KEY_DOWN(VK_UP))
-	{
-		for (RigidSphere* rigidSphere : rigidSpheres)
-		{
-			rigidSphere->SetFixed(true);
-
-			rigidSphere->translation.y = 100.f;
-
-			rigidSphere->translation.x = Random(-3.f, 3.f);
-			rigidSphere->translation.z = Random(-3.f, 3.f);
-		}
-	}
+	HandleInput();
 
 	for (RigidSphere* rigidSphere : rigidSpheres)
 	{
 		rigidSphere->Update();
+
+		rigidSphere->ClearForce();
+
+		rigidSphere->AddVelocity();
+
+		rigidSphere->UpdateRigidBody();
 
 		//if (rigidSphere->Collision(floor))
 		//	rigidSphere->HandleCollision(floor);
@@ -123,4 +120,25 @@ void RigidBodyTestScene::PostRender()
 {
 	for (Quad* floor : floors)
 		floor->Debug();
+}
+
+void RigidBodyTestScene::HandleInput()
+{
+	if (KEY_DOWN(VK_LBUTTON))
+	{
+		for (RigidSphere* rigidSphere : rigidSpheres)
+			rigidSphere->SetFixed(false);
+	}
+	if (KEY_DOWN(VK_UP))
+	{
+		for (RigidSphere* rigidSphere : rigidSpheres)
+		{
+			rigidSphere->SetFixed(true);
+
+			rigidSphere->translation.y = 100.f;
+
+			rigidSphere->translation.x = Random(-3.f, 3.f);
+			rigidSphere->translation.z = Random(-3.f, 3.f);
+		}
+	}
 }

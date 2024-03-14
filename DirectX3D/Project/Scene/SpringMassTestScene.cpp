@@ -5,44 +5,81 @@
 SpringMassTestScene::SpringMassTestScene()
 {
 	Init();
-
-	p1 = new RigidSphere(0.003f);
-	p1->SetFixed(true);
-	p1->translation = {};
-
-	p2 = new RigidSphere(0.003f);
-	p2->SetFixed(true);
-	p2->translation = {0, 3, 0};
-
-	spring = new Spring(p1, p2);
 }
 
 SpringMassTestScene::~SpringMassTestScene()
 {
 	delete floor;
 
-	delete p1;
-	delete p2;
+	for (RigidSphere* particle : particles)
+		delete particle;
 
-	delete spring;
+	particles.clear();
+
+	for (Spring* spring : springs)
+		delete spring;
+
+	springs.clear();
+
+	delete obstacle;
 }
 
+/*
+	Clear All forces
+	Particle Add force(Gravity, own velocity)
+	Spring Add force to each Particles
+	Particle steps(UpdateRigidBody)
+	ResolveCollisions
+*/
 void SpringMassTestScene::Update()
 {
 	floor->Update();
+	obstacle->Update();
 
-	p1->Update();
-	p2->Update();
-	spring->Update();
+	for (UINT i = 0; i < 100; i++)
+	{
+		for (RigidSphere*& particle : particles)
+		{
+			particle->ClearForce();
+
+			particle->AddVelocity();
+		}
+
+		for (Spring*& spring : springs)
+			spring->AddForceToParticles();
+
+		for (RigidSphere*& particle : particles)
+			particle->UpdateRigidBody(100);
+	}
+
+	for (RigidSphere* particle : particles)
+		particle->Update();
+
+	for (Spring*& spring : springs)
+		spring->Update();
+
+
+
+	if (KEY_DOWN(VK_DOWN))
+	{
+	}
+	else if (KEY_DOWN(VK_UP))
+	{
+	}
+
 }
 
 void SpringMassTestScene::Render()
 {
 	floor->Render();
 
-	p1->Render();
-	p2->Render();
-	spring->Render();
+	for (RigidSphere*& particle : particles)
+		particle->Render();
+
+	for (Spring*& spring : springs)
+		spring->Render();
+
+	obstacle->Render();
 }
 
 void SpringMassTestScene::PreRender()
@@ -51,9 +88,6 @@ void SpringMassTestScene::PreRender()
 
 void SpringMassTestScene::PostRender()
 {
-	//p1->Debug();
-	//p2->Debug();
-	//spring->Debug();
 }
 
 void SpringMassTestScene::Init()
@@ -68,6 +102,38 @@ void SpringMassTestScene::Init()
 
 	floor->SetName("RigidTestFloor_0");
 	floor->LoadTransform();
+
+	for (int y = 0; y < 20; y++)
+	{
+		for (int x = 0; x < 20; x++)
+		{
+			RigidSphere* particle = new RigidSphere(0.01f, 0.1f);
+			particle->translation = { (x - 1) * 2.f, 100.f - (y - 1) * 2.f, Random(0.f, 1.f) };
+			//particle->SetFixed(true);
+			particles.push_back(particle);
+		}
+	}
+
+	for (int y = 0; y < 20; y++)
+		for (int x = 0; x < 19; x++)
+			springs.push_back(new Spring(particles[(y) * 20 + x], particles[(y) * 20 + x + 1]));
+			
+	for (int y = 0; y < 19; y++) 
+		for (int x = 0; x < 20; x++)
+			springs.push_back(new Spring(particles[(y) * 20 + x], particles[(y + 1) * 20 + x]));
+
+	for (int y = 0; y < 19; y++)
+		for (int x = 0; x < 19; x++)
+			springs.push_back(new Spring(particles[(y) * 20 + x], particles[(y + 1) * 20 + x + 1], 200.f));
+
+	for (int y = 0; y < 19; y++)
+		for (int x = 0; x < 19; x++)
+			springs.push_back(new Spring(particles[(y + 1) * 20 + x], particles[(y) * 20 + x + 1], 200.f));
+
+	particles[0]->SetFixed(true);
+	particles[19]->SetFixed(true);
+
+	obstacle = new ColliderSphere(10.f);
 
 
 }
