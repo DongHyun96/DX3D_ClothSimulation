@@ -37,7 +37,6 @@ void Time::Update()
 	frameCount++;
 
 	oneSecCount += timeElapsed;
-
 	runningTime += timeElapsed;
 
 	if (oneSecCount >= 1.0)

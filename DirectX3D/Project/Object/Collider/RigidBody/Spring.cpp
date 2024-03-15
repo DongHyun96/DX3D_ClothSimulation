@@ -61,15 +61,19 @@ void Spring::UpdateBody()
 {
 	Vector3 p1_to_p2	 = particle2->GetGlobalPosition() - particle1->GetGlobalPosition();
 
+	// Update translation
 	body->translation	 = particle1->GetGlobalPosition() + p1_to_p2 * 0.5f;
 
+	// Update rotation
 	Vector3 rotationAxis = Vector3::Cross(Vector3(0, 1, 0), p1_to_p2);
 	float	rotAngle	 = acosf(Vector3::Dot(Vector3(0, 1, 0), p1_to_p2.GetNormalized()));
 
 	body->SetRotationMatrix(rotationAxis, rotAngle);
 
+	// Update scale
 	body->scale.y = p1_to_p2.Length();
 
+	// body Update
 	body->Update();
 
 }

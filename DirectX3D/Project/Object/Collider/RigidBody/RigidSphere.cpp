@@ -99,5 +99,5 @@ void RigidSphere::UpdateRigidBody(const float& timeRate)
 	}
 
 	velocity	+= (force / mass) * (DELTA_TIME / timeRate);
-	translation += velocity * (DELTA_TIME / timeRate);
+	translation +=       velocity * (DELTA_TIME / timeRate);
 }

@@ -11,12 +11,12 @@ SpringMassTestScene::~SpringMassTestScene()
 {
 	delete floor;
 
-	for (RigidSphere* particle : particles)
+	for (RigidSphere*& particle : particles)
 		delete particle;
 
 	particles.clear();
 
-	for (Spring* spring : springs)
+	for (Spring*& spring : springs)
 		delete spring;
 
 	springs.clear();
@@ -25,18 +25,19 @@ SpringMassTestScene::~SpringMassTestScene()
 }
 
 /*
-	Clear All forces
-	Particle Add force(Gravity, own velocity)
-	Spring Add force to each Particles
-	Particle steps(UpdateRigidBody)
-	ResolveCollisions
+	for Step Rate times...
+		Clear All forces
+		Particle Add force(Gravity, own velocity)
+		Spring Add force to each Particles
+		Particle steps(UpdateRigidBody)
+		ResolveCollisions
 */
 void SpringMassTestScene::Update()
 {
 	floor->Update();
 	obstacle->Update();
 
-	for (UINT i = 0; i < 100; i++)
+	/*for (UINT i = 0; i < 100; i++)
 	{
 		for (RigidSphere*& particle : particles)
 		{
@@ -50,32 +51,47 @@ void SpringMassTestScene::Update()
 
 		for (RigidSphere*& particle : particles)
 			particle->UpdateRigidBody(100);
-	}
+	}*/
 
-	for (RigidSphere* particle : particles)
-		particle->Update();
+	for (RigidSphere*& particle : particles)
+	{
+		particle->ClearForce();
+
+		particle->AddVelocity();
+	}
 
 	for (Spring*& spring : springs)
+	{
+		spring->AddForceToParticles();
 		spring->Update();
-
-
-
-	if (KEY_DOWN(VK_DOWN))
-	{
-	}
-	else if (KEY_DOWN(VK_UP))
-	{
 	}
 
+	for (RigidSphere*& particle : particles)
+	{
+		particle->UpdateRigidBody();
+		particle->Update();
+	}
+
+	//for (Spring*& spring : springs)
+	//	spring->Update();
+
+	
+	//if (KEY_DOWN(VK_DOWN))
+	//{
+	//}
+	//else if (KEY_DOWN(VK_UP))
+	//{
+	//}
 }
 
+// Draw call - 1882
 void SpringMassTestScene::Render()
 {
 	floor->Render();
 
 	for (RigidSphere*& particle : particles)
 		particle->Render();
-
+	
 	for (Spring*& spring : springs)
 		spring->Render();
 
@@ -90,6 +106,10 @@ void SpringMassTestScene::PostRender()
 {
 }
 
+/*
+	particle - 400°³
+	spring	 - 1482°³
+*/
 void SpringMassTestScene::Init()
 {
 	floor = new Quad();
