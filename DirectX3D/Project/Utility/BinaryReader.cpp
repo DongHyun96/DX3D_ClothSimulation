@@ -37,7 +37,8 @@ int BinaryReader::ReadInt()
 {
 	int temp{};
 
-	assert(ReadFile(file, &temp, sizeof(int), &size, nullptr));
+	if (!ReadFile(file, &temp, sizeof(int), &size, nullptr))
+		RaiseException(1, 0, 0, nullptr);
 
 	return temp;
 }
@@ -46,7 +47,8 @@ UINT BinaryReader::ReadUint()
 {
 	UINT temp{};
 
-	assert(ReadFile(file, &temp, sizeof(UINT), &size, nullptr));
+	if (!ReadFile(file, &temp, sizeof(UINT), &size, nullptr))
+		RaiseException(1, 0, 0, nullptr);
 
 	return temp;
 }
@@ -55,7 +57,8 @@ float BinaryReader::ReadFloat()
 {
 	float temp{};
 
-	assert(ReadFile(file, &temp, sizeof(float), &size, nullptr));
+	if (!ReadFile(file, &temp, sizeof(float), &size, nullptr))
+		RaiseException(1, 0, 0, nullptr);
 
 	return temp;
 }
@@ -66,7 +69,8 @@ string BinaryReader::ReadString()
 
 	char* data = new char[length + 1];
 
-	assert(ReadFile(file, data, sizeof(char) * length, &size, nullptr));
+	if (!ReadFile(file, data, sizeof(char) * length, &size, nullptr))
+		RaiseException(1, 0, 0, nullptr);
 
 	data[length] = '\0';
 
@@ -82,7 +86,8 @@ wstring BinaryReader::ReadWstring()
 
 	WCHAR* data = new WCHAR[length + 1];
 
-	assert(ReadFile(file, data, sizeof(WCHAR) * length, &size, nullptr));
+	if (!ReadFile(file, data, sizeof(WCHAR) * length, &size, nullptr))
+		RaiseException(1, 0, 0, nullptr);
 
 	data[length] = '\0';
 
@@ -119,12 +124,14 @@ Matrix BinaryReader::ReadMatrix()
 {
 	Matrix temp{};
 
-	assert(ReadFile(file, &temp, sizeof(Matrix), &size, nullptr));
+	if (!ReadFile(file, &temp, sizeof(Matrix), &size, nullptr))
+		RaiseException(1, 0, 0, nullptr);
 
 	return temp;
 }
 
 void BinaryReader::ReadData(void** data, UINT dataSize)
 {
-	assert(ReadFile(file, *data, dataSize, &size, nullptr));
+	if (!ReadFile(file, *data, dataSize, &size, nullptr))
+		RaiseException(1, 0, 0, nullptr);
 }
