@@ -52,6 +52,12 @@ void SpringMassTestScene::Update()
 		{
 			particle->UpdateRigidBody(100);
 			particle->Update();
+
+			if (((ColliderSphere*)particle)->Collision(obstacle))
+				particle->HandleCollision(obstacle);
+
+			if (particle->Collision(floor))
+				particle->HandleCollision(floor);
 		}
 	}
 
@@ -61,7 +67,7 @@ void SpringMassTestScene::Update()
 	
 	if (KEY_DOWN('1'))		particles[FIXED_LEFT_IDX]->SetFixed(false);
 	else if (KEY_DOWN('2')) particles[FIXED_RIGHT_IDX]->SetFixed(false);
-		
+
 }
 
 // Draw call - 1882
@@ -69,8 +75,8 @@ void SpringMassTestScene::Render()
 {
 	floor->Render();
 
-	for (RigidSphere*& particle : particles)
-		particle->Render();
+	//for (RigidSphere*& particle : particles)
+	//	particle->Render();
 	
 	for (Spring*& spring : springs)
 		spring->Render();
@@ -84,6 +90,7 @@ void SpringMassTestScene::PreRender()
 
 void SpringMassTestScene::PostRender()
 {
+	obstacle->Debug();
 }
 
 /*
