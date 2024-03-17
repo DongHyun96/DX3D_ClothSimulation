@@ -36,52 +36,32 @@ void SpringMassTestScene::Update()
 {
 	floor->Update();
 	obstacle->Update();
-
-	/*for (UINT i = 0; i < 100; i++)
+	
+	for (UINT i = 0; i < 100; i++)
 	{
-		for (RigidSphere*& particle : particles)
+		for (auto& particle : particles)
 		{
 			particle->ClearForce();
-
 			particle->AddVelocity();
 		}
 
-		for (Spring*& spring : springs)
+		for (auto& spring : springs)
 			spring->AddForceToParticles();
 
-		for (RigidSphere*& particle : particles)
+		for (auto& particle : particles)
+		{
 			particle->UpdateRigidBody(100);
-	}*/
-
-	for (RigidSphere*& particle : particles)
-	{
-		particle->ClearForce();
-
-		particle->AddVelocity();
+			particle->Update();
+		}
 	}
 
-	for (Spring*& spring : springs)
-	{
-		spring->AddForceToParticles();
+	for (auto& spring : springs)
 		spring->Update();
-	}
-
-	for (RigidSphere*& particle : particles)
-	{
-		particle->UpdateRigidBody();
-		particle->Update();
-	}
-
-	//for (Spring*& spring : springs)
-	//	spring->Update();
 
 	
-	//if (KEY_DOWN(VK_DOWN))
-	//{
-	//}
-	//else if (KEY_DOWN(VK_UP))
-	//{
-	//}
+	if (KEY_DOWN('1'))		particles[FIXED_LEFT_IDX]->SetFixed(false);
+	else if (KEY_DOWN('2')) particles[FIXED_RIGHT_IDX]->SetFixed(false);
+		
 }
 
 // Draw call - 1882
@@ -150,8 +130,8 @@ void SpringMassTestScene::Init()
 		for (int x = 0; x < 19; x++)
 			springs.push_back(new Spring(particles[(y + 1) * 20 + x], particles[(y) * 20 + x + 1], 200.f));
 
-	particles[0]->SetFixed(true);
-	particles[19]->SetFixed(true);
+	particles[FIXED_LEFT_IDX]->SetFixed(true);
+	particles[FIXED_RIGHT_IDX]->SetFixed(true);
 
 	obstacle = new ColliderSphere(10.f);
 

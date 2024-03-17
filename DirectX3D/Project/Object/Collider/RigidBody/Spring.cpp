@@ -15,8 +15,11 @@ Spring::Spring(RigidSphere* p1, RigidSphere* p2, float k, Vector4 color)
 
 	float s = min(p1->Radius(), p2->Radius());
 
-	body->scale.x = s;
-	body->scale.z = s;
+	//body->scale.x = s;
+	//body->scale.z = s;
+
+	body->scale.x = 0.3f;
+	body->scale.z = 0.3f;
 
 	r = (p1->GetGlobalPosition() - p2->GetGlobalPosition()).Length();
 

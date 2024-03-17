@@ -65,7 +65,6 @@ MainGame::MainGame()
     SCENE->Create("Start", new SpringMassTestScene);
 
 
-
     //SCENE->Add("Tutorial");
     SCENE->Add("Grid");
     SCENE->Add("Start");
