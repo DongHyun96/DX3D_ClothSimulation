@@ -24,7 +24,9 @@ SpringMassTestScene::~SpringMassTestScene()
 
 	springs.clear();
 
-	delete obstacle;
+	//delete obstacle;
+	for (ColliderSphere*& obstacle : obstacles)
+		delete obstacle;
 }
 
 /*
@@ -37,14 +39,16 @@ SpringMassTestScene::~SpringMassTestScene()
 */
 void SpringMassTestScene::Update()
 {
-	if (KEY_DOWN(VK_SPACE)) isPlaying = !isPlaying;
-
+	HandleInput();
 
 	if (!isPlaying) return;
 
 	floor->Update();
-	obstacle->Update();
-	
+
+	//obstacle->Update();
+	for (ColliderSphere*& obstacle : obstacles)
+		obstacle->Update();
+
 	for (UINT i = 0; i < 100; i++)
 	{
 		for (auto& particle : particles)
@@ -58,19 +62,25 @@ void SpringMassTestScene::Update()
 
 		for (auto& particle : particles)
 		{
-			bool floorCollided		= particle->Collision(floor);
-			bool obstacleCollided	= ((ColliderSphere*)particle)->Collision(obstacle);
 
-			/*if (floorCollided) particle->ResolveContact(floor, 100);
-			if (obstacleCollided) particle->ResolveContact(obstacle, 100);*/
+			/*if (particle->Collision(floor)) particle->ResolveContact(floor, 100);
+
+			for (ColliderSphere*& obstacle : obstacles)
+			{
+				if (((ColliderSphere*)particle)->Collision(obstacle))
+					particle->ResolveContact(obstacle, 100);
+			}*/
 
 			particle->UpdateRigidBody(100);
 			particle->Update();
 
-			if (obstacleCollided)
-				particle->ResolveCollision(obstacle);
+			for (ColliderSphere*& obstacle : obstacles)
+			{
+				if (particle->Collision(obstacle))
+					particle->ResolveCollision(obstacle);
+			}
 
-			if (floorCollided)
+			if (particle->Collision(floor))
 				particle->ResolveCollision(floor);
 		}
 	}
@@ -82,8 +92,7 @@ void SpringMassTestScene::Update()
 	/*if (KEY_DOWN('1'))		particles[FIXED_LEFT_IDX]->SetFixed(false);
 	else if (KEY_DOWN('2')) particles[FIXED_RIGHT_IDX]->SetFixed(false);*/
 
-	if (KEY_DOWN('1'))		particles[FIXED_LEFT_IDX]->ToggleFixed();
-	else if (KEY_DOWN('2')) particles[FIXED_RIGHT_IDX]->ToggleFixed();
+
 
 }
 
@@ -98,7 +107,9 @@ void SpringMassTestScene::Render()
 	for (Spring*& spring : springs)
 		spring->Render();
 
-	obstacle->Render();
+	//obstacle->Render();
+	for (ColliderSphere*& obstacle : obstacles)
+		obstacle->Render();
 }
 
 void SpringMassTestScene::PreRender()
@@ -107,7 +118,9 @@ void SpringMassTestScene::PreRender()
 
 void SpringMassTestScene::PostRender()
 {
-	obstacle->Debug();
+	//obstacle->Debug();
+	for (ColliderSphere*& obstacle : obstacles)
+		obstacle->Debug();
 }
 
 /*
@@ -132,7 +145,7 @@ void SpringMassTestScene::Init()
 		for (int x = 0; x < 20; x++)
 		{
 			RigidSphere* particle = new RigidSphere(0.01f, 0.1f);
-			particle->translation = { (x - 1) * 2.f, 100.f - (y - 1) * 2.f, Random(0.f, 1.f) };
+			particle->translation = { (x - 10) * 2.f, 200.f - (y - 1) * 2.f, Random(0.f, 1.f) };
 			//particle->SetFixed(true);
 			particles.push_back(particle);
 		}
@@ -157,7 +170,39 @@ void SpringMassTestScene::Init()
 	particles[FIXED_LEFT_IDX]->SetFixed(true);
 	particles[FIXED_RIGHT_IDX]->SetFixed(true);
 
-	obstacle = new ColliderSphere(10.f);
+	//obstacle = new ColliderSphere(10.f);
 	//obstacle->SetName("SpringMassObstacle")
+	for (UINT i = 0; i < 3; i++)
+	{
+		ColliderSphere* o = new ColliderSphere(10.f);
+		o->SetName("SpringMassObstacle_" + to_string(i));
+		o->LoadTransform();
+		obstacles.push_back(o);
+	}
 
+}
+
+void SpringMassTestScene::HandleInput()
+{
+	if (KEY_DOWN(VK_SPACE)) isPlaying = !isPlaying;
+
+	if (KEY_DOWN('0'))
+	{
+		for (int y = 0; y < 20; y++)
+		{
+			for (int x = 0; x < 20; x++)
+				particles[x + y * 20]->translation = { (x - 10) * 2.f, 200.f - (y - 1) * 2.f, Random(0.f, 1.f) };
+		}
+
+		particles[FIXED_LEFT_IDX]->SetFixed(true);
+		particles[FIXED_RIGHT_IDX]->SetFixed(true);
+
+		for (RigidSphere* particle : particles) particle->Update();
+		for (Spring* spring : springs)			spring->Update();
+
+		isPlaying = false;
+	}
+
+	if (KEY_DOWN('1'))	particles[FIXED_LEFT_IDX]->ToggleFixed();
+	if (KEY_DOWN('2'))	particles[FIXED_RIGHT_IDX]->ToggleFixed();
 }

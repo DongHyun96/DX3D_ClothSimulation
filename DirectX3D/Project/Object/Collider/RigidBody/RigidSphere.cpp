@@ -52,6 +52,14 @@ bool RigidSphere::Collision(const Quad* other)
 		   Vector3::Dot(velocity, other->GetNormal()) < 0;
 }
 
+bool RigidSphere::Collision(const ColliderSphere* other)
+{
+	Vector3 pos = other->GetGlobalPosition() + (this->globalPosition - other->GetGlobalPosition()).GetNormalized() * other->Radius();
+	Vector3 n = (this->globalPosition - other->GetGlobalPosition()).GetNormalized();
+
+	return Vector3::Dot(this->globalPosition - pos, n) < 0.00001f && Vector3::Dot(velocity, n) < 0;
+}
+
 void RigidSphere::ResolveContact(const ColliderSphere* other, const UINT& timeRate)
 {
 	Vector3 n = (this->globalPosition - other->GetGlobalPosition()).GetNormalized();

@@ -28,6 +28,8 @@ public: // 충돌검사 및 충돌처리
 
 	bool Collision(const Quad* other);
 
+	bool Collision(const ColliderSphere* other);
+
 	void ResolveContact(const ColliderSphere* other, const UINT& timeRate = 1.f);
 	void ResolveContact(const RigidSphere*    other, const UINT& timeRate = 1.f);
 

@@ -35,6 +35,7 @@ public:
 private:
 
 	void Init();
+	void HandleInput();
 
 private:
 
@@ -43,7 +44,8 @@ private:
 	vector<RigidSphere*>	particles{};
 	vector<Spring*>			springs{};
 
-	ColliderSphere* obstacle{};
+	//ColliderSphere* obstacle{};
+	vector<ColliderSphere*> obstacles{};
 
 	/*
 	//vector<Quad*> quads{};

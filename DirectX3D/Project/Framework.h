@@ -49,6 +49,8 @@ using namespace std;
 
 #define WIN_HEIGHT		720.f
 #define WIN_WIDTH		1280.f
+//#define WIN_HEIGHT		1080.f
+//#define WIN_WIDTH		1920.f
 #define WIN_CENTER		Vector3(WIN_WIDTH * 0.5f, WIN_HEIGHT * 0.5f, 0.f)
 
 #define MAX_FRAME		512
