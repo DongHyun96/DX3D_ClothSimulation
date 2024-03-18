@@ -89,12 +89,12 @@ void RigidBodyTestScene::Update()
 		//	rigidSphere->HandleCollision(floor);
 
 		if (((ColliderSphere*)rigidSphere)->Collision(obstacle))
-			rigidSphere->HandleCollision(obstacle);
+			rigidSphere->ResolveCollision(obstacle);
 
 		for (Quad* floor : floors)
 		{
 			if (rigidSphere->Collision(floor))
-				rigidSphere->HandleCollision(floor);
+				rigidSphere->ResolveCollision(floor);
 		}
 	}
 

@@ -52,25 +52,67 @@ bool RigidSphere::Collision(const Quad* other)
 		   Vector3::Dot(velocity, other->GetNormal()) < 0;
 }
 
-void RigidSphere::HandleCollision(const ColliderSphere* other)
+void RigidSphere::ResolveContact(const ColliderSphere* other, const UINT& timeRate)
 {
-	Vector3 contactVec	= other->Radius() * (this->globalPosition - other->GetGlobalPosition().GetNormalized());
+	Vector3 n = (this->globalPosition - other->GetGlobalPosition()).GetNormalized();
+	float dt = DELTA_TIME / timeRate;
+
+
+	Vector3 fN = Vector3::Dot(force, n) * n;
+	Vector3 vN = Vector3::Dot(velocity, n) * n;
+	Vector3 vT = velocity - vN;
+	Vector3 fF = -MU * fN.Length() * vT.GetNormalized();
+
+	if (fF.Length() * dt > vT.Length() * mass)
+		fF = -vT / dt * mass;
+
+	AddForce(fF);
+	AddForce(-fN);
+}
+
+void RigidSphere::ResolveContact(const RigidSphere* other, const UINT& timeRate)
+{
+	ResolveContact((ColliderSphere*)other, timeRate);
+}
+
+void RigidSphere::ResolveContact(const Quad* other, const UINT& timeRate)
+{
+	Vector3 planeNormal = other->GetNormal();
+	float dt = DELTA_TIME / timeRate;
+
+	Vector3 fN = Vector3::Dot(force, planeNormal) * planeNormal;
+	Vector3 vN = Vector3::Dot(velocity, planeNormal) * planeNormal;
+	Vector3 vT = velocity - vN;
+	Vector3 fF = -MU * fN.Length() * vT.GetNormalized();
+
+	if (fF.Length() * dt > vT.Length() * mass)
+		fF = -vT / dt * mass;
+
+	AddForce(fF);
+	AddForce(-fN);
+}
+
+void RigidSphere::ResolveCollision(const ColliderSphere* other)
+{
+	Vector3 contactVec = other->Radius() * (this->globalPosition - other->GetGlobalPosition()).GetNormalized();
+
 	Vector3 contactPos	= other->GetGlobalPosition() + contactVec;
 	Vector3 n			= (this->globalPosition - other->GetGlobalPosition()).GetNormalized();
 
 	Vector3 vN	= Vector3::Dot(velocity, n) * n;
 	Vector3 vT	= velocity - vN;
+
 	velocity	= vT - vN * COR;
-
-	this->translation -= Vector3::Dot(translation - contactPos, n) * n;
+	
+	this->translation -= Vector3::Dot(this->translation - contactPos, n) * n;
 }
 
-void RigidSphere::HandleCollision(const RigidSphere* other)
+void RigidSphere::ResolveCollision(const RigidSphere* other)
 {
-	HandleCollision((ColliderSphere*)other);
+	ResolveCollision((ColliderSphere*)other);
 }
 
-void RigidSphere::HandleCollision(const Quad* other)
+void RigidSphere::ResolveCollision(const Quad* other)
 {
 	Vector3 vN = Vector3::Dot(velocity, other->GetNormal()) * other->GetNormal();
 	Vector3 vT = velocity - vN;
@@ -80,7 +122,7 @@ void RigidSphere::HandleCollision(const Quad* other)
 	translation -= Vector3::Dot(translation - other->GetGlobalPosition(), other->GetNormal()) * other->GetNormal();
 }
 
-void RigidSphere::HandleCollision(const Terrain* terrain)
+void RigidSphere::ResolveCollision(const Terrain* terrain)
 {
 }
 

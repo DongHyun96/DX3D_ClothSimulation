@@ -20,6 +20,7 @@ public:
 	void UpdateRigidBody(const float& timeRate = 1.f); // Step
 
 	void SetFixed(const bool& fixed) { this->fixed = fixed; }
+	void ToggleFixed() { fixed = !fixed; }
 
 	Vector3 GetVelocity() const { return velocity; }
 
@@ -27,11 +28,16 @@ public: // 충돌검사 및 충돌처리
 
 	bool Collision(const Quad* other);
 
-	void HandleCollision(const ColliderSphere*	other); // ColliderSphere
-	void HandleCollision(const RigidSphere*		other); // RigidBody vs RigidBody
+	void ResolveContact(const ColliderSphere* other, const UINT& timeRate = 1.f);
+	void ResolveContact(const RigidSphere*    other, const UINT& timeRate = 1.f);
 
-	void HandleCollision(const Quad* other);			
-	void HandleCollision(const Terrain* terrain);		// NOT IMPLEMENTED
+	void ResolveContact(const Quad* other, const UINT& timeRate = 1.f);
+
+	void ResolveCollision(const ColliderSphere*	other);		// ColliderSphere
+	void ResolveCollision(const RigidSphere*	other);		// RigidBody vs RigidBody
+
+	void ResolveCollision(const Quad* other);			
+	void ResolveCollision(const Terrain* terrain);			// NOT IMPLEMENTED
 
 private:
 

@@ -5,6 +5,9 @@
 SpringMassTestScene::SpringMassTestScene()
 {
 	Init();
+
+	this->Update();
+	isPlaying = false;
 }
 
 SpringMassTestScene::~SpringMassTestScene()
@@ -34,6 +37,11 @@ SpringMassTestScene::~SpringMassTestScene()
 */
 void SpringMassTestScene::Update()
 {
+	if (KEY_DOWN(VK_SPACE)) isPlaying = !isPlaying;
+
+
+	if (!isPlaying) return;
+
 	floor->Update();
 	obstacle->Update();
 	
@@ -50,14 +58,20 @@ void SpringMassTestScene::Update()
 
 		for (auto& particle : particles)
 		{
+			bool floorCollided		= particle->Collision(floor);
+			bool obstacleCollided	= ((ColliderSphere*)particle)->Collision(obstacle);
+
+			/*if (floorCollided) particle->ResolveContact(floor, 100);
+			if (obstacleCollided) particle->ResolveContact(obstacle, 100);*/
+
 			particle->UpdateRigidBody(100);
 			particle->Update();
 
-			if (((ColliderSphere*)particle)->Collision(obstacle))
-				particle->HandleCollision(obstacle);
+			if (obstacleCollided)
+				particle->ResolveCollision(obstacle);
 
-			if (particle->Collision(floor))
-				particle->HandleCollision(floor);
+			if (floorCollided)
+				particle->ResolveCollision(floor);
 		}
 	}
 
@@ -65,8 +79,11 @@ void SpringMassTestScene::Update()
 		spring->Update();
 
 	
-	if (KEY_DOWN('1'))		particles[FIXED_LEFT_IDX]->SetFixed(false);
-	else if (KEY_DOWN('2')) particles[FIXED_RIGHT_IDX]->SetFixed(false);
+	/*if (KEY_DOWN('1'))		particles[FIXED_LEFT_IDX]->SetFixed(false);
+	else if (KEY_DOWN('2')) particles[FIXED_RIGHT_IDX]->SetFixed(false);*/
+
+	if (KEY_DOWN('1'))		particles[FIXED_LEFT_IDX]->ToggleFixed();
+	else if (KEY_DOWN('2')) particles[FIXED_RIGHT_IDX]->ToggleFixed();
 
 }
 
@@ -141,6 +158,6 @@ void SpringMassTestScene::Init()
 	particles[FIXED_RIGHT_IDX]->SetFixed(true);
 
 	obstacle = new ColliderSphere(10.f);
-
+	//obstacle->SetName("SpringMassObstacle")
 
 }
