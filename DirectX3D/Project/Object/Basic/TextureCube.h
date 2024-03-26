@@ -20,6 +20,8 @@ public:
 
 	void SetDiffuseMap(wstring file);
 
+	void SetShader(wstring file);
+
 private:
 	void CreateQuads();
 

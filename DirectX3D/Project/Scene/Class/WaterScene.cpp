@@ -12,7 +12,12 @@ WaterScene::WaterScene()
 	//floor->GetMaterial()->SetShader(L"26_Reflection");
 	//floor->GetMaterial()->SetShader(L"27_Refraction");
 
-	sky = new SkyBox(L"Landscape/ddsTest.dds");
+	//sky = new SkyBox(L"Landscape/ddsTest.dds");
+	//sky = new SkyBox(L"Landscape/SkyTexture.dds");
+	//sky = new SkyBox(L"Landscape/Sample.png");
+	sky = new SkyBox(L"Landscape/DesertSky.dds");
+
+
 
 	water = new Water(L"Landscape/Wave.dds");
 }

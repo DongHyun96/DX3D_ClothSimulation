@@ -35,6 +35,12 @@ void TextureCube::SetDiffuseMap(wstring file)
 		quad->GetMaterial()->SetDiffuseMap(file);
 }
 
+void TextureCube::SetShader(wstring file)
+{
+	for (Quad* quad : quads)
+		quad->GetMaterial()->SetShader(file);
+}
+
 void TextureCube::CreateQuads()
 {
 	// STL : resize, reserve

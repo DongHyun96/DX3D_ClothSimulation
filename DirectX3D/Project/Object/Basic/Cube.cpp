@@ -3,7 +3,7 @@
 
 
 Cube::Cube(Vector4 color)
-    :GameObject<VertexType>(L"Tutorial"), color(color)
+    :GameObject<VertexType>(L"02_DiffuseColor"), color(color)
 {
     CreateMesh();
 }

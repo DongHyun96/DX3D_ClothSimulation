@@ -10,11 +10,12 @@ public:
 	void Render()		override;
 	void PreRender()	override;
 	void PostRender()	override;
-
+	
 private:
 	Quad* quad{};
 
-	TextureCube* cube{};
+	TextureCube* textureCube{};
+	Cube* cube{};
 
 	Sphere* sphere{};
 };

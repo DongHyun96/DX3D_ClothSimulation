@@ -49,6 +49,4 @@ private:
 	Vector3 velocity{};
 	Vector3 force{};
 
-	const float STEP_RATE = 100.f;
-
 };

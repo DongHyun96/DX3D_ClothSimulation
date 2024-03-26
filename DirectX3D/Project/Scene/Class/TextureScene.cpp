@@ -6,37 +6,44 @@ TextureScene::TextureScene()
 	quad = new Quad;
 	quad->GetMaterial()->SetDiffuseMap(L"Landscape/Box.png");
 
-	cube = new TextureCube;
-	cube->SetDiffuseMap(L"Landscape/Box.png");
-	cube->SetName("TextureCubeExample");
-	cube->translation.x = -2;
+	cube = new Cube;
+	cube->translation.x = -4;
+
+	textureCube = new TextureCube;
+	//cube->SetDiffuseMap(L"Landscape/Box.png");
+	textureCube->SetName("TextureCubeExample");
+	textureCube->translation.x = -2;
+	textureCube->SetShader(L"16_Light");
 
 	sphere = new Sphere;
-	sphere->GetMaterial()->SetDiffuseMap(L"LandScape/FieldStone_DM.tga");
-	sphere->GetMaterial()->SetSpecularMap(L"LandScape/FieldStone_SM.tga");
-	sphere->GetMaterial()->SetNormalMap(L"LandScape/FieldStone_NM.tga");
-
+	sphere->GetMaterial()->SetShader(L"16_Light");
+	//sphere->GetMaterial()->SetDiffuseMap(L"LandScape/FieldStone_DM.tga");
+	//sphere->GetMaterial()->SetSpecularMap(L"LandScape/FieldStone_SM.tga");
+	//sphere->GetMaterial()->SetNormalMap(L"LandScape/FieldStone_NM.tga");
 }
 
 TextureScene::~TextureScene()
 {
 	delete quad;
-	delete cube;
+	delete textureCube;
 	delete sphere;
+	delete cube;
 }
 
 void TextureScene::Update()
 {
 	quad->Update();
-	cube->Update();
+	textureCube->Update();
 	sphere->Update();
+	cube->Update();
 }
 
 void TextureScene::Render()
 {
 	//quad->Render();
-	cube->Render();
+	textureCube->Render();
 	sphere->Render();
+	cube->Render();
 }
 
 void TextureScene::PreRender()
@@ -45,6 +52,8 @@ void TextureScene::PreRender()
 
 void TextureScene::PostRender()
 {
-	cube->Debug();
+	textureCube->Debug();
 	sphere->Debug();
+	cube->Debug();
+	cube->GetMaterial()->Debug();
 }

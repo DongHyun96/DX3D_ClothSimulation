@@ -121,6 +121,8 @@ void SpringMassTestScene::PostRender()
 	//obstacle->Debug();
 	for (ColliderSphere*& obstacle : obstacles)
 		obstacle->Debug();
+
+	floor->GetMaterial()->Debug();
 }
 
 /*
@@ -135,7 +137,8 @@ void SpringMassTestScene::Init()
 	floor->rotation.x = XM_PIDIV2;
 	floor->translation.y = 0.1f;
 	floor->GetMaterial()->SetShader(L"16_Light");
-	floor->GetMaterial()->SetDiffuseMap(L"Landscape/Dirt3.png");
+	floor->GetMaterial()->SetDiffuseMap(L"Solid/White.png");
+	floor->GetMaterial()->GetBuffer()->data.diffuse = Vector4(0.286, 0.411, 0.537, 1);
 
 	floor->SetName("RigidTestFloor_0");
 	floor->LoadTransform();
