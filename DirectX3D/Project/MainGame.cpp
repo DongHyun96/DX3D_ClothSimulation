@@ -28,6 +28,8 @@
 #include"Scene/RigidBodyTestScene.h"
 #include "Scene/SpringMassTestScene.h"
 
+#include "Scene/TestScene.h"
+
 MainGame::MainGame()
 {
 	Initialize();
@@ -39,7 +41,7 @@ MainGame::MainGame()
 
     SCENE->Create("Grid", new GridScene);
 
-    //SCENE->Create("Start", new TextureScene);
+    SCENE->Create("Start", new TextureScene);
     //SCENE->Create("Start", new TerrainScene);
     //SCENE->Create("Start", new TerrainEditorScene);
     //SCENE->Create("Start", new ModelExportScene);
@@ -62,7 +64,8 @@ MainGame::MainGame()
     //SCENE->Create("Start", new MapTestScene);
 
     //SCENE->Create("Start", new RigidBodyTestScene);
-    SCENE->Create("Start", new SpringMassTestScene);
+    //SCENE->Create("Start", new SpringMassTestScene);
+    //SCENE->Create("Start", new TestScene);
 
 
     //SCENE->Add("Tutorial");

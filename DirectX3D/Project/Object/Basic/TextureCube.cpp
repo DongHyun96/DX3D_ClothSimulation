@@ -35,6 +35,18 @@ void TextureCube::SetDiffuseMap(wstring file)
 		quad->GetMaterial()->SetDiffuseMap(file);
 }
 
+void TextureCube::SetSpecularMap(wstring file)
+{
+	for (Quad* quad : quads)
+		quad->GetMaterial()->SetSpecularMap(file);
+}
+
+void TextureCube::SetNormalMap(wstring file)
+{
+	for (Quad* quad : quads)
+		quad->GetMaterial()->SetNormalMap(file);
+}
+
 void TextureCube::SetShader(wstring file)
 {
 	for (Quad* quad : quads)

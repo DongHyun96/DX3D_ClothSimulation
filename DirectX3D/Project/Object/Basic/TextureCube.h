@@ -19,6 +19,8 @@ public:
 	void Render();
 
 	void SetDiffuseMap(wstring file);
+	void SetSpecularMap(wstring file);
+	void SetNormalMap(wstring file);
 
 	void SetShader(wstring file);
 

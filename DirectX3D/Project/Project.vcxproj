@@ -190,6 +190,7 @@
     <ClInclude Include="Scene\Class\TessellationScene.h" />
     <ClInclude Include="Scene\Class\TerrainLODScene.h" />
     <ClInclude Include="Object\LandScape\TerrainLOD.h" />
+    <ClInclude Include="Scene\TestScene.h" />
     <ClInclude Include="Utility\PhysicsValue.h" />
     <ClInclude Include="System\Reflection.h" />
     <ClInclude Include="System\Refraction.h" />
@@ -435,6 +436,7 @@
     <ClCompile Include="Scene\Class\TessellationScene.cpp" />
     <ClCompile Include="Scene\Class\TerrainLODScene.cpp" />
     <ClCompile Include="Object\LandScape\TerrainLOD.cpp" />
+    <ClCompile Include="Scene\TestScene.cpp" />
     <ClCompile Include="Utility\GameMath.cpp" />
     <ClCompile Include="Object\Basic\Grid.cpp" />
     <ClCompile Include="Render\State\RasterizerState.cpp" />

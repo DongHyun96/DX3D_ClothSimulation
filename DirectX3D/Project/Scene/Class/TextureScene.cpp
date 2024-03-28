@@ -11,6 +11,10 @@ TextureScene::TextureScene()
 
 	textureCube = new TextureCube;
 	//cube->SetDiffuseMap(L"Landscape/Box.png");
+	textureCube->SetDiffuseMap(L"Default/TemplateGrid_albedo.png");
+	//textureCube->SetSpecularMap(L"Landscape/Wall_specular.png");
+	textureCube->SetNormalMap(L"Default/TemplateGrid_normal.png");
+
 	textureCube->SetName("TextureCubeExample");
 	textureCube->translation.x = -2;
 	textureCube->SetShader(L"16_Light");

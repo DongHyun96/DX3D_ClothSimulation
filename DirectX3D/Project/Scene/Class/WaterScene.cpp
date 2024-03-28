@@ -15,8 +15,8 @@ WaterScene::WaterScene()
 	//sky = new SkyBox(L"Landscape/ddsTest.dds");
 	//sky = new SkyBox(L"Landscape/SkyTexture.dds");
 	//sky = new SkyBox(L"Landscape/Sample.png");
-	sky = new SkyBox(L"Landscape/DesertSky.dds");
-
+	//sky = new SkyBox(L"Landscape/DesertSky.dds");
+	sky = new SkyBox(L"Landscape/ColdSunset.dds");
 
 
 	water = new Water(L"Landscape/Wave.dds");

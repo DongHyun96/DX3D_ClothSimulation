@@ -1,0 +1,44 @@
+#include "Framework.h"
+#include "TestScene.h"
+
+
+TestScene::TestScene()
+{
+	sky = new SkyBox(L"Landscape/ColdSunset.dds");
+
+	defaultFloor = new TextureCube;
+
+	defaultFloor->SetName("Default floor");
+	defaultFloor->SetShader(L"16_Light");
+	//defaultFloor->SetDiffuseMap(L"Default/TemplateGrid_albedo.png");
+	//defaultFloor->SetNormalMap(L"Default/TemplateGrid_normal.png");
+	defaultFloor->SetDiffuseMap(L"Landscape/Floor.png");
+	 defaultFloor->SetNormalMap(L"Landscape/Floor_normal.png");
+}
+
+TestScene::~TestScene()
+{
+	delete sky;
+	delete defaultFloor;
+}
+
+void TestScene::Update()
+{
+	sky->Update();
+	defaultFloor->Update();
+}
+
+void TestScene::Render()
+{
+	sky->Render();
+	defaultFloor->Render();
+}
+
+void TestScene::PreRender()
+{
+}
+
+void TestScene::PostRender()
+{
+	defaultFloor->Debug();
+}

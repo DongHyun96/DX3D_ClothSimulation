@@ -612,6 +612,9 @@
     <ClInclude Include="Object\LandScape\TerrainLOD.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\TestScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -918,6 +921,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Object\LandScape\TerrainLOD.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\TestScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
