@@ -36,6 +36,8 @@ Texture* Texture::Add(wstring file)
 		LoadFromDDSFile(file.c_str(), DDS_FLAGS_NONE, nullptr, tempImage);
 	else
 		LoadFromWICFile(file.c_str(), WIC_FLAGS_NONE, nullptr, tempImage);
+		//LoadFromWICFile(file.c_str(), WIC_FLAGS_IGNORE_SRGB, nullptr, tempImage);
+
 
 	ID3D11ShaderResourceView* tempSRV{};
 
