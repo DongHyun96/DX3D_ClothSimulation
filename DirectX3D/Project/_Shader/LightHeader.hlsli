@@ -69,17 +69,10 @@ float3 GetNormal(float3 T, float3 B, float3 N, float2 uv)
     {
         float4 normalMapping = normalMap.Sample(samp, uv); // 0 ~ 1
 
-        //normalMapping = normalMapping * 2.f - 1.f; // -1 ~ 1
-        
-        //normalMapping -= 0.5f;
-        //normalMapping.z *= -1;
-        //normalMapping += 0.5f;
-        
         normalMapping = normalMapping * 2.f - 1.f; // -1 ~ 1
-        normalMapping.z *= -1;
-
+        
         float3x3 TBN = float3x3(T, B, N);
-    
+        
         normal = normalize(mul(normalMapping.xyz, TBN));
     }
     

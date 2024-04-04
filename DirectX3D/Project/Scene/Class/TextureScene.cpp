@@ -13,9 +13,9 @@ TextureScene::TextureScene()
 	textureCube->SetDiffuseMap(L"Default/TemplateGrid_albedo.png");
 	textureCube->SetNormalMap(L"Default/TemplateGrid_normal.png");
 
-	textureCube->SetDiffuseMap(L"LandScape/FieldStone_DM.tga");
-	textureCube->SetSpecularMap(L"LandScape/FieldStone_SM.tga");
-	textureCube->SetNormalMap(L"LandScape/FieldStone_NM.tga");
+	//textureCube->SetDiffuseMap(L"LandScape/FieldStone_DM.tga");
+	//textureCube->SetSpecularMap(L"LandScape/FieldStone_SM.tga");
+	//textureCube->SetNormalMap(L"LandScape/FieldStone_NM.tga");
 
 
 	textureCube->SetName("TextureCubeExample");
