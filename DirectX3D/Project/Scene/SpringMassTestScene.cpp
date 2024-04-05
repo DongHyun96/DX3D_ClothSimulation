@@ -68,8 +68,6 @@ void SpringMassTestScene::Init()
 	floor->SetName("RigidTestFloor_0");
 	floor->LoadTransform();
 	
-	cloth = new Cloth;
-
 	for (UINT i = 0; i < 3; i++)
 	{
 		ColliderSphere* o = new ColliderSphere(10.f);
@@ -77,5 +75,13 @@ void SpringMassTestScene::Init()
 		o->LoadTransform();
 		obstacles.push_back(o);
 	}
+
+	cloth = new Cloth;
+
+	cloth->AddObstacles(floor);
+	
+	for (ColliderSphere* cSphere : obstacles)
+		cloth->AddObstacles(cSphere);
+
 
 }

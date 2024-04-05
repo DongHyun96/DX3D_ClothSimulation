@@ -19,7 +19,6 @@ private:
 private:
 
 	Cube* body{};
-	//TextureCube* body{};
 
 	Vector4 color{};
 

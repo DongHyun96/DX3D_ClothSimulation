@@ -38,7 +38,7 @@ MainGame::MainGame()
     //scene = new TutorialScene;
     //scene = new TextureScene;
 
-    //SCENE->Create("Tutorial", new TutorialScene);
+    //SCENE->Create("Start", new TutorialScene);
 
     SCENE->Create("Grid", new GridScene);
     SCENE->Create("Sky", new SkyScene);

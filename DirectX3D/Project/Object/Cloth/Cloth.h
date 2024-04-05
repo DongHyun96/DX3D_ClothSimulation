@@ -8,9 +8,11 @@ public:
 	void Update();
 	void Render();
 
+	void AddObstacles(Transform* obstacle);
+
 private:
 
-	void Init();
+	void InitSpringsAndParticles();
 	void HandleInput();
 
 private:
@@ -23,4 +25,10 @@ private:
 
 	bool isPlaying = true;
 
+private: // 충돌 처리 검사용
+
+	vector<Quad*>			quadObstacles{};
+	vector<ColliderSphere*> sphereObstacles{};
+	
+	
 };

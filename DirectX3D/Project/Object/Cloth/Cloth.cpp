@@ -4,10 +4,11 @@
 
 Cloth::Cloth()
 {
-	Init();
+	InitSpringsAndParticles();
 
 	this->Update();
 	isPlaying = false;
+
 }
 
 Cloth::~Cloth()
@@ -53,7 +54,17 @@ void Cloth::Update()
 			particle->UpdateRigidBody(100);
 			particle->Update();
 
-			// TODO : Collision handling here
+			for (Quad*& quad : quadObstacles)
+			{
+				if (particle->Collision(quad))
+					particle->ResolveCollision(quad);
+			}
+
+			for (ColliderSphere*& cSphere : sphereObstacles)
+			{
+				if (particle->Collision(cSphere))
+					particle->ResolveCollision(cSphere);
+			}
 		}
 	}
 
@@ -67,7 +78,27 @@ void Cloth::Render()
 		spring->Render();
 }
 
-void Cloth::Init()
+void Cloth::AddObstacles(Transform* obstacle)
+{
+	ColliderSphere* cSphere = dynamic_cast<ColliderSphere*>(obstacle);
+
+	if (cSphere)
+	{
+		sphereObstacles.push_back(cSphere);
+		return;
+	}
+
+	Quad* quad = dynamic_cast<Quad*>(obstacle);
+
+	if (quad)
+	{
+		quadObstacles.push_back(quad);
+		return;
+	}
+
+}
+
+void Cloth::InitSpringsAndParticles()
 {
 	for (int y = 0; y < 20; y++)
 	{

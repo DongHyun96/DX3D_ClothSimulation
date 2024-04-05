@@ -9,27 +9,13 @@ Spring::Spring(RigidSphere* p1, RigidSphere* p2, float k, Vector4 color)
 	 color(color)
 {
 	body = new Cube;
-	//body->GetMaterial()->SetShader(L"16_Light");
 	body->GetMaterial()->GetBuffer()->data.diffuse = color;
-
-	//Sbody = new TextureCube;
-	//Sbody->SetShader(L"16_Light");
-
-	/*
-	cube = new TextureCube;
-	cube->SetDiffuseMap(L"Landscape/Box.png");
-	cube->SetName("TextureCubeExample");
-	cube->translation.x = -2;
-	cube->SetShader(L"16_Light");
-	*/
+	//body->GetMaterial()->SetShader(L"16_Light");
 
 	p1->UpdateWorldMatrix();
 	p2->UpdateWorldMatrix();
 
 	float s = min(p1->Radius(), p2->Radius());
-
-	//body->scale.x = s;
-	//body->scale.z = s;
 
 	body->scale.x = 0.2f;
 	body->scale.z = 0.2f;
@@ -46,7 +32,6 @@ Spring::~Spring()
 
 void Spring::Update()
 {
-	//r = (particle1->GetGlobalPosition() - particle2->GetGlobalPosition()).Length();
 	UpdateBody();
 }
 

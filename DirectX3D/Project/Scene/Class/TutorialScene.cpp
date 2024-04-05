@@ -5,6 +5,7 @@
 TutorialScene::TutorialScene()
 {
     cube = new Cube();
+    //cube->GetMaterial()->SetShader(L"16_Light");
     cube2 = new Cube(Vector4(0, 1, 0, 1));
 
     //cube2->translation.x = 0.01f;
