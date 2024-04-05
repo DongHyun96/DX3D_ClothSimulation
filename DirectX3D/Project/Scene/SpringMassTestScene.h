@@ -15,12 +15,6 @@
 
 class SpringMassTestScene : public Scene
 {
-	struct InstanceData
-	{
-		Matrix transform{};
-
-		Vector4 color{};
-	};
 
 public:
 	SpringMassTestScene();
@@ -35,33 +29,13 @@ public:
 private:
 
 	void Init();
-	void HandleInput();
 
 private:
 
 	Quad* floor{};
 
-	vector<RigidSphere*>	particles{};
-	vector<Spring*>			springs{};
+	Cloth* cloth{};
 
-	//ColliderSphere* obstacle{};
 	vector<ColliderSphere*> obstacles{};
-
-	/*
-	//vector<Quad*> quads{};
-
-	const UINT COUNT = 50;
-
-	Quad* quad{}; // 공용 quad 하나
-
-	vector<InstanceData> instanceData{};
-
-	VertexBuffer* instanceBuffer{};
-	*/
-
-	const UINT FIXED_LEFT_IDX = 0;
-	const UINT FIXED_RIGHT_IDX = 19;
-
-	bool isPlaying = true;
 
 };

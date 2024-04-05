@@ -177,6 +177,7 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Object\Cloth\Cloth.h" />
     <ClInclude Include="Render\Shader\HullShader.h" />
     <ClInclude Include="Render\Shader\DomainShader.h" />
     <ClInclude Include="Object\Effect\Particle.h" />
@@ -186,6 +187,7 @@
     <ClInclude Include="Scene\RigidBodyTestScene.h" />
     <ClInclude Include="Scene\SpringMassTestScene.h" />
     <ClInclude Include="Object\Collider\RigidBody\Spring.h" />
+    <ClInclude Include="Scene\SkyScene.h" />
     <ClInclude Include="System\Shadow.h" />
     <ClInclude Include="Scene\Class\TessellationScene.h" />
     <ClInclude Include="Scene\Class\TerrainLODScene.h" />
@@ -379,6 +381,7 @@
     <ClInclude Include="__Others\targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Object\Cloth\Cloth.cpp" />
     <ClCompile Include="Render\Shader\HullShader.cpp" />
     <ClCompile Include="Render\Shader\DomainShader.cpp" />
     <ClCompile Include="Object\Effect\Particle.cpp" />
@@ -388,6 +391,7 @@
     <ClCompile Include="Scene\RigidBodyTestScene.cpp" />
     <ClCompile Include="Scene\SpringMassTestScene.cpp" />
     <ClCompile Include="Object\Collider\RigidBody\Spring.cpp" />
+    <ClCompile Include="Scene\SkyScene.cpp" />
     <ClCompile Include="System\Shadow.cpp" />
     <ClCompile Include="System\Reflection.cpp" />
     <ClCompile Include="System\Refraction.cpp" />

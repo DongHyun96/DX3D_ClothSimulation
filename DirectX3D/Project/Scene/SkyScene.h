@@ -1,16 +1,18 @@
 #pragma once
-class TestScene : public Scene
+class SkyScene : public Scene
 {
 public:
-	TestScene();
-	~TestScene();
+	SkyScene();
+	~SkyScene();
 
 	void Update()		override;
+
 	void Render()		override;
 	void PreRender()	override;
 	void PostRender()	override;
 
 private:
 
-	TextureCube* defaultFloor{};
+	SkyBox* sky{};
+
 };

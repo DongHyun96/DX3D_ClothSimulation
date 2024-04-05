@@ -167,6 +167,8 @@ using namespace GameMath;
 #include "Object/Collider/RigidBody/RigidSphere.h"
 #include "Object/Collider/RigidBody/Spring.h"
 
+#include "Object/Cloth/Cloth.h"
+
 #include "Object/UI/ProgressBar.h"
 
 #include "Object/Effect/Particle.h"

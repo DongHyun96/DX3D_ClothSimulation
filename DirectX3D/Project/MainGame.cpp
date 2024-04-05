@@ -25,6 +25,7 @@
 #include "Scene/Revolt/GameScene.h"
 #include "Scene/Revolt/MapTestScene.h"
 
+#include "Scene/SkyScene.h"
 #include"Scene/RigidBodyTestScene.h"
 #include "Scene/SpringMassTestScene.h"
 
@@ -40,8 +41,9 @@ MainGame::MainGame()
     //SCENE->Create("Tutorial", new TutorialScene);
 
     SCENE->Create("Grid", new GridScene);
+    SCENE->Create("Sky", new SkyScene);
 
-    SCENE->Create("Start", new TextureScene);
+    //SCENE->Create("Start", new TextureScene);
     //SCENE->Create("Start", new TerrainScene);
     //SCENE->Create("Start", new TerrainEditorScene);
     //SCENE->Create("Start", new ModelExportScene);
@@ -64,12 +66,13 @@ MainGame::MainGame()
     //SCENE->Create("Start", new MapTestScene);
 
     //SCENE->Create("Start", new RigidBodyTestScene);
-    //SCENE->Create("Start", new SpringMassTestScene);
+    SCENE->Create("Start", new SpringMassTestScene);
     //SCENE->Create("Start", new TestScene);
 
 
     //SCENE->Add("Tutorial");
     SCENE->Add("Grid");
+    SCENE->Add("Sky");
     SCENE->Add("Start");
 
     char path[128];
