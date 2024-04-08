@@ -9,18 +9,18 @@ public:
 	
 	bool Succeeded() const { return file != INVALID_HANDLE_VALUE; }
 	
-	int ReadInt();
-	UINT ReadUint();
-	float ReadFloat();
-	string ReadString();
+	int		ReadInt();
+	UINT	ReadUint();
+	float	ReadFloat();
+	string	ReadString();
 	wstring ReadWstring();
 	
 	Vector3 ReadVector3();
 	Vector4 ReadVector4();
 	
-	Matrix ReadMatrix();
+	Matrix	ReadMatrix();
 	
-	void ReadData(void** data, UINT dataSize);
+	void	ReadData(void** data, UINT dataSize);
 
 private:
 	HANDLE file{};

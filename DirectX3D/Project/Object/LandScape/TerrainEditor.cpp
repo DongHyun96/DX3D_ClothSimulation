@@ -81,7 +81,7 @@ void TerrainEditor::ComputePicking()
 
 	UINT x = ceilf(polygonCount / 64.f);
 
-	DC->Dispatch(x, 1, 1); // dispatch - 보내다, 알리다
+	DC->Dispatch(x, 1, 1); // dispatch - 보내다, 알리다 -> Compute shader의 draw call
 
 	structuredBuffer->Copy(output.data(), sizeof(OutputDesc) * polygonCount);
 

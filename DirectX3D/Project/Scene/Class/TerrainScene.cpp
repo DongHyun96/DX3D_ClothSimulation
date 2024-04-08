@@ -8,7 +8,7 @@ TerrainScene::TerrainScene()
 
 	terrain->SetSecondDiffuseMap(L"Solid/Black.png");
 
-	terrain->GetMaterial()->LoadTransform(L"_TextData/FieldStone.mat");
+	terrain->GetMaterial()->LoadMaterial(L"_TextData/FieldStone.mat");
 	terrain->GetMaterial()->SetShader(L"08_Terrain");
 
 	//terrain->GetMaterial()->SetDiffuseMap(L"LandScape/Fieldstone_DM.tga");

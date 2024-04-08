@@ -76,7 +76,7 @@ void Model::Debug()
 		Transform::LoadTransform();
 
 		for (Material* material : materials)
-			material->LoadTransform(L"_ModelData/Material/" + ToWString(name + "/" + material->GetName()) + L".mat");
+			material->LoadMaterial(L"_ModelData/Material/" + ToWString(name + "/" + material->GetName()) + L".mat");
 	}
 }
 
@@ -106,7 +106,7 @@ void Model::SaveModel()
 	Transform::SaveTransform();
 
 	for (Material* material : materials)
-		material->SaveTransform(L"_ModelData/Material/" + ToWString(name + "/" + material->GetName()) + L".mat");
+		material->SaveMaterial(L"_ModelData/Material/" + ToWString(name + "/" + material->GetName()) + L".mat");
 }
 
 void Model::ReadMaterial()
@@ -123,7 +123,7 @@ void Model::ReadMaterial()
 
 		string file = data.ReadString();
 
-		material->LoadTransform(ToWString(file));
+		material->LoadMaterial(ToWString(file));
 
 		materials.push_back(material);
 	}

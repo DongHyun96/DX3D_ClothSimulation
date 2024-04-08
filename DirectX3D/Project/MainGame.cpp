@@ -44,6 +44,7 @@ MainGame::MainGame()
     SCENE->Create("Sky", new SkyScene);
 
     //SCENE->Create("Start", new TextureScene);
+
     //SCENE->Create("Start", new TerrainScene);
     //SCENE->Create("Start", new TerrainEditorScene);
     //SCENE->Create("Start", new ModelExportScene);
