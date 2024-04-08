@@ -9,35 +9,42 @@ SpringMassTestScene::SpringMassTestScene()
 
 SpringMassTestScene::~SpringMassTestScene()
 {
-	delete floor;
+	delete defaultFloor;
 
 	delete cloth;
 
 	//delete obstacle;
-	for (ColliderSphere*& obstacle : obstacles)
-		delete obstacle;
+	for (auto& p : obstacles)
+	{
+		delete p.first;
+		delete p.second;
+	}
+
+	obstacles.clear();
 }
 
 void SpringMassTestScene::Update()
 {
-	floor->Update();
-
-	for (ColliderSphere*& obstacle : obstacles)
-		obstacle->Update();
+	defaultFloor->Update();
 
 	cloth->Update();
-	
+
+	for (auto& p : obstacles)
+	{
+		p.first->Update();
+		p.second->Update();
+	}
 }
 
 // Draw call - 1882
 void SpringMassTestScene::Render()
 {
-	floor->Render();
+	defaultFloor->Render();
+
+	for (auto& p : obstacles)
+		p.second->Render();
 
 	cloth->Render();
-
-	for (ColliderSphere*& obstacle : obstacles)
-		obstacle->Render();
 }
 
 void SpringMassTestScene::PreRender()
@@ -47,41 +54,53 @@ void SpringMassTestScene::PreRender()
 void SpringMassTestScene::PostRender()
 {
 	//obstacle->Debug();
-	for (ColliderSphere*& obstacle : obstacles)
-		obstacle->Debug();
+	for (auto& p : obstacles)
+	{
+		p.first->Debug();
+		//p.second->GetMaterial()->Debug();
+	}
 
-	floor->GetMaterial()->Debug();
+
+
+	defaultFloor->Debug();
+
+	cloth->PostRender();
+
 }
 
 void SpringMassTestScene::Init()
 {
-	floor = new Quad();
+	defaultFloor = new TextureCube;
+	defaultFloor->SetName("SpringMassFloor");
+	defaultFloor->LoadTransform();
 
-	floor->scale *= 250.f;
-	floor->rotation.x = XM_PIDIV2;
-	floor->translation.y = 0.1f;
+	defaultFloor->SetShader(L"16_Light");
+	defaultFloor->SetDiffuseMap(L"Default/TemplateGrid_albedo.png");
 
-	floor->GetMaterial()->SetShader(L"16_Light");
-	floor->GetMaterial()->SetDiffuseMap(L"Solid/White.png");
-	floor->GetMaterial()->GetBuffer()->data.diffuse = Vector4(0.286, 0.411, 0.537, 1);
-
-	floor->SetName("RigidTestFloor_0");
-	floor->LoadTransform();
-	
-	for (UINT i = 0; i < 3; i++)
+	for (UINT i = 0; i < 4; i++)
 	{
-		ColliderSphere* o = new ColliderSphere(10.f);
-		o->SetName("SpringMassObstacle_" + to_string(i));
-		o->LoadTransform();
-		obstacles.push_back(o);
+		ColliderSphere* cSphere = new ColliderSphere(10.f);
+
+		cSphere->SetName("SpringMassObstacle_" + to_string(i));
+		cSphere->LoadTransform();
+
+		Sphere* renderingSphere = new Sphere(10.f, 30, 30);
+		renderingSphere->GetMaterial()->SetName(to_string(i));
+		renderingSphere->GetMaterial()->SetSpecularMap(L"Solid/White.png");
+		renderingSphere->GetMaterial()->SetShader(L"16_Light");
+		renderingSphere->GetMaterial()->LoadMaterial(L"_TextData/SpringMassObstacle" + to_wstring(i) + L".mat");
+		renderingSphere->SetParent(cSphere);
+
+		obstacles[cSphere] = renderingSphere;
 	}
 
-	cloth = new Cloth;
+	cloth = new Cloth(Vector4(1, 0, 0, 1));
 
-	cloth->AddObstacles(floor);
+	cloth->AddObstacles(defaultFloor->GetFrontQuad());
 	
-	for (ColliderSphere* cSphere : obstacles)
-		cloth->AddObstacles(cSphere);
+	for (auto& p : obstacles)
+		cloth->AddObstacles(p.first);
 
+	ENVIRONMENT->GetLightBuffer()->data.lights[0].direction = {1, -0.6, 1};
 
 }

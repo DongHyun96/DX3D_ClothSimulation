@@ -24,6 +24,8 @@ public:
 
 	void SetShader(wstring file);
 
+	Quad* GetFrontQuad() const { return quads[FRONT]; }
+
 private:
 	void CreateQuads();
 

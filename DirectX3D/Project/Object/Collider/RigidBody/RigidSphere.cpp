@@ -1,8 +1,6 @@
 #include "Framework.h"
 #include "RigidSphere.h"
 
-
-
 RigidSphere::RigidSphere(float mass, float radius, UINT stackCount, UINT sliceCount)
 	:ColliderSphere(radius, stackCount, sliceCount), mass(mass)
 {
@@ -136,7 +134,7 @@ void RigidSphere::ResolveCollision(const Terrain* terrain)
 
 void RigidSphere::AddVelocity()
 {
-	AddForce(GRAVITY * mass);
+	AddForce(GRAVITY * mass); // Gravity force
 	AddForce(velocity * (-K_DRAG));
 }
 

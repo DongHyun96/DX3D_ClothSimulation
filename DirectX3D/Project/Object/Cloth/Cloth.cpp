@@ -2,9 +2,12 @@
 #include "Cloth.h"
 
 
-Cloth::Cloth()
+Cloth::Cloth(Vector4 color)
+	:color(color)
 {
 	InitSpringsAndParticles();
+
+	InitInstancing();
 
 	this->Update();
 	isPlaying = false;
@@ -22,6 +25,9 @@ Cloth::~Cloth()
 		delete particle;
 
 	particles.clear();
+
+	delete instanceBuffer;
+	delete springBase;
 }
 
 /*
@@ -40,10 +46,29 @@ void Cloth::Update()
 
 	for (UINT i = 0; i < 100; i++)
 	{
+		if (isWindActive)
+		{
+			windVelocity.z += ACCEL_AMOUNT * accelSign * DELTA_TIME * 0.01f;
+
+			accelSignTimer += DELTA_TIME * 0.01f;
+
+			if (accelSignTimer >= 1.f)
+			{
+				accelSignTimer -= 1.f;
+				accelSign *= -1;
+			}
+		}
+
 		for (auto& particle : particles)
 		{
 			particle->ClearForce();
 			particle->AddVelocity();
+
+			if (isWindActive)
+			{
+				bias = Random(-5.f, 10.f);
+				particle->AddForce(windVelocity * bias);
+			}
 		}
 
 		for (auto& spring : springs)
@@ -70,12 +95,26 @@ void Cloth::Update()
 
 	for (auto& spring : springs)
 		spring->Update();
+
+	// Update instance data
+	UpdateInstanceData();
 }
 
 void Cloth::Render()
 {
-	for (auto& spring : springs)
-		spring->Render();
+	instanceBuffer->IASetBuffer(1);
+	springBase->RenderInstanced(instanceCount);
+}
+
+void Cloth::PostRender()
+{
+	ImGui::Text("Cloth Options");
+	ImGui::Text("Input Keys:");
+	ImGui::Text("0 : Init | 1 : ToggleLeftFixed | 2 : ToggleRightFixed");
+	ImGui::Text("SpaceBar : TogglePlaying");
+
+	ImGui::Checkbox("IsPlaying",  &isPlaying);
+	ImGui::Checkbox("WindActive", &isWindActive);
 }
 
 void Cloth::AddObstacles(Transform* obstacle)
@@ -127,6 +166,26 @@ void Cloth::InitSpringsAndParticles()
 	particles[FIXED_RIGHT_IDX]->SetFixed(true);
 }
 
+void Cloth::InitInstancing()
+{
+	instanceCount = springs.size();
+
+	// instancing °ø¿ë spring
+	springBase = new Spring;
+	springBase->SetShader(L"BasicColorInstancing");
+
+	for (UINT i = 0; i < instanceCount; i++)
+	{
+		InstanceData data{};
+
+		data.transform = XMMatrixTranspose(springs[i]->GetWorld());
+		data.color = color;
+		instanceData.emplace_back(data);
+	}
+
+	instanceBuffer = new VertexBuffer(instanceData);
+}
+
 void Cloth::HandleInput()
 {
 	if (KEY_DOWN(VK_SPACE)) isPlaying = !isPlaying;
@@ -145,9 +204,19 @@ void Cloth::HandleInput()
 		for (RigidSphere* particle : particles) particle->Update();
 		for (Spring* spring : springs)			spring->Update();
 
+		UpdateInstanceData();
+
 		isPlaying = false;
 	}
 
 	if (KEY_DOWN('1'))	particles[FIXED_LEFT_IDX]->ToggleFixed();
 	if (KEY_DOWN('2'))	particles[FIXED_RIGHT_IDX]->ToggleFixed();
+}
+
+void Cloth::UpdateInstanceData()
+{
+	for (UINT i = 0; i < instanceCount; i++)
+		instanceData[i].transform = XMMatrixTranspose(springs[i]->GetWorld());
+
+	instanceBuffer->UpdateVertex(instanceData.data(), instanceCount);
 }

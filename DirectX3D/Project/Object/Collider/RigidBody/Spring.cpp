@@ -2,6 +2,15 @@
 #include "Spring.h"
 
 
+Spring::Spring()
+{
+	body = new Cube;
+	body->GetMaterial()->SetShader(L"BasicColorInstancing");
+
+	body->scale.x = 0.2f;
+	body->scale.z = 0.2f;
+}
+
 Spring::Spring(RigidSphere* p1, RigidSphere* p2, float k, Vector4 color)
 	:particle1(p1),
 	 particle2(p2),
@@ -10,6 +19,7 @@ Spring::Spring(RigidSphere* p1, RigidSphere* p2, float k, Vector4 color)
 {
 	body = new Cube;
 	body->GetMaterial()->GetBuffer()->data.diffuse = color;
+	body->GetMaterial()->SetShader(L"Tutorial");
 	//body->GetMaterial()->SetShader(L"16_Light");
 
 	p1->UpdateWorldMatrix();
@@ -38,6 +48,11 @@ void Spring::Update()
 void Spring::Render()
 {
 	body->Render();
+}
+
+void Spring::RenderInstanced(const UINT& count)
+{
+	body->RenderInstanced(count);
 }
 
 void Spring::AddForceToParticles()

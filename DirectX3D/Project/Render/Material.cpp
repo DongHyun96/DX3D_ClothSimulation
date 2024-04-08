@@ -93,11 +93,11 @@ void Material::Debug(string baseDir)
 		ImGui::ColorEdit4("Ambient",  (float*)&buffer->data.ambient);
 		ImGui::ColorEdit4("Emissive", (float*)&buffer->data.emissive);
 
-		ImGui::SliderFloat("Shininess", &buffer->data.shininess, 1, 50);
+		ImGui::SliderFloat("Shininess", &buffer->data.shininess, 1, 100);
 
 
 		SelectMap(&diffuseMap,  diffuseKey,	 L"Solid/White.png");
-		SelectMap(&specularMap, specularKey, L"Solid/Black.png");
+		SelectMap(&specularMap, specularKey, L"Solid/White.png");
 		SelectMap(&normalMap,   normalKey,	 L"Solid/White.png");
 		
 		SaveDialog(baseDir);
@@ -148,7 +148,7 @@ void Material::SelectMap(Texture** texture, string mapType, wstring clearFile)
 		*texture = Texture::Add(clearFile, ToWString(mapType) + clearFile);
 }
 
-void Material::SaveTransform(wstring file)
+void Material::SaveMaterial(wstring file)
 {
 	BinaryWriter data(file);
 
@@ -176,9 +176,11 @@ void Material::SaveTransform(wstring file)
 	data.WriteData(buffer->data.shininess);
 }
 
-void Material::LoadTransform(wstring file)
+void Material::LoadMaterial(wstring file)
 {
 	BinaryReader data(file);
+
+	if (!data.Succeeded()) return;
 
 	name = data.ReadString();
 
@@ -219,7 +221,7 @@ void Material::SaveDialog(string baseDir)
 
 			file = file.substr(projectDir.size() + 1, file.size());
 
-			SaveTransform(ToWString(file));
+			SaveMaterial(ToWString(file));
 		}
 
 		DIALOG->Close();
@@ -239,7 +241,7 @@ void Material::LoadDialog(string baseDir)
 
 			file = file.substr(projectDir.size() + 1, file.size());
 
-			LoadTransform(ToWString(file));
+			LoadMaterial(ToWString(file));
 		}
 
 		DIALOG->Close();
