@@ -118,7 +118,7 @@ float4 CalculateDirectional(LightMaterial material, LightData data)
     float3 light            = normalize(data.direction);
     
     float diffuseIntensity  = saturate(dot(material.normal, -light));
-    float4 diffuse          = material.diffuse * diffuseIntensity * mDiffuse;
+    float4 diffuse          = data.color * diffuseIntensity * mDiffuse;
 
     float3 viewDir          = normalize(material.worldPos - material.viewPos);
     float3 halfVector       = normalize(viewDir + light);
@@ -128,7 +128,7 @@ float4 CalculateDirectional(LightMaterial material, LightData data)
     
     float4 finalColor       = diffuse + specular;
 
-    return finalColor * data.color;
+    return finalColor * material.diffuse;
 }
 
 float4 CalculatePoint(LightMaterial material, LightData data)
@@ -144,7 +144,7 @@ float4 CalculatePoint(LightMaterial material, LightData data)
     
     float diffuseIntensity = saturate(dot(material.normal, -light));
     
-    float4 diffuse = material.diffuse * diffuseIntensity * mDiffuse;
+    float4 diffuse = data.color * diffuseIntensity * mDiffuse;
 
     float3 viewDir = normalize(material.worldPos - material.viewPos);
 
@@ -162,7 +162,7 @@ float4 CalculatePoint(LightMaterial material, LightData data)
     
     float4 finalColor = diffuse + specular;
 
-    return finalColor * data.color * attention;
+    return finalColor * material.diffuse * attention;
 }
 
 float4 CalculateSpot(LightMaterial material, LightData data)
@@ -177,7 +177,7 @@ float4 CalculateSpot(LightMaterial material, LightData data)
     
     float diffuseIntensity = saturate(dot(material.normal, -light));
     
-    float4 diffuse = material.diffuse * diffuseIntensity * mDiffuse;
+    float4 diffuse = data.color * diffuseIntensity * mDiffuse;
 
     float3 viewDir = normalize(material.worldPos - material.viewPos);
 
@@ -207,7 +207,7 @@ float4 CalculateSpot(LightMaterial material, LightData data)
     
     float4 finalColor = diffuse + specular;
 
-    return finalColor * data.color * attention * conAttention;
+    return finalColor * material.diffuse * attention * conAttention;
 }
 
 float4 CalculateCapsule(LightMaterial material, LightData data)
@@ -230,7 +230,7 @@ float4 CalculateCapsule(LightMaterial material, LightData data)
     
     float diffuseIntensity = saturate(dot(material.normal, -light));
     
-    float4 diffuse = material.diffuse * diffuseIntensity * mDiffuse;
+    float4 diffuse = data.color * diffuseIntensity * mDiffuse;
 
     float3 viewDir = normalize(material.worldPos - material.viewPos);
 
@@ -248,7 +248,7 @@ float4 CalculateCapsule(LightMaterial material, LightData data)
     
     float4 finalColor = diffuse + specular;
 
-    return finalColor * data.color * attention;
+    return finalColor * material.diffuse * attention;
 }
 
 float4 CalculateLights(LightMaterial material)
