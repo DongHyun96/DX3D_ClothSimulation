@@ -61,7 +61,6 @@ void SpringMassTestScene::PostRender()
 	}
 
 
-
 	defaultFloor->Debug();
 
 	cloth->PostRender();
@@ -94,13 +93,15 @@ void SpringMassTestScene::Init()
 		obstacles[cSphere] = renderingSphere;
 	}
 
-	cloth = new Cloth(Vector4(1, 0, 0, 1));
+	//rgb(98, 114, 84)
+	//rgb(91, 188, 255)
+	cloth = new Cloth(Vector4(0.356f, 0.737f, 1.f, 1));
 
 	cloth->AddObstacles(defaultFloor->GetFrontQuad());
 	
 	for (auto& p : obstacles)
 		cloth->AddObstacles(p.first);
 
-	ENVIRONMENT->GetLightBuffer()->data.lights[0].direction = {1, -0.6, 1};
+	ENVIRONMENT->GetLightBuffer()->data.lights[0].direction = {0.826, -0.6, 1};
 
 }

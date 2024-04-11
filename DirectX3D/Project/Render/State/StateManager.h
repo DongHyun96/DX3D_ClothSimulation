@@ -5,6 +5,31 @@ class StateManager : public Singleton<StateManager>
 	friend class Singleton;
 
 private:
+
+	enum RsStateMode
+	{
+		FILL_MODE_SOLID, // default
+		FILL_MODE_WIREFRAME,
+		FRONT_COUNTERCLOCKWISE,
+		CULL_NONE
+	};
+
+	enum BlendStateMode
+	{
+		DISABLE_ALPHA,
+		ENABLE_ALPHA,
+		ALPHA_TO_COVERAGE,
+		ADDITIVE_BLENDING
+	};
+
+	enum DepthStencilMode
+	{
+		DEPTH_ENABLED,
+		DEPTH_DISABLED,
+		DEPTH_WRITE_MASKZERO
+	};
+
+private:
 	StateManager();
 	~StateManager();
 
@@ -30,6 +55,9 @@ public:
 	void SetFrontClockWise();
 
 	void DepthWriteMaskZero();
+
+	void EnableBackFaceCulling();
+	void DisableBackFaceCulling();
 
 private:
 	SamplerState* sampler{};

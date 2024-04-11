@@ -170,10 +170,10 @@ void TerrainEditor::Update()
 		switch (type)
 		{
 		case HEIGHT:
+			// Normal과 Tangent도 수정되기 때문에 다시금 계산 -> 높이 adjust할 때에는 normal과 tangent를 재계산 하지 않음
 			if (KEY_PRESS(VK_LBUTTON))
 				AdjustHeight();
 
-			// Normal과 Tangent도 수정되기 때문에 다시금 계산 -> 높이 adjust할 때에는 normal과 tangent를 재계산 하지 않음
 			if (KEY_UP(VK_LBUTTON))
 				UpdateMesh();
 
@@ -248,7 +248,7 @@ void TerrainEditor::CreateMesh()
 			indices.emplace_back((i + 0) * width + (j + 1));
 			indices.emplace_back((i + 1) * width + (j + 1));
 		}
-	}
+	} 
 
 	// Create Normal Vector
 	for (UINT i = 0; i < indices.size() / 3; i++) // 폴리곤의 개수만큼 normal 생성
@@ -296,7 +296,7 @@ void TerrainEditor::AdjustHeight()
 
 			vertex.pos.y = Clamp(vertex.pos.y, 0.f, MAX_HEIGHT);
 
-			// Normal이 바뀌기 때문에 초기화 한 뒤, 다시금 수정
+			// Normal이 바뀌기 때문에 초기화 한 뒤, UpdateMesh에서 Normal 다시금 수정
 			vertex.normal = Vector3(0, 1, 0);
 			vertex.tangent = Vector3(1, 0, 0);
 		}

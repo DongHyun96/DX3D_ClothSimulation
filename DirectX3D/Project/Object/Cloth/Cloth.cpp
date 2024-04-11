@@ -3,15 +3,15 @@
 
 
 Cloth::Cloth(Vector4 color)
-	:color(color)
+	:GameObject<VertexType>(L"02_DiffuseColor"), color(color)
 {
-	InitSpringsAndParticles();
+	InitObjects();
+	InitSpringInstancing();
 
-	InitInstancing();
+	CreateMesh();
 
 	this->Update();
 	isPlaying = false;
-
 }
 
 Cloth::~Cloth()
@@ -28,6 +28,65 @@ Cloth::~Cloth()
 
 	delete instanceBuffer;
 	delete springBase;
+}
+
+
+void Cloth::CreateMesh()
+{
+	vertices.clear();
+	indices.clear();
+
+	for (int y = 0; y < 20; y++)
+	{
+		for (int x = 0; x < 20; x++)
+		{
+			//RigidSphere* particle = new RigidSphere(0.01f, 0.1f);
+			//particle->translation = { (x - 10) * 2.f, 200.f - (y - 1) * 2.f, Random(0.f, 1.f) };
+			////particle->SetFixed(true);
+			//particles.push_back(particle);
+			VertexType vertex{};
+			
+			vertex.pos	 = particles[20 * y + x]->GetGlobalPosition();
+			vertex.color = color;
+
+			vertices.emplace_back(vertex);
+		}
+	}
+
+	for (UINT i = 0; i < 20 - 1; i++)
+	{
+		for (UINT j = 0; j < 20 - 1; j++)
+		{
+			indices.emplace_back((i + 0) * 20 + (j + 0));
+			indices.emplace_back((i + 0) * 20 + (j + 1));
+			indices.emplace_back((i + 1) * 20 + (j + 0));
+										   
+			indices.emplace_back((i + 1) * 20 + (j + 0));
+			indices.emplace_back((i + 0) * 20 + (j + 1));
+			indices.emplace_back((i + 1) * 20 + (j + 1));
+		}
+	}
+
+	// Create Normal Vector
+
+	for (UINT i = 0; i < indices.size() / 3; i++)
+	{
+		UINT index0 = indices[i * 3 + 0];
+		UINT index1 = indices[i * 3 + 1];
+		UINT index2 = indices[i * 3 + 2];
+
+		Vector3 v01 = vertices[index1].pos - vertices[index0].pos;
+		Vector3 v02 = vertices[index2].pos - vertices[index0].pos;
+
+		Vector3 normal = Vector3::Cross(v01, v02).GetNormalized();
+
+		// ÃßÈÄ Æò±ÕÀ» ³¿
+		vertices[index0].normal += normal;
+		vertices[index1].normal += normal;
+		vertices[index2].normal += normal;
+	}
+
+	mesh = new Mesh(vertices, indices);
 }
 
 /*
@@ -93,17 +152,49 @@ void Cloth::Update()
 		}
 	}
 
-	for (auto& spring : springs)
-		spring->Update();
+	switch (mode)
+	{
+	case Cloth::RAW_SPRING:
+		// Updating spring transforms
+		for (auto& spring : springs)
+			spring->Update();
 
-	// Update instance data
-	UpdateInstanceData();
+		// Update instance data
+		UpdateSpringInstanceData();
+		break;
+	case Cloth::FABRIC: // Update fabric's vertices pos and normal
+
+		UpdateFabricMesh();
+
+		break;
+	default:
+		break;
+	}
+	
 }
 
-void Cloth::Render()
+void Cloth::Render(D3D11_PRIMITIVE_TOPOLOGY topology)
 {
-	instanceBuffer->IASetBuffer(1);
-	springBase->RenderInstanced(instanceCount);
+	switch (mode)
+	{
+	case Cloth::RAW_SPRING:
+
+		instanceBuffer->IASetBuffer(1);
+		springBase->RenderInstanced(instanceCount);
+		return;
+
+	case Cloth::FABRIC:
+
+		STATE->DisableBackFaceCulling();
+		__super::Render(topology);
+		STATE->EnableBackFaceCulling();
+
+		return;
+
+	default:
+		break;
+	}
+	
 }
 
 void Cloth::PostRender()
@@ -115,6 +206,10 @@ void Cloth::PostRender()
 
 	ImGui::Checkbox("IsPlaying",  &isPlaying);
 	ImGui::Checkbox("WindActive", &isWindActive);
+
+	const char* list[] = { "Raw Spring", "Fabric" };
+
+	ImGui::Combo("ClothType", (int*)&mode, list, 2);
 }
 
 void Cloth::AddObstacles(Transform* obstacle)
@@ -137,7 +232,7 @@ void Cloth::AddObstacles(Transform* obstacle)
 
 }
 
-void Cloth::InitSpringsAndParticles()
+void Cloth::InitObjects()
 {
 	for (int y = 0; y < 20; y++)
 	{
@@ -166,7 +261,7 @@ void Cloth::InitSpringsAndParticles()
 	particles[FIXED_RIGHT_IDX]->SetFixed(true);
 }
 
-void Cloth::InitInstancing()
+void Cloth::InitSpringInstancing()
 {
 	instanceCount = springs.size();
 
@@ -204,7 +299,8 @@ void Cloth::HandleInput()
 		for (RigidSphere* particle : particles) particle->Update();
 		for (Spring* spring : springs)			spring->Update();
 
-		UpdateInstanceData();
+		UpdateSpringInstanceData();
+		UpdateFabricMesh();
 
 		isPlaying = false;
 	}
@@ -213,10 +309,45 @@ void Cloth::HandleInput()
 	if (KEY_DOWN('2'))	particles[FIXED_RIGHT_IDX]->ToggleFixed();
 }
 
-void Cloth::UpdateInstanceData()
+void Cloth::UpdateSpringInstanceData()
 {
 	for (UINT i = 0; i < instanceCount; i++)
 		instanceData[i].transform = XMMatrixTranspose(springs[i]->GetWorld());
 
 	instanceBuffer->UpdateVertex(instanceData.data(), instanceCount);
+}
+
+void Cloth::UpdateFabricMesh()
+{
+	// Update pos
+	for (int y = 0; y < 20; y++)
+	{
+		for (int x = 0; x < 20; x++)
+		{
+			VertexType& vertex = vertices[20 * y + x];
+
+			vertex.pos = particles[20 * y + x]->GetGlobalPosition();
+			vertex.normal = Vector3(0, 1, 0);
+		}
+	}
+
+	// Update normal
+	for (UINT i = 0; i < indices.size() / 3; i++)
+	{
+		UINT index0 = indices[i * 3 + 0];
+		UINT index1 = indices[i * 3 + 1];
+		UINT index2 = indices[i * 3 + 2];
+
+		Vector3 v01 = vertices[index1].pos - vertices[index0].pos;
+		Vector3 v02 = vertices[index2].pos - vertices[index0].pos;
+
+		Vector3 normal = Vector3::Cross(v01, v02).GetNormalized();
+
+		// ÃßÈÄ Æò±ÕÀ» ³¿
+		vertices[index0].normal += normal;
+		vertices[index1].normal += normal;
+		vertices[index2].normal += normal;
+	}
+
+	mesh->UpdateVertex(vertices.data(), vertices.size());
 }

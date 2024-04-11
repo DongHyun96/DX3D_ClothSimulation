@@ -27,35 +27,16 @@ void RigidSphere::ClearForce()
 
 bool RigidSphere::Collision(const Quad* other)
 {
-	/*OBBQuad box = other->GetOBB();
-	
-	Vector3 pos = other->GetGlobalPosition();
-
-	for (UINT i = 0; i < 3; i++)
-	{
-		float length = Vector3::Dot(box.axis[i], globalPosition - other->GetGlobalPosition());
-	
-		float mult = (length < 0.f) ? -1.f : 1.f;
-	
-		length = min(abs(length), box.halfSize[i]);
-	
-		pos += box.axis[i] * length * mult;
-	}
-	
-	float distance = (globalPosition - pos).Length();
-	
-	return distance <= this->Radius();*/
-
-	return Vector3::Dot(globalPosition - other->GetGlobalPosition(), other->GetNormal()) < 0.00001f &&
+	return Vector3::Dot(globalPosition - other->GetGlobalPosition(), other->GetNormal()) < 0.01f &&
 		   Vector3::Dot(velocity, other->GetNormal()) < 0;
 }
 
 bool RigidSphere::Collision(const ColliderSphere* other)
 {
 	Vector3 pos = other->GetGlobalPosition() + (this->globalPosition - other->GetGlobalPosition()).GetNormalized() * other->Radius();
-	Vector3 n = (this->globalPosition - other->GetGlobalPosition()).GetNormalized();
+	Vector3 n	= (this->globalPosition - other->GetGlobalPosition()).GetNormalized();
 
-	return Vector3::Dot(this->globalPosition - pos, n) < 0.00001f && Vector3::Dot(velocity, n) < 0;
+	return Vector3::Dot(this->globalPosition - pos, n) < 0.01f && Vector3::Dot(velocity, n) < 0;
 }
 
 void RigidSphere::ResolveContact(const ColliderSphere* other, const UINT& timeRate)

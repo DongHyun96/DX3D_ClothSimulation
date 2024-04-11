@@ -1,6 +1,10 @@
 #pragma once
-class Cloth
+class Cloth : public GameObject<VertexColorNormal>
 {
+	typedef VertexColorNormal VertexType;
+
+private:
+
 	struct InstanceData
 	{
 		Matrix transform{};
@@ -8,24 +12,30 @@ class Cloth
 		Vector4 color{};
 	};
 
+private:
+
+	void CreateMesh() override;
+
 public:
-	Cloth(Vector4 color);
+	Cloth(Vector4 color = Vector4(1, 0, 0, 1));
 	~Cloth();
 
 	void Update();
-	void Render();
+	void Render(D3D11_PRIMITIVE_TOPOLOGY topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST) override;
 	void PostRender();
 
 	void AddObstacles(Transform* obstacle);
 
 private:
 
-	void InitSpringsAndParticles();
-	void InitInstancing();
+	void InitObjects();
+	void InitSpringInstancing();
 
 	void HandleInput();
 
-	void UpdateInstanceData();
+	void UpdateSpringInstanceData();
+
+	void UpdateFabricMesh();
 
 private:
 
@@ -57,11 +67,18 @@ private: // 바람 관련
 
 	bool		isWindActive{};
 	
-	Vector3		windVelocity = Vector3(0, 0, 3.f);
+	Vector3		windVelocity	= Vector3(0, 0, 3.f);
 	float		accelSignTimer{};
 	int			accelSign		= 1;
 	const float ACCEL_AMOUNT	= 1.5f;
-	float bias = 1.f;
+	float		bias			= 1.f;
 
-	
+private:
+
+	enum Mode
+	{
+		RAW_SPRING,
+		FABRIC
+	} mode{};
+
 };

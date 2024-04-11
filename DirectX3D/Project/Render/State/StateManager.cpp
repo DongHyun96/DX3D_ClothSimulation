@@ -40,15 +40,19 @@ void StateManager::CreateRasterizer()
 	rs.emplace_back(new RasterizerState);
 	rs.emplace_back(new RasterizerState);
 
-	rs[0]->SetFillMode(D3D11_FILL_SOLID);
-	rs[1]->SetFillMode(D3D11_FILL_WIREFRAME);
+	rs[FILL_MODE_SOLID]->SetFillMode(D3D11_FILL_SOLID);
+	rs[FILL_MODE_WIREFRAME]->SetFillMode(D3D11_FILL_WIREFRAME);
 
-	rs[0]->CreateState();
-	rs[1]->CreateState();
+	rs[FILL_MODE_SOLID]->CreateState();
+	rs[FILL_MODE_WIREFRAME]->CreateState();
 
 	rs.emplace_back(new RasterizerState);
-	rs[2]->SetFrontCounterClockWise(true);
-	rs[2]->CreateState();
+	rs[FRONT_COUNTERCLOCKWISE]->SetFrontCounterClockWise(true);
+	rs[FRONT_COUNTERCLOCKWISE]->CreateState();
+
+	rs.emplace_back(new RasterizerState);
+	rs[CULL_NONE]->SetCullMode(D3D11_CULL_NONE);
+	rs[CULL_NONE]->CreateState();
 }
 
 void StateManager::CreateBlendState()
@@ -56,17 +60,17 @@ void StateManager::CreateBlendState()
 	blendStates.emplace_back(new BlendState);
 	blendStates.emplace_back(new BlendState);
 
-	blendStates[0]->SetAlpha(false);
+	blendStates[DISABLE_ALPHA]->SetAlpha(false);
 
-	blendStates[1]->SetAlpha(true);
+	blendStates[ENABLE_ALPHA]->SetAlpha(true);
 
 	// AlphaToCoverage
 	blendStates.emplace_back(new BlendState);
-	blendStates[2]->SetAlphaToCoverage(true);
+	blendStates[ALPHA_TO_COVERAGE]->SetAlphaToCoverage(true);
 
 	// Additive
 	blendStates.emplace_back(new BlendState);
-	blendStates[3]->SetAdditive();
+	blendStates[ADDITIVE_BLENDING]->SetAdditive();
 	//blendStates[3]->SetAlphaToCoverage(true);
 }
 
@@ -76,62 +80,72 @@ void StateManager::CreateDepthStencilState()
 	depthStencilStates.emplace_back(new DepthStencilState);
 	depthStencilStates.emplace_back(new DepthStencilState);
 
-	depthStencilStates[1]->DepthEnable(false);
-	depthStencilStates[2]->DepthWriteMask(D3D11_DEPTH_WRITE_MASK_ZERO);
+	depthStencilStates[DEPTH_DISABLED]->DepthEnable(false);
+	depthStencilStates[DEPTH_WRITE_MASKZERO]->DepthWriteMask(D3D11_DEPTH_WRITE_MASK_ZERO);
 
 }
 
 void StateManager::EnableWireFrame()
 {
-	rs[1]->SetState();
+	rs[FILL_MODE_WIREFRAME]->SetState();
 }
 
 void StateManager::DisableWireFrame()
 {
-	rs[0]->SetState();
+	rs[FILL_MODE_SOLID]->SetState();
 }
 
 void StateManager::EnableAlpha()
 {
-	blendStates[1]->SetState();
+	blendStates[ENABLE_ALPHA]->SetState();
 }
 
 void StateManager::EnableAlphaToCoverage()
 {
-	blendStates[2]->SetState();
+	blendStates[ALPHA_TO_COVERAGE]->SetState();
 }
 
 void StateManager::EnableAdditive()
 {
-	blendStates[3]->SetState();
+	blendStates[ADDITIVE_BLENDING]->SetState();
 }
 
 void StateManager::DisableAlpha()
 {
-	blendStates[0]->SetState();
+	blendStates[DISABLE_ALPHA]->SetState();
 }
 
 void StateManager::EnableDepth()
 {
-	depthStencilStates[0]->SetState();
+	depthStencilStates[DEPTH_ENABLED]->SetState();
 }
 
 void StateManager::DisableDepth()
 {
-	depthStencilStates[1]->SetState();
+	depthStencilStates[DEPTH_DISABLED]->SetState();
 }
 
 void StateManager::SetFrontCounterClockWise()
 {
-	rs[2]->SetState();
+	rs[FRONT_COUNTERCLOCKWISE]->SetState();
 }
 
 void StateManager::SetFrontClockWise()
 {
-	rs[0]->SetState();
+	rs[FILL_MODE_SOLID]->SetState();
 }
 
 void StateManager::DepthWriteMaskZero()
 {
-	depthStencilStates[2]->SetState();
+	depthStencilStates[DEPTH_WRITE_MASKZERO]->SetState();
+}
+
+void StateManager::EnableBackFaceCulling()
+{
+	rs[FILL_MODE_SOLID]->SetState();
+}
+
+void StateManager::DisableBackFaceCulling()
+{
+	rs[CULL_NONE]->SetState();
 }

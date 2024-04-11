@@ -1,3 +1,5 @@
+#include "LightHeader.hlsli"
+
 struct VertexInput
 {
     float4 pos       : POSITION;
@@ -15,21 +17,21 @@ struct VertexOutput
     float3 normal   : NORMAL;
 };
 
-cbuffer World : register(b0)
-{
-    matrix world;    
-}
-
-cbuffer View : register(b1)
-{
-    matrix view;
-    
-}
-    
-cbuffer Projection : register(b2)
-{
-    matrix proj;
-}
+//cbuffer World : register(b0)
+//{
+//    matrix world;    
+//}
+//
+//cbuffer View : register(b1)
+//{
+//    matrix view;
+//    
+//}
+//    
+//cbuffer Projection : register(b2)
+//{
+//    matrix proj;
+//}
 
 
 VertexOutput VS( VertexInput input)
@@ -50,5 +52,10 @@ VertexOutput VS( VertexInput input)
 
 float4 PS( VertexOutput input) : SV_TARGET
 {
+    //float3 light = normalize(lights[0].direction);
+    //
+    //float diffuseIntensity = saturate(dot(input.normal, -light)); // N dot L
+    //
+    //return input.color * diffuseIntensity;
     return input.color;
 }
