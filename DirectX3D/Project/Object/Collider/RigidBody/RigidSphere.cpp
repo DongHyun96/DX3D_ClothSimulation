@@ -33,7 +33,10 @@ bool RigidSphere::Collision(const Quad* other)
 
 bool RigidSphere::Collision(const ColliderSphere* other)
 {
-	Vector3 pos = other->GetGlobalPosition() + (this->globalPosition - other->GetGlobalPosition()).GetNormalized() * other->Radius();
+	// z fighting 때문에 radius에 여유를 둠
+	float otherRadius = other->Radius() + SPHERE_COLLISION_MARGIN;
+
+	Vector3 pos = other->GetGlobalPosition() + (this->globalPosition - other->GetGlobalPosition()).GetNormalized() * otherRadius;
 	Vector3 n	= (this->globalPosition - other->GetGlobalPosition()).GetNormalized();
 
 	return Vector3::Dot(this->globalPosition - pos, n) < 0.01f && Vector3::Dot(velocity, n) < 0;
@@ -81,7 +84,9 @@ void RigidSphere::ResolveContact(const Quad* other, const UINT& timeRate)
 
 void RigidSphere::ResolveCollision(const ColliderSphere* other)
 {
-	Vector3 contactVec = other->Radius() * (this->globalPosition - other->GetGlobalPosition()).GetNormalized();
+	float otherRadius = other->Radius() + SPHERE_COLLISION_MARGIN;
+
+	Vector3 contactVec = otherRadius * (this->globalPosition - other->GetGlobalPosition()).GetNormalized();
 
 	Vector3 contactPos	= other->GetGlobalPosition() + contactVec;
 	Vector3 n			= (this->globalPosition - other->GetGlobalPosition()).GetNormalized();

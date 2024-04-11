@@ -49,4 +49,8 @@ private:
 	Vector3 velocity{};
 	Vector3 force{};
 
+private:
+
+	const float SPHERE_COLLISION_MARGIN = 0.5f;
+
 };
