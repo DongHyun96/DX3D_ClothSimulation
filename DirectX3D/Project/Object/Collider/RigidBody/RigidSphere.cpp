@@ -142,6 +142,6 @@ void RigidSphere::UpdateRigidBody(const float& timeRate)
 	Vector3 k3 = ((force / mass) + 0.5f * k2) * (DELTA_TIME / timeRate);
 	Vector3 k4 = ((force / mass) + k3) * (DELTA_TIME / timeRate);
 
-	velocity += (k1 + 2.0f * k2 + 2.0f * k3 + k4) / 6.0f;
+	velocity	+= (k1 + 2.f * k2 + 2.f * k3 + k4) / 6.f;
 	translation += velocity * (DELTA_TIME / timeRate);
 }

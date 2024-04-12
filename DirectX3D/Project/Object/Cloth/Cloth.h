@@ -39,6 +39,10 @@ private:
 
 private:
 
+	const UINT PHYSICS_TIMESTEP = 5;
+
+private:
+
 	Vector4				 color{ 1, 0, 0, 1 };
 
 	vector<RigidSphere*> particles{};
