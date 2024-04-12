@@ -90,6 +90,11 @@ struct Vector3
 		);
 	}
 
+	friend Vector3 operator*(const float& scalar, const Vector3& other) 
+	{
+		return other * scalar;
+	}
+
 	Vector3 operator/(const float& value) const
 	{
 		return Vector3

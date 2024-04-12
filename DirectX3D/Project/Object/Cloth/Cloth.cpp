@@ -103,52 +103,49 @@ void Cloth::Update()
 
 	if (!isPlaying) return;
 
-	for (UINT i = 0; i < 100; i++)
+	if (isWindActive)
 	{
+		windVelocity.z += ACCEL_AMOUNT * accelSign * DELTA_TIME;
+
+		accelSignTimer += DELTA_TIME;
+
+		if (accelSignTimer >= 1.f)
+		{
+			accelSignTimer -= 1.f;
+			accelSign *= -1;
+		}
+	}
+
+	for (auto& particle : particles)
+	{
+		particle->ClearForce();
+		particle->AddVelocity();
+
 		if (isWindActive)
 		{
-			windVelocity.z += ACCEL_AMOUNT * accelSign * DELTA_TIME * 0.01f;
+			bias = Random(-5.f, 10.f);
+			particle->AddForce(windVelocity * bias);
+		}
+	}
 
-			accelSignTimer += DELTA_TIME * 0.01f;
+	for (auto& spring : springs)
+		spring->AddForceToParticles();
 
-			if (accelSignTimer >= 1.f)
-			{
-				accelSignTimer -= 1.f;
-				accelSign *= -1;
-			}
+	for (auto& particle : particles)
+	{
+		particle->UpdateRigidBody(1);
+		particle->Update();
+
+		for (Quad*& quad : quadObstacles)
+		{
+			if (particle->Collision(quad))
+				particle->ResolveCollision(quad);
 		}
 
-		for (auto& particle : particles)
+		for (ColliderSphere*& cSphere : sphereObstacles)
 		{
-			particle->ClearForce();
-			particle->AddVelocity();
-
-			if (isWindActive)
-			{
-				bias = Random(-5.f, 10.f);
-				particle->AddForce(windVelocity * bias);
-			}
-		}
-
-		for (auto& spring : springs)
-			spring->AddForceToParticles();
-
-		for (auto& particle : particles)
-		{
-			particle->UpdateRigidBody(100);
-			particle->Update();
-
-			for (Quad*& quad : quadObstacles)
-			{
-				if (particle->Collision(quad))
-					particle->ResolveCollision(quad);
-			}
-
-			for (ColliderSphere*& cSphere : sphereObstacles)
-			{
-				if (particle->Collision(cSphere))
-					particle->ResolveCollision(cSphere);
-			}
+			if (particle->Collision(cSphere))
+				particle->ResolveCollision(cSphere);
 		}
 	}
 

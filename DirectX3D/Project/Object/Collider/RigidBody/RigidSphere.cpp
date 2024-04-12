@@ -132,6 +132,16 @@ void RigidSphere::UpdateRigidBody(const float& timeRate)
 		return;
 	}
 
-	velocity	+= (force / mass) * (DELTA_TIME / timeRate);
-	translation +=       velocity * (DELTA_TIME / timeRate);
+	//velocity	+= (force / mass) * (DELTA_TIME / timeRate);
+	//translation +=       velocity * (DELTA_TIME / timeRate);
+
+	// Runge-Kutta integration method
+
+	Vector3 k1 = (force / mass) * (DELTA_TIME / timeRate);
+	Vector3 k2 = ((force / mass) + 0.5f * k1) * (DELTA_TIME / timeRate);
+	Vector3 k3 = ((force / mass) + 0.5f * k2) * (DELTA_TIME / timeRate);
+	Vector3 k4 = ((force / mass) + k3) * (DELTA_TIME / timeRate);
+
+	velocity += (k1 + 2.0f * k2 + 2.0f * k3 + k4) / 6.0f;
+	translation += velocity * (DELTA_TIME / timeRate);
 }
