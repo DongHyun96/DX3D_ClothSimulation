@@ -99,6 +99,8 @@ void Cloth::CreateMesh()
 */
 void Cloth::Update()
 {
+	if (DELTA_TIME > 0.01f) return;
+
 	HandleInput();
 
 	if (!isPlaying) return;

@@ -39,7 +39,15 @@ private:
 
 private:
 
-	const UINT PHYSICS_TIMESTEP = 5;
+	// TODO debug / Release ³ª´©±â
+//#ifdef _DEBUG
+//	//const UINT PHYSICS_TIMESTEP = 20;
+//#endif
+//
+//#ifndef _DEBUG
+//	const UINT PHYSICS_TIMESTEP = 1;
+//#endif
+	const UINT PHYSICS_TIMESTEP = 1;
 
 private:
 

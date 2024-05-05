@@ -1,4 +1,5 @@
 #pragma once
+
 class MainGame
 {
 public:
@@ -17,8 +18,8 @@ private:
 	void Initialize();
 	void Release();
 
+
 private:
 
 	//Scene* scene{};
-
 };

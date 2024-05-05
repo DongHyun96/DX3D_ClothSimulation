@@ -19,8 +19,16 @@ public:
 	Scene* Add(string key);
 	void Remove(string key);
 
+	TextureCube* GetDefaultFloor() const { return defaultFloor; }
+
+private:
+
+	void InitDefaultFloor();
+
 private:
 	map<string, Scene*> scenes{};
 
 	vector<Scene*> curScenes{};
+
+	TextureCube* defaultFloor{};
 };

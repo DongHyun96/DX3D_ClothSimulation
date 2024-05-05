@@ -19,8 +19,6 @@ private:
 
 private:
 
-	TextureCube* defaultFloor{};
-
 	Cloth* cloth{};
 
 	//vector<ColliderSphere*> obstacles{};

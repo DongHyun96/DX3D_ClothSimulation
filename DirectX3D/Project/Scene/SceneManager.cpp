@@ -4,6 +4,7 @@
 
 SceneManager::SceneManager()
 {
+	InitDefaultFloor();
 }
 
 SceneManager::~SceneManager()
@@ -12,6 +13,8 @@ SceneManager::~SceneManager()
 		delete scene.second;
 
 	scenes.clear();
+
+	delete defaultFloor;
 }
 
 void SceneManager::Update()
@@ -75,5 +78,15 @@ void SceneManager::Remove(string key)
 			return;
 		}
 	}
+}
+
+void SceneManager::InitDefaultFloor()
+{
+	defaultFloor = new TextureCube;
+	defaultFloor->SetName("SpringMassFloor");
+	defaultFloor->LoadTransform();
+
+	defaultFloor->SetShader(L"16_Light");
+	defaultFloor->SetDiffuseMap(L"Default/TemplateGrid_albedo.png");
 }
 

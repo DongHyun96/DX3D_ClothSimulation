@@ -9,8 +9,6 @@ SpringMassTestScene::SpringMassTestScene()
 
 SpringMassTestScene::~SpringMassTestScene()
 {
-	delete defaultFloor;
-
 	delete cloth;
 
 	//delete obstacle;
@@ -25,7 +23,7 @@ SpringMassTestScene::~SpringMassTestScene()
 
 void SpringMassTestScene::Update()
 {
-	defaultFloor->Update();
+	DEFAULT_FLOOR->Update();
 
 	cloth->Update();
 
@@ -39,7 +37,7 @@ void SpringMassTestScene::Update()
 // Draw call - 1882
 void SpringMassTestScene::Render()
 {
-	defaultFloor->Render();
+	DEFAULT_FLOOR->Render();
 
 	for (auto& p : obstacles)
 		p.second->Render();
@@ -61,7 +59,7 @@ void SpringMassTestScene::PostRender()
 	}
 
 
-	defaultFloor->Debug();
+	DEFAULT_FLOOR->Debug();
 
 	cloth->PostRender();
 
@@ -69,13 +67,6 @@ void SpringMassTestScene::PostRender()
 
 void SpringMassTestScene::Init()
 {
-	defaultFloor = new TextureCube;
-	defaultFloor->SetName("SpringMassFloor");
-	defaultFloor->LoadTransform();
-
-	defaultFloor->SetShader(L"16_Light");
-	defaultFloor->SetDiffuseMap(L"Default/TemplateGrid_albedo.png");
-
 	for (UINT i = 0; i < 4; i++)
 	{
 		ColliderSphere* cSphere = new ColliderSphere(10.f);
@@ -97,7 +88,7 @@ void SpringMassTestScene::Init()
 	//rgb(91, 188, 255)
 	cloth = new Cloth(Vector4(0.356f, 0.737f, 1.f, 1));
 
-	cloth->AddObstacles(defaultFloor->GetFrontQuad());
+	cloth->AddObstacles(DEFAULT_FLOOR->GetFrontQuad());
 	
 	for (auto& p : obstacles)
 		cloth->AddObstacles(p.first);

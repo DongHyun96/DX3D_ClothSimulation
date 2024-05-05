@@ -47,10 +47,10 @@ using namespace std;
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
 
-//#define WIN_HEIGHT		720.f
-//#define WIN_WIDTH		1280.f
-#define WIN_HEIGHT		1080.f
-#define WIN_WIDTH		1920.f
+#define WIN_HEIGHT		720.f
+#define WIN_WIDTH		1280.f
+//#define WIN_HEIGHT		1080.f
+//#define WIN_WIDTH		1920.f
 #define WIN_CENTER		Vector3(WIN_WIDTH * 0.5f, WIN_HEIGHT * 0.5f, 0.f)
 
 #define MAX_FRAME		512
@@ -67,6 +67,7 @@ using namespace std;
 #define SCENE			SceneManager::GetInstance()
 #define STATE			StateManager::GetInstance()
 #define CAMERA			Environment::GetInstance()->GetMainCamera()
+#define DEFAULT_FLOOR	SCENE->GetDefaultFloor()
 
 #define DIALOG			ImGuiFileDialog::Instance()
 
@@ -201,6 +202,6 @@ using namespace GameMath;
 #include "MainGame.h"
 
 
-extern HWND hWnd;
-extern Vector3 mousePos;
-extern string projectDir;
+extern HWND		hWnd;
+extern Vector3	mousePos;
+extern string	projectDir;
