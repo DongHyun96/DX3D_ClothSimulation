@@ -36,16 +36,17 @@ bool RigidSphere::Collision(const ColliderSphere* other)
 	// z fighting 때문에 radius에 여유를 둠
 	float otherRadius = other->Radius() + SPHERE_COLLISION_MARGIN;
 
+	// pos = ColliderSphere로 부터 RigidSphere로 향하는 방향에 맞닿는 ColliderSphere위의 점
 	Vector3 pos = other->GetGlobalPosition() + (this->globalPosition - other->GetGlobalPosition()).GetNormalized() * otherRadius;
 	Vector3 n	= (this->globalPosition - other->GetGlobalPosition()).GetNormalized();
 
 	return Vector3::Dot(this->globalPosition - pos, n) < 0.01f && Vector3::Dot(velocity, n) < 0;
 }
 
-void RigidSphere::ResolveContact(const ColliderSphere* other, const UINT& timeRate)
+void RigidSphere::ResolveContact(const ColliderSphere* other, const UINT& timeStep)
 {
 	Vector3 n = (this->globalPosition - other->GetGlobalPosition()).GetNormalized();
-	float dt = DELTA_TIME / timeRate;
+	float dt  = DELTA_TIME / timeStep;
 
 
 	Vector3 fN = Vector3::Dot(force, n) * n;
@@ -60,15 +61,15 @@ void RigidSphere::ResolveContact(const ColliderSphere* other, const UINT& timeRa
 	AddForce(-fN);
 }
 
-void RigidSphere::ResolveContact(const RigidSphere* other, const UINT& timeRate)
+void RigidSphere::ResolveContact(const RigidSphere* other, const UINT& timeStep)
 {
-	ResolveContact((ColliderSphere*)other, timeRate);
+	ResolveContact((ColliderSphere*)other, timeStep);
 }
 
-void RigidSphere::ResolveContact(const Quad* other, const UINT& timeRate)
+void RigidSphere::ResolveContact(const Quad* other, const UINT& timeStep)
 {
 	Vector3 planeNormal = other->GetNormal();
-	float dt = DELTA_TIME / timeRate;
+	float dt = DELTA_TIME / timeStep;
 
 	Vector3 fN = Vector3::Dot(force, planeNormal) * planeNormal;
 	Vector3 vN = Vector3::Dot(velocity, planeNormal) * planeNormal;
@@ -84,18 +85,20 @@ void RigidSphere::ResolveContact(const Quad* other, const UINT& timeRate)
 
 void RigidSphere::ResolveCollision(const ColliderSphere* other)
 {
+	// z fighting 문제로 실질적인 radius에 약간의 margin을 더함
 	float otherRadius = other->Radius() + SPHERE_COLLISION_MARGIN;
 
-	Vector3 contactVec = otherRadius * (this->globalPosition - other->GetGlobalPosition()).GetNormalized();
+	// other sphere 위치로부터 나 자신으로 향하는 방향
+	Vector3 n = (this->globalPosition - other->GetGlobalPosition()).GetNormalized();
 
-	Vector3 contactPos	= other->GetGlobalPosition() + contactVec;
-	Vector3 n			= (this->globalPosition - other->GetGlobalPosition()).GetNormalized();
-
+	// Velocity update
 	Vector3 vN	= Vector3::Dot(velocity, n) * n;
 	Vector3 vT	= velocity - vN;
-
 	velocity	= vT - vN * COR;
 	
+	// Translation 보정
+	Vector3 contactVec = otherRadius * n;
+	Vector3 contactPos = other->GetGlobalPosition() + contactVec;
 	this->translation -= Vector3::Dot(this->translation - contactPos, n) * n;
 }
 
@@ -106,11 +109,12 @@ void RigidSphere::ResolveCollision(const RigidSphere* other)
 
 void RigidSphere::ResolveCollision(const Quad* other)
 {
+	// Velocity update
 	Vector3 vN = Vector3::Dot(velocity, other->GetNormal()) * other->GetNormal();
 	Vector3 vT = velocity - vN;
+	velocity   = vT - vN * COR;
 
-	velocity = vT - vN * COR;
-
+	// Translation 보정
 	translation -= Vector3::Dot(translation - other->GetGlobalPosition(), other->GetNormal()) * other->GetNormal();
 }
 
@@ -118,13 +122,7 @@ void RigidSphere::ResolveCollision(const Terrain* terrain)
 {
 }
 
-void RigidSphere::AddVelocity()
-{
-	AddForce(GRAVITY * mass); // Gravity force
-	AddForce(velocity * (-K_DRAG));
-}
-
-void RigidSphere::UpdateRigidBody(const float& timeRate)
+void RigidSphere::SolveCurrentPosition(const UINT& timeStep)
 {
 	if (fixed)
 	{
@@ -132,16 +130,22 @@ void RigidSphere::UpdateRigidBody(const float& timeRate)
 		return;
 	}
 
+	Vector3 forcePerMass = force / mass;
+	float dt			 = DELTA_TIME / timeStep;
+
 	// Euler integration
-	//velocity	+= (force / mass) * (DELTA_TIME / timeRate);
-	//translation +=       velocity * (DELTA_TIME / timeRate);
+	// translation(t + dt) = translation(t) + curVelocity * dt;
+	// dt를 최대한 줄임으로써(timeStep으로) 오차 줄이기 시도
+	//velocity	+= forcePerMass * dt;
+	//translation += velocity     * dt;
 
 	// Runge-Kutta integration
-	Vector3 k1 = (force / mass) * (DELTA_TIME / timeRate);
-	Vector3 k2 = ((force / mass) + 0.5f * k1) * (DELTA_TIME / timeRate);
-	Vector3 k3 = ((force / mass) + 0.5f * k2) * (DELTA_TIME / timeRate);
-	Vector3 k4 = ((force / mass) + k3) * (DELTA_TIME / timeRate);
-
+	Vector3 k1 = forcePerMass * dt;
+	Vector3 k2 = (forcePerMass + 0.5f * k1) * dt;
+	Vector3 k3 = (forcePerMass + 0.5f * k2) * dt;
+	Vector3 k4 = (forcePerMass + k3) * dt;
+	
 	velocity	+= (k1 + 2.f * k2 + 2.f * k3 + k4) / 6.f;
-	translation += velocity * (DELTA_TIME / timeRate);
+	translation += velocity * dt;
+
 }

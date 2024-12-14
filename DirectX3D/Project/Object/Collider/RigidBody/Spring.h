@@ -32,6 +32,6 @@ private:
 	RigidSphere* particle2{};
 
 	float r{}; 
-	float k{};
+	float k{}; // 스프링 상수
 
 };

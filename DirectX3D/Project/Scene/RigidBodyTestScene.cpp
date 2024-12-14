@@ -81,9 +81,10 @@ void RigidBodyTestScene::Update()
 
 		rigidSphere->ClearForce();
 
-		rigidSphere->AddVelocity();
+		rigidSphere->AddGravityForce();
+		rigidSphere->AddViscousDragForce();
 
-		rigidSphere->UpdateRigidBody();
+		rigidSphere->SolveCurrentPosition();
 
 		//if (rigidSphere->Collision(floor))
 		//	rigidSphere->HandleCollision(floor);

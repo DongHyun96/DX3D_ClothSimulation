@@ -67,6 +67,7 @@ private:
 
 	Matrix rotMatrix{};
 
+	// Frustum planes
 	XMVECTOR planes[6];
 
 	float a, b, c, d;

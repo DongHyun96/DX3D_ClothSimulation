@@ -20,7 +20,7 @@ public:
 	Cloth(Vector4 color = Vector4(1, 0, 0, 1));
 	~Cloth();
 
-	void Update();
+	void Update(const UINT& PhysicsTimeStep);
 	void Render(D3D11_PRIMITIVE_TOPOLOGY topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST) override;
 	void PostRender();
 
@@ -36,18 +36,6 @@ private:
 	void UpdateSpringInstanceData();
 
 	void UpdateFabricMesh();
-
-private:
-
-	// TODO debug / Release 나누기
-//#ifdef _DEBUG
-//	//const UINT PHYSICS_TIMESTEP = 20;
-//#endif
-//
-//#ifndef _DEBUG
-//	const UINT PHYSICS_TIMESTEP = 1;
-//#endif
-	const UINT PHYSICS_TIMESTEP = 1;
 
 private:
 
@@ -83,7 +71,7 @@ private: // 바람 관련
 	float		accelSignTimer{};
 	int			accelSign		= 1;
 	const float ACCEL_AMOUNT	= 1.5f;
-	float		bias			= 1.f;
+	float		windBias		= 1.f;
 
 private:
 

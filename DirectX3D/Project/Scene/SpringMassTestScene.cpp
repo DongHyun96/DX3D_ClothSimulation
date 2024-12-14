@@ -25,7 +25,7 @@ void SpringMassTestScene::Update()
 {
 	DEFAULT_FLOOR->Update();
 
-	cloth->Update();
+	cloth->Update(PHYSICS_TIMESTEP);
 
 	for (auto& p : obstacles)
 	{
@@ -34,7 +34,6 @@ void SpringMassTestScene::Update()
 	}
 }
 
-// Draw call - 1882
 void SpringMassTestScene::Render()
 {
 	DEFAULT_FLOOR->Render();

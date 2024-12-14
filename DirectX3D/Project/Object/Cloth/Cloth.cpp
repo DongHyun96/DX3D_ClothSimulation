@@ -10,7 +10,8 @@ Cloth::Cloth(Vector4 color)
 
 	CreateMesh();
 
-	this->Update();
+	this->Update(1);
+
 	isPlaying = false;
 }
 
@@ -97,7 +98,7 @@ void Cloth::CreateMesh()
 		Particle steps(UpdateRigidBody)
 		ResolveCollisions
 */
-void Cloth::Update()
+void Cloth::Update(const UINT& PhysicsTimeStep)
 {
 	if (DELTA_TIME > 0.01f) return;
 
@@ -105,13 +106,13 @@ void Cloth::Update()
 
 	if (!isPlaying) return;
 
-	for (UINT i = 0; i < PHYSICS_TIMESTEP; i++)
+	for (UINT i = 0; i < PhysicsTimeStep; i++)
 	{
 		if (isWindActive)
 		{
-			windVelocity.z += ACCEL_AMOUNT * accelSign * DELTA_TIME / PHYSICS_TIMESTEP;
+			windVelocity.z += ACCEL_AMOUNT * accelSign * DELTA_TIME / PhysicsTimeStep;
 
-			accelSignTimer += DELTA_TIME / PHYSICS_TIMESTEP;
+			accelSignTimer += DELTA_TIME / PhysicsTimeStep;
 
 			if (accelSignTimer >= 1.f)
 			{
@@ -123,12 +124,16 @@ void Cloth::Update()
 		for (auto& particle : particles)
 		{
 			particle->ClearForce();
-			particle->AddVelocity();
+
+			//particle->AddVelocity();
+
+			particle->AddGravityForce();
+			particle->AddViscousDragForce();
 
 			if (isWindActive)
 			{
-				bias = Random(-5.f, 10.f);
-				particle->AddForce(windVelocity * bias);
+				windBias = Random(-5.f, 10.f);
+				particle->AddForce(windVelocity * windBias);
 			}
 		}
 
@@ -137,7 +142,7 @@ void Cloth::Update()
 
 		for (auto& particle : particles)
 		{
-			particle->UpdateRigidBody(PHYSICS_TIMESTEP);
+			particle->SolveCurrentPosition(PhysicsTimeStep);
 			particle->Update();
 
 			for (Quad*& quad : quadObstacles)
@@ -153,6 +158,8 @@ void Cloth::Update()
 			}
 		}
 	}
+
+	/* Render 용 Update 과정. Cloth의 각 Particles의 GlobalPosition에 따른 각 도형 Transform 잡기 */
 
 	switch (mode)
 	{

@@ -15,9 +15,14 @@ public:
 
 	void AddForce(const Vector3& force) { this->force += force; }
 
-	void AddVelocity();
+	void AddGravityForce()     { AddForce(GRAVITY * mass); }
+	void AddViscousDragForce() { AddForce(velocity * (-K_DRAG)); }
 
-	void UpdateRigidBody(const float& timeRate = 1.f); // Step
+	/// <summary>
+	/// 현재 위치 translation 계산하기
+	/// </summary>
+	/// <param name="timeStep"></param>
+	void SolveCurrentPosition(const UINT& timeStep = 1); // Step
 
 	void SetFixed(const bool& fixed) { this->fixed = fixed; }
 	void ToggleFixed() { fixed = !fixed; }
@@ -30,10 +35,10 @@ public: // 충돌검사 및 충돌처리
 
 	bool Collision(const ColliderSphere* other);
 
-	void ResolveContact(const ColliderSphere* other, const UINT& timeRate = 1.f);
-	void ResolveContact(const RigidSphere*    other, const UINT& timeRate = 1.f);
+	void ResolveContact(const ColliderSphere* other, const UINT& timeStep = 1.f);
+	void ResolveContact(const RigidSphere*    other, const UINT& timeStep = 1.f);
 
-	void ResolveContact(const Quad* other, const UINT& timeRate = 1.f);
+	void ResolveContact(const Quad* other, const UINT& timeStep = 1.f);
 
 	void ResolveCollision(const ColliderSphere*	other);		// ColliderSphere
 	void ResolveCollision(const RigidSphere*	other);		// RigidBody vs RigidBody
