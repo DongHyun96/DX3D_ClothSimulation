@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 class Grid : public GameObject<VertexColor>
 {
 public:

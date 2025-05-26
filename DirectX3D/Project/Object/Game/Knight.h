@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 class Knight : public Character
 {
 	enum State

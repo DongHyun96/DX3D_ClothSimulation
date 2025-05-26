@@ -1,6 +1,6 @@
-#pragma once
+ï»¿#pragma once
 
-/* Animation 1°³ (.clip ÆÄÀÏ) */
+/* Animation 1ê°œ (.clip íŒŒì¼) */
 class ModelClip
 {
 	friend class ModelAnimator;
@@ -20,7 +20,7 @@ public:
 private:
 	string name{};
 
-	UINT frameCount{}; // ÃÑ frame °¹¼ö
+	UINT frameCount{}; // ì´ frame ê°¯ìˆ˜
 
 	float ticksPerSecond{};
 	float duration{};
@@ -29,10 +29,10 @@ private:
 
 	unordered_map<string, KeyFrame*> keyFrames{};
 
-	// Anim Notifier | key - Èå¸¥½Ã°£ratio
+	// Anim Notifier | key - íë¥¸ì‹œê°„ratio
 	multimap<float, function<void()>> events{};
 
-	// À§ÀÇ events¸¦ ¼øÈ¸ÇÏ±â À§ÇÑ iterator
+	// ìœ„ì˜ eventsë¥¼ ìˆœíšŒí•˜ê¸° ìœ„í•œ iterator
 	multimap<float, function<void()>>::iterator eventsIterator;
 
 	float ratio{};

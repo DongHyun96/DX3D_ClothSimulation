@@ -1,4 +1,4 @@
-#include "Framework.h"
+﻿#include "Framework.h"
 #include "Utility.h"
 
 wstring Utility::GetExtension(wstring file)

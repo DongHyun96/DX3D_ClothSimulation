@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Camera.h"
 
 Camera::Camera()
@@ -22,7 +22,7 @@ void Camera::Update()
 	//XMVECTOR focus = XMVectorSet(+0, +0, +0, 0);
 	//XMVECTOR up    = XMVectorSet(+0, +1, +0, 0);
 	//               
-	//viewMatrix     = XMMatrixLookAtLH(eye, focus, up); // Ä«¸Ş¶ó°¡ ¹Ù¶óº¸´Â ¹æÇâÀ» °í·ÁÇØ¼­ view matÀ» ¸¸µé¾î ÁÜ
+	//viewMatrix     = XMMatrixLookAtLH(eye, focus, up); // ì¹´ë©”ë¼ê°€ ë°”ë¼ë³´ëŠ” ë°©í–¥ì„ ê³ ë ¤í•´ì„œ view matì„ ë§Œë“¤ì–´ ì¤Œ
 
 	Transform::Update();
 
@@ -187,7 +187,7 @@ Ray Camera::ScreenPointToRay(Vector3 screenPoint)
 	Vector3 screenSize(WIN_WIDTH, WIN_HEIGHT, 1.f);
 
 	// Inv Viewport
-	// È­¸é point¸¦ ndcÁÂÇ¥°è·Î
+	// í™”ë©´ pointë¥¼ ndcì¢Œí‘œê³„ë¡œ
 	Vector3 point;
 	point.x = (screenPoint.x / screenSize.x) * 2.f - 1.f;
 	point.y = (screenPoint.y / screenSize.y) * 2.f - 1.f;
@@ -204,7 +204,7 @@ Ray Camera::ScreenPointToRay(Vector3 screenPoint)
 	point = XMVector3TransformCoord(point, invProj);
 
 	// Inv View(Cam)
-	// view MatÀº worldÀÇ ¿ªÇà·Ä, µû¶ó¼­ inv view´Â world°¡ µÊ
+	// view Matì€ worldì˜ ì—­í–‰ë ¬, ë”°ë¼ì„œ inv viewëŠ” worldê°€ ë¨
 	point = XMVector3TransformCoord(point, world);
 
 	Ray ray;
@@ -235,7 +235,7 @@ bool Camera::PointInFrustum(Vector3 point)
 {
 	for (UINT i = 0; i < 6; i++)
 	{
-		Vector3 dot = XMPlaneDotCoord(planes[i], point); // xyz ¸ğµÎ ¶È°°Àº °ªÀ¸·Î Ã¤¿öÁü
+		Vector3 dot = XMPlaneDotCoord(planes[i], point); // xyz ëª¨ë‘ ë˜‘ê°™ì€ ê°’ìœ¼ë¡œ ì±„ì›Œì§
 
 		if (dot.x < 0.f) return false;
 	}

@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "ModelClip.h"
 
 
@@ -25,7 +25,7 @@ void ModelClip::Execute(float ratio)
 	if (events.empty()) return;
 	if (eventsIterator == events.end()) return;
 
-	// ÄÝ¹éÇÒ ºÎºÐÀÇ ratio >= ½ÇÁ¦ ¾Ö´Ï¸ÞÀÌ¼ÇÀÌ Èå¸¥ ½Ã°£ÀÇ ratio
+	// ì½œë°±í•  ë¶€ë¶„ì˜ ratio >= ì‹¤ì œ ì• ë‹ˆë©”ì´ì…˜ì´ íë¥¸ ì‹œê°„ì˜ ratio
 	if (eventsIterator->first > ratio) return;
 	
 	eventsIterator->second();

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 class MainGame
 {
@@ -7,8 +7,8 @@ public:
 	MainGame();
 	~MainGame();
 
-	void Update(); // Á¤º¸¸¦ °»½ÅÇÏ´Â ÇÔ¼ö
-	void Render(); // È­¸éÀ» °»½ÅÇÏ´Â ÇÔ¼ö
+	void Update(); // ì •ë³´ë¥¼ ê°±ì‹ í•˜ëŠ” í•¨ìˆ˜
+	void Render(); // í™”ë©´ì„ ê°±ì‹ í•˜ëŠ” í•¨ìˆ˜
 
 	void PreRender();
 	void PostRender();

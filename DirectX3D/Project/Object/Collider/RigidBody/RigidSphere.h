@@ -1,6 +1,13 @@
-#pragma once
+ï»¿#pragma once
+
+enum DifferentialEquationSolver
+{
+	EULER,
+	RUNGE_KUTTA
+};
+
 /// <summary>
-/// ÁÖÀÇÇÒ Á¡ : ÃÖ»óÀ§ TransformÀ¸·Î µÎ¾î¾ß Á¤»ó ÀÛµ¿ -> local TransformÀÌ °ğ global TransformÀÌ µÇ¾î¾ß ÇÔ
+/// ì£¼ì˜í•  ì  : ìµœìƒìœ„ Transformìœ¼ë¡œ ë‘ì–´ì•¼ ì •ìƒ ì‘ë™ -> local Transformì´ ê³§ global Transformì´ ë˜ì–´ì•¼ í•¨
 /// </summary>
 class RigidSphere : public ColliderSphere
 {
@@ -19,17 +26,17 @@ public:
 	void AddViscousDragForce() { AddForce(velocity * (-K_DRAG)); }
 
 	/// <summary>
-	/// ÇöÀç À§Ä¡ translation °è»êÇÏ±â
+	/// í˜„ì¬ ìœ„ì¹˜ translation ê³„ì‚°í•˜ê¸°
 	/// </summary>
 	/// <param name="timeStep"></param>
-	void SolveCurrentPosition(const UINT& timeStep = 1); // Step
+	void SolveCurrentPosition(const UINT& timeStep = 1, const DifferentialEquationSolver& SolverType = RUNGE_KUTTA); // Step
 
 	void SetFixed(const bool& fixed) { this->fixed = fixed; }
 	void ToggleFixed() { fixed = !fixed; }
 
 	Vector3 GetVelocity() const { return velocity; }
 
-public: // Ãæµ¹°Ë»ç ¹× Ãæµ¹Ã³¸®
+public: // ì¶©ëŒê²€ì‚¬ ë° ì¶©ëŒì²˜ë¦¬
 
 	bool Collision(const Quad* other);
 

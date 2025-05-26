@@ -1,11 +1,11 @@
-#pragma once
+ï»¿#pragma once
 class CollisionScene : public Scene
 {
 public:
 	CollisionScene();
 	~CollisionScene();
 
-	// SceneÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+	// Sceneì„(ë¥¼) í†µí•´ ìƒì†ë¨
 	void Update()		override;
 
 	void Render()		override;

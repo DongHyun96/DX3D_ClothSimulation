@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 class GeometryBuffer
 {
 	enum RenderTargets
@@ -19,7 +19,7 @@ private:
 
 	DepthStencil* depthStencil{};
 
-	Quad* quads[SIZE + 1]; // µð¹ö±ë¿ë quadµé
+	Quad* quads[SIZE + 1]; // ë””ë²„ê¹…ìš© quadë“¤
 
 	ID3D11ShaderResourceView* srvs[SIZE + 1];
 };

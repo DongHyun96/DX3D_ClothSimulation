@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "ColliderBox.h"
 
 
@@ -45,7 +45,7 @@ bool ColliderBox::Collision(IN Ray ray, OUT HitResult* hitResult)
 
 	temp.distance = FLT_MAX;
 
-	// °¢ ¸éÀÇ Á¤Á¡µé(4°³¾¿)
+	// ê° ë©´ì˜ ì •ì ë“¤(4ê°œì”©)
 	UINT faces[] =
 	{
 	   0, 1, 2, 3,
@@ -101,7 +101,7 @@ bool ColliderBox::Collision(ColliderSphere* other)
 
 	Vector3 pos = this->GetGlobalPosition();
 
-	// °¢ Ãàº°(boxÀÇ right, up, forward) sphere¿Í °¡Àå °¡±î¿î ÁöÁ¡°ªÀ» Ã£¾Æ¼­ °¡Àå °¡±î¿î Á¡À¸·Î ÇÕÄ§
+	// ê° ì¶•ë³„(boxì˜ right, up, forward) sphereì™€ ê°€ìž¥ ê°€ê¹Œìš´ ì§€ì ê°’ì„ ì°¾ì•„ì„œ ê°€ìž¥ ê°€ê¹Œìš´ ì ìœ¼ë¡œ í•©ì¹¨
 	for (UINT i = 0; i < 3; i++)
 	{
 		float length = Vector3::Dot(box.axis[i], other->GetGlobalPosition() - this->GetGlobalPosition());

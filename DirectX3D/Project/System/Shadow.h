@@ -1,7 +1,7 @@
-#pragma once
+ï»¿#pragma once
 
 /// <summary>
-/// ±×¸²ÀÚÀÇ ÇØ»óµµ°¡ ³ô¾Æ¾ß ¿¹»Ú°Ô ³ª¿È
+/// ê·¸ë¦¼ìì˜ í•´ìƒë„ê°€ ë†’ì•„ì•¼ ì˜ˆì˜ê²Œ ë‚˜ì˜´
 /// </summary>
 class Shadow
 {
@@ -20,7 +20,7 @@ private:
 
 private:
 
-	UINT width{}, height{}; // RenderTarget ÇØ»óµµ
+	UINT width{}, height{}; // RenderTarget í•´ìƒë„
 
 	RenderTarget* renderTarget{};
 	DepthStencil* depthStencil{};

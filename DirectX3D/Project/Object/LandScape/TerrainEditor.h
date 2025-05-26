@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 struct VertexTerrain
 {
@@ -23,7 +23,7 @@ public:
 	TerrainEditor();
 	~TerrainEditor();
 
-	void Picking(); // Mouse Picking (¸¶¿ì½º·Î Å¬¸¯ÇÑ À§Ä¡¸¦ Ã£À½)
+	void Picking(); // Mouse Picking (ë§ˆìš°ìŠ¤ë¡œ í´ë¦­í•œ ìœ„ì¹˜ë¥¼ ì°¾ìŒ)
 
 	void Debug();
 
@@ -66,7 +66,7 @@ private:
 
 	float adjustValue = 10.f;
 
-	// ¸¶¿ì½º ÇÇÅ· À§Ä¡
+	// ë§ˆìš°ìŠ¤ í”¼í‚¹ ìœ„ì¹˜
 	Vector3 pickedPos{}; 
 
 	// Compute Shader

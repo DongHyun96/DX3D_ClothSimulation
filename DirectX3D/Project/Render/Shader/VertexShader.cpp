@@ -1,4 +1,4 @@
-#include "Framework.h"
+Ôªø#include "Framework.h"
 #include "VertexShader.h"
 
 VertexShader::VertexShader(wstring file)
@@ -80,7 +80,7 @@ void VertexShader::CreateInputLayout()
         if (semantic == "POSITION")
             elementDesc.Format = DXGI_FORMAT_R32G32B32_FLOAT;
 
-        // semantic æ’ø° INSTANCE √£±‚
+        // semantic ÏïûÏóê INSTANCE Ï∞æÍ∏∞
         int n = semantic.find_first_of("_");
 
         semantic = semantic.substr(0, n);

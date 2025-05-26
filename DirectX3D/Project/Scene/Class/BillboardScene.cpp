@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "BillboardScene.h"
 
 
@@ -53,7 +53,7 @@ BillboardScene::BillboardScene()
 
 		pos.y = terrain->GetHeight(pos) + size.y * 0.5f + 1.f;
 
-		// ¿ø·¡´Â quad·Î ±×·ÈÁö¸¸ Vertex Á¤º¸¿¡ pos¿Í size¸¸ ³Ö¾îÁÜ
+		// ì›ëž˜ëŠ” quadë¡œ ê·¸ë ¸ì§€ë§Œ Vertex ì •ë³´ì— posì™€ sizeë§Œ ë„£ì–´ì¤Œ
 		VertexTexture vertex;
 		vertex.pos = pos;
 		vertex.uv = size;
@@ -87,7 +87,7 @@ void BillboardScene::Update()
 
 	//	Vector3 dir =  tree->GetGlobalPosition() - CAMERA->GetGlobalPosition();
 	//	
-	//	float angle = atan2f(dir.x, dir.z); // È¸ÀüÇÒ °¢
+	//	float angle = atan2f(dir.x, dir.z); // íšŒì „í•  ê°
 
 	//	tree->rotation.y = angle;
 
@@ -111,9 +111,9 @@ void BillboardScene::Render()
 	material->Set();
 	geometryShader->SetShader();
 
-	DC->Draw(drawCount, 0); // ³ª¹«µéÀ» ±×¸®´Â drawCall
+	DC->Draw(drawCount, 0); // ë‚˜ë¬´ë“¤ì„ ê·¸ë¦¬ëŠ” drawCall
 
-	DC->GSSetShader(nullptr, nullptr, 0); // GS ÃÊ±âÈ­
+	DC->GSSetShader(nullptr, nullptr, 0); // GS ì´ˆê¸°í™”
 
 	STATE->DisableAlpha();
 

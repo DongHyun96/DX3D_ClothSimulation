@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 class Sphere : public GameObject<VertexTextureNormalTangent>
 {
 	typedef VertexTextureNormalTangent VertexType;

@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "RenderTarget.h"
 
 
@@ -25,7 +25,7 @@ void RenderTarget::Set(DepthStencil* depthStencil, Vector4 clearColor)
 
 	depthStencil->ClearDSV();
 
-	// Viewportµµ »õ·Î Àâ¾ÆÁà¾ß ÇÔ
+	// Viewportë„ ìƒˆë¡œ ì¡ì•„ì¤˜ì•¼ í•¨
 	Device::GetInstance()->SetViewport(width, height);
 
 	ENVIRONMENT->Set();

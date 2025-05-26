@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 class SpringMassTestScene : public Scene
 {
@@ -27,8 +27,9 @@ private:
 
 private:
 
-	// Differential equation Ç®ÀÌ¿ë timeStep -> ÇÑ Update tick ¾È¿¡¼­ dt¸¦ ÀÛ°Ô ÂÉ°³´Â ¿ëµµ
-	// Euler methodÀ¸·Î ÀÔÀÚÀÇ Çö velocity¿Í À§Ä¡¸¦ °è»êÇÒ ¶§, rawÇÑ delta time »ç¿ë ½Ã ¿ÀÂ÷°¡ »ó´çÈ÷ Ä¿¼­ ½Ã¹Ä·¹ÀÌ¼ÇÀÌ ÅÍÁ®¹ö¸²
+	// Differential equation í’€ì´ìš© timeStep -> í•œ Update tick ì•ˆì—ì„œ dtë¥¼ ìž‘ê²Œ ìª¼ê°œëŠ” ìš©ë„
+	// Euler methodìœ¼ë¡œ ìž…ìžì˜ í˜„ velocityì™€ ìœ„ì¹˜ë¥¼ ê³„ì‚°í•  ë•Œ, rawí•œ delta time ì‚¬ìš© ì‹œ ì˜¤ì°¨ê°€ ìƒë‹¹ížˆ ì»¤ì„œ ì‹œë®¬ë ˆì´ì…˜ì´ í„°ì ¸ë²„ë¦¼
 	const UINT PHYSICS_TIMESTEP = 1;
+	//const UINT PHYSICS_TIMESTEP = 100;
 
 };

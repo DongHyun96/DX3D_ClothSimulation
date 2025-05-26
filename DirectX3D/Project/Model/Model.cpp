@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Model.h"
 
 
@@ -94,9 +94,9 @@ void Model::AttachToBone(ModelAnimator* model, string boneName)
 		return;
 	}
 
-	Transform* socket = new Transform; // ¿À¸¥¼Õ
+	Transform* socket = new Transform; // ì˜¤ë¥¸ì†
 
-	this->SetParent(socket); // SwordÀÇ parent¸¦ socketÀ¸·Î µÒ
+	this->SetParent(socket); // Swordì˜ parentë¥¼ socketìœ¼ë¡œ ë‘ 
 
 	model->sockets.emplace(boneName, socket);
 }
@@ -202,7 +202,7 @@ void Model::ReadMesh()
 
 void Model::UpdateSockets()
 {
-	// Sword´Â socket¿¡ ºÙ¾îÀÖ°í ÇØ´ç socket¸¸ Àß ÀÌµ¿ ½ÃÅ°¸é µÊ
+	// SwordëŠ” socketì— ë¶™ì–´ìˆê³  í•´ë‹¹ socketë§Œ ì˜ ì´ë™ ì‹œí‚¤ë©´ ë¨
 	for (pair<string, Transform*> pair : sockets)
 	{
 		Transform* socket		= pair.second;

@@ -1,8 +1,8 @@
-#pragma once
+ï»¿#pragma once
 
-/* Model¿¡ animationÀÌ ÀÖ´Â ¹öÀü */
-// °¡¸¸È÷ ÀÖ´Â animationÀÌ ¾ø´Â ¾ÖµéÀº Model
-// ModelAnimator´Â animationÀÌ ÀÖ´Â ¹°Ã¼µé (ex - character)
+/* Modelì— animationì´ ìˆëŠ” ë²„ì „ */
+// ê°€ë§Œíˆ ìˆëŠ” animationì´ ì—†ëŠ” ì• ë“¤ì€ Model
+// ModelAnimatorëŠ” animationì´ ìˆëŠ” ë¬¼ì²´ë“¤ (ex - character)
 class ModelAnimator : public Model
 {
 protected:
@@ -23,12 +23,12 @@ protected:
 		}
 
 		float takeTime = 0.2f;
-		float tweenTime{}; // clip°ú clip »çÀÌÀÇ tween time
+		float tweenTime{}; // clipê³¼ clip ì‚¬ì´ì˜ tween time
 		float runningTime{};
 		float padding{};
 
 		Frame curFrame{};
-		Frame nextFrame{}; // ´ÙÀ½ ¸ğ¼ÇÀÇ Frame
+		Frame nextFrame{}; // ë‹¤ìŒ ëª¨ì…˜ì˜ Frame
 	};
 
 	class FrameBuffer : public ConstBuffer<Motion>
@@ -70,7 +70,7 @@ protected:
 	ClipTransform* clipTransforms{};
 	ClipTransform* nodeTransforms{};
 
-	// ½ÇÁúÀûÀ¸·Î png ÀÌ¹ÌÁö·Î »ÌÀº texture°¡ ¾Æ´Ô / ³»ºÎÀûÀ¸·Î ¸¸µé°í »ç¿ëÇÏ´Â texture
+	// ì‹¤ì§ˆì ìœ¼ë¡œ png ì´ë¯¸ì§€ë¡œ ë½‘ì€ textureê°€ ì•„ë‹˜ / ë‚´ë¶€ì ìœ¼ë¡œ ë§Œë“¤ê³  ì‚¬ìš©í•˜ëŠ” texture
 	ID3D11Texture2D*			texture{};
 	ID3D11ShaderResourceView*	srv{};
 

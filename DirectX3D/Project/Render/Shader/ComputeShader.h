@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 class ComputeShader : public Shader
 {
 	friend class Shader;

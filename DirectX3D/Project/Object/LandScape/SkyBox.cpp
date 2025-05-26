@@ -1,4 +1,4 @@
-#include "Framework.h"
+﻿#include "Framework.h"
 #include "SkyBox.h"
 
 SkyBox::SkyBox(wstring file)

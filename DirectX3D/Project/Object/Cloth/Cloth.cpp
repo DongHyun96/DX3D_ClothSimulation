@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Cloth.h"
 
 
@@ -81,7 +81,7 @@ void Cloth::CreateMesh()
 
 		Vector3 normal = Vector3::Cross(v01, v02).GetNormalized();
 
-		// ÃßÈÄ Æò±ÕÀ» ³¿
+		// ì¶”í›„ í‰ê· ì„ ëƒ„
 		vertices[index0].normal += normal;
 		vertices[index1].normal += normal;
 		vertices[index2].normal += normal;
@@ -142,9 +142,9 @@ void Cloth::Update(const UINT& PhysicsTimeStep)
 
 		for (auto& particle : particles)
 		{
-			particle->SolveCurrentPosition(PhysicsTimeStep);
+			particle->SolveCurrentPosition(PhysicsTimeStep, RUNGE_KUTTA);
 			particle->Update();
-
+			
 			for (Quad*& quad : quadObstacles)
 			{
 				if (particle->Collision(quad))
@@ -159,7 +159,7 @@ void Cloth::Update(const UINT& PhysicsTimeStep)
 		}
 	}
 
-	/* Render ¿ë Update °úÁ¤. ClothÀÇ °¢ ParticlesÀÇ GlobalPosition¿¡ µû¸¥ °¢ µµÇü Transform Àâ±â */
+	/* Render ìš© Update ê³¼ì •. Clothì˜ ê° Particlesì˜ GlobalPositionì— ë”°ë¥¸ ê° ë„í˜• Transform ì¡ê¸° */
 
 	switch (mode)
 	{
@@ -274,7 +274,7 @@ void Cloth::InitSpringInstancing()
 {
 	instanceCount = springs.size();
 
-	// instancing °ø¿ë spring
+	// instancing ê³µìš© spring
 	springBase = new Spring;
 	springBase->SetShader(L"BasicColorInstancing");
 
@@ -352,7 +352,7 @@ void Cloth::UpdateFabricMesh()
 
 		Vector3 normal = Vector3::Cross(v01, v02).GetNormalized();
 
-		// ÃßÈÄ Æò±ÕÀ» ³¿
+		// ì¶”í›„ í‰ê· ì„ ëƒ„
 		vertices[index0].normal += normal;
 		vertices[index1].normal += normal;
 		vertices[index2].normal += normal;

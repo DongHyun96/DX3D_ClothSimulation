@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 template<typename T>
 class GameObject : public Transform
@@ -47,7 +47,7 @@ inline void GameObject<T>::Render(D3D11_PRIMITIVE_TOPOLOGY topology)
 	material->Set();
 
 
-	// Draw Call ÀÌÀü±îÁö´Â setting -> settingÇÑ °á°ú¸¦ °¡Áö°í draw call·Î ºñ·Î¼Ò ±×·ÁÁü
+	// Draw Call ì´ì „ê¹Œì§€ëŠ” setting -> settingí•œ ê²°ê³¼ë¥¼ ê°€ì§€ê³  draw callë¡œ ë¹„ë¡œì†Œ ê·¸ë ¤ì§
 	//DC->Draw(vertices.size(), 0);
 	if (indices.size() > 0)
 		DC->DrawIndexed(indices.size(), 0, 0); // Draw call

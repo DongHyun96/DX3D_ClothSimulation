@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 class Device : public Singleton<Device>
 {
 	friend class Singleton;
@@ -20,10 +20,10 @@ public:
 	void SetViewport(UINT width = WIN_WIDTH, UINT height = WIN_HEIGHT);
 
 private:
-	ID3D11Device*           device;         // ¹«¾ğ°¡¸¦ ¸¸µé ¶§ »ç¿ë, CPU¸¦ ´Ù·ç´Â °´Ã¼ - CreateÇÏ´Â °æ¿ì°¡ ¸¹À½
-    ID3D11DeviceContext*    deviceContext;  // ¹«¾ğ°¡¸¦ ±×¸± ¶§ »ç¿ë, GPU¸¦ ´Ù·ç´Â °´Ã¼ - SetÇÏ´Â °æ¿ì°¡ ¸¹À½
+	ID3D11Device*           device;         // ë¬´ì–¸ê°€ë¥¼ ë§Œë“¤ ë•Œ ì‚¬ìš©, CPUë¥¼ ë‹¤ë£¨ëŠ” ê°ì²´ - Createí•˜ëŠ” ê²½ìš°ê°€ ë§ìŒ
+    ID3D11DeviceContext*    deviceContext;  // ë¬´ì–¸ê°€ë¥¼ ê·¸ë¦´ ë•Œ ì‚¬ìš©, GPUë¥¼ ë‹¤ë£¨ëŠ” ê°ì²´ - Setí•˜ëŠ” ê²½ìš°ê°€ ë§ìŒ
 
-    IDXGISwapChain*         swapChain;          // SwapChain - DoubleBufferingÀ» ±¸ÇöÇÏ´Â °´Ã¼
+    IDXGISwapChain*         swapChain;          // SwapChain - DoubleBufferingì„ êµ¬í˜„í•˜ëŠ” ê°ì²´
     ID3D11RenderTargetView* renderTargetView;
 
 	ID3D11DepthStencilView* depthStencilView;

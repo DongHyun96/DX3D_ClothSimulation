@@ -1,4 +1,4 @@
-#include "Framework.h"
+Ôªø#include "Framework.h"
 #include "Sphere.h"
 
 
@@ -93,7 +93,7 @@ void Sphere::CalculateTangent()
 		vertices[index2].tangent += tangent;
 	}
 
-	// Tangent±Ê¿Ã ∫∏¡§
+	// TangentÍ∏∏Ïù¥ Î≥¥Ï†ï
 	for (VertexType& vertex : vertices)
 	{
 		Vector3 T = vertex.tangent;

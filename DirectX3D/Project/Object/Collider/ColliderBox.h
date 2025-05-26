@@ -1,11 +1,11 @@
-#pragma once
+Ôªø#pragma once
 
 class ColliderBox : public Collider
 {
 public:
 	struct OBB
 	{
-		Vector3 axis[3]{}; // local x,y,z√‡
+		Vector3 axis[3]{}; // local x,y,zÏ∂ï
 		Vector3 halfSize{};
 	};
 
@@ -20,7 +20,7 @@ public:
 
 	OBB GetOBB();
 
-	// distance - ¡ﬂ¡°≥¢∏Æ ª´ ∞Õ
+	// distance - Ï§ëÏ†êÎÅºÎ¶¨ Î∫Ä Í≤É
 	bool SeperatedAxis(Vector3 distance, Vector3 axis, OBB box1, OBB box2);
 
 private:

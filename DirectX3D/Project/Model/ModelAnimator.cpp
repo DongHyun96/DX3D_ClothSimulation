@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "ModelAnimator.h"
 
 
@@ -36,7 +36,7 @@ void ModelAnimator::Render()
 
     buffer->SetVSBuffer(3); // 0,1,2 wvp
 
-    DC->VSSetShaderResources(0, 1, &srv); // Å¬¸³ÀÇ Transform Á¤º¸¸¦ srvÇü½ÄÀ¸·Î ³Ñ±è
+    DC->VSSetShaderResources(0, 1, &srv); // í´ë¦½ì˜ Transform ì •ë³´ë¥¼ srví˜•ì‹ìœ¼ë¡œ ë„˜ê¹€
 
     Model::Render(true);
 }
@@ -66,7 +66,7 @@ void ModelAnimator::Debug()
 
 void ModelAnimator::ReadClip(string file, UINT clipIndex)
 {
-	// .clip ºÒ·¯¿À±â
+	// .clip ë¶ˆëŸ¬ì˜¤ê¸°
 
     string path = "_ModelData/Clip/" + name + "/" + file + "_" + to_string(clipIndex) + ".clip";
 
@@ -127,7 +127,7 @@ void ModelAnimator::CreateTexture()
 
     D3D11_TEXTURE2D_DESC desc = {};
 
-    desc.Width              = MAX_BONE * 4; // 4*4 Çà·ÄÀ» ¸¸µé±â À§ÇÔ
+    desc.Width              = MAX_BONE * 4; // 4*4 í–‰ë ¬ì„ ë§Œë“¤ê¸° ìœ„í•¨
     desc.Height             = MAX_FRAME;
     desc.ArraySize          = clipCount;
     desc.Format             = DXGI_FORMAT_R32G32B32A32_FLOAT;
@@ -172,7 +172,7 @@ void ModelAnimator::CreateTexture()
     D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 
     srvDesc.Format                      = DXGI_FORMAT_R32G32B32A32_FLOAT;
-    srvDesc.ViewDimension               = D3D11_SRV_DIMENSION_TEXTURE2DARRAY; // 2D Texture¸¦ ¹è¿­ Çü½ÄÀ¸·Î ³Ñ±è
+    srvDesc.ViewDimension               = D3D11_SRV_DIMENSION_TEXTURE2DARRAY; // 2D Textureë¥¼ ë°°ì—´ í˜•ì‹ìœ¼ë¡œ ë„˜ê¹€
     srvDesc.Texture2DArray.MipLevels    = 1;
     srvDesc.Texture2DArray.ArraySize    = clipCount;
 
@@ -221,7 +221,7 @@ Matrix ModelAnimator::GetTransformByBone(string boneName)
 
 void ModelAnimator::CreateClipTransform(UINT clipIndex)
 {
-    // S, R, T µû·Î °¡Á®¿ÀÁö ¾Ê°í transformÀ¸·Î °è»êµÈ °ªÀ» °¡Á®¿Ã °ÍÀÓ
+    // S, R, T ë”°ë¡œ ê°€ì ¸ì˜¤ì§€ ì•Šê³  transformìœ¼ë¡œ ê³„ì‚°ëœ ê°’ì„ ê°€ì ¸ì˜¬ ê²ƒì„
     ModelClip* clip = clips[clipIndex];
 
     for (UINT f = 0; f < clip->frameCount; f++)
@@ -284,16 +284,16 @@ void ModelAnimator::UpdateFrame()
 
     motion.curFrame.time += DELTA_TIME * clip->ticksPerSecond * motion.curFrame.speed;
 
-    if (motion.curFrame.time >= 1.f) // 1 ÇÁ·¹ÀÓÀÌ Áö³µÀ½
+    if (motion.curFrame.time >= 1.f) // 1 í”„ë ˆì„ì´ ì§€ë‚¬ìŒ
     {
         if (motion.curFrame.frameIndex == 0)
-            clip->Init(); // clip Äİ¹é map iterator beginÀ¸·Î ÃÊ±âÈ­
+            clip->Init(); // clip ì½œë°± map iterator beginìœ¼ë¡œ ì´ˆê¸°í™”
 
         float animRatio = (float)motion.curFrame.frameIndex / clip->frameCount;
 
-        clip->Execute(animRatio); // ºñÀ²¿¡ ¸Â´Â ÇÔ¼ö Æ÷ÀÎÅÍ°¡ ÀÖÀ¸¸é callBack
+        clip->Execute(animRatio); // ë¹„ìœ¨ì— ë§ëŠ” í•¨ìˆ˜ í¬ì¸í„°ê°€ ìˆìœ¼ë©´ callBack
 
-        motion.curFrame.frameIndex = (motion.curFrame.frameIndex + 1) % (clip->frameCount - 1); // ¸¶Áö¸· ÇÁ·¹ÀÓÀº ¾²Áö ¾ÊÀ½ (Tweening¶§¹®¿¡ ¼öÁ¤)
+        motion.curFrame.frameIndex = (motion.curFrame.frameIndex + 1) % (clip->frameCount - 1); // ë§ˆì§€ë§‰ í”„ë ˆì„ì€ ì“°ì§€ ì•ŠìŒ (Tweeningë•Œë¬¸ì— ìˆ˜ì •)
         motion.curFrame.time = 0.f;
     }
 
@@ -303,7 +303,7 @@ void ModelAnimator::UpdateFrame()
 
     clip = clips[motion.nextFrame.clipIndex];
 
-    if (motion.tweenTime >= 1.f) // ´ÙÀ½ motionÀ¸·Î ÀüÈ¯
+    if (motion.tweenTime >= 1.f) // ë‹¤ìŒ motionìœ¼ë¡œ ì „í™˜
     {
         motion.curFrame             = motion.nextFrame;
         motion.tweenTime            = 0.f;
@@ -312,7 +312,7 @@ void ModelAnimator::UpdateFrame()
         motion.nextFrame.frameIndex = 0;
         motion.nextFrame.time       = 0.f;
     }
-    else // Tweening ÇÏ´Â ¼ø°£
+    else // Tweening í•˜ëŠ” ìˆœê°„
     {
         motion.nextFrame.time += DELTA_TIME * clip->ticksPerSecond * motion.nextFrame.speed;
 

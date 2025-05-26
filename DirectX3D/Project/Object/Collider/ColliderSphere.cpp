@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "ColliderSphere.h"
 
 
@@ -58,7 +58,7 @@ bool ColliderSphere::Collision(IN Ray ray, OUT HitResult* hitResult)
 	Vector3 P = this->globalPosition;
 	Vector3 X = O - P;
 
-	// ÀÚ±âÀÚ½Å Dot product = ±æÀÌÀÇ Á¦°ö
+	// ìê¸°ìì‹  Dot product = ê¸¸ì´ì˜ ì œê³±
 	float a = Vector3::Dot(D, D);
 	float b = 2 * Vector3::Dot(D, X);
 	float c = Vector3::Dot(X, X) - Radius() * Radius();

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 class SceneManager : public Singleton<SceneManager>
 {
 	friend class Singleton;

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 class InstancingScene : public Scene
 {
 
@@ -25,7 +25,7 @@ private:
 
 	const UINT COUNT = 50;
 
-	Quad* quad{}; // °ø¿ë quad ÇÏ³ª
+	Quad* quad{}; // ê³µìš© quad í•˜ë‚˜
 
 	vector<InstanceData> instanceData{};
 

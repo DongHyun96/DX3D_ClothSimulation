@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 class ModelAnimationScene : public Scene
 {
 public:

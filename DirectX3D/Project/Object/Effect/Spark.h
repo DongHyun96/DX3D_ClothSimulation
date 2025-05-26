@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 class Spark : public Particle
 {
 private:
@@ -29,7 +29,7 @@ private:
 
 	vector<VertexParticle> vertices{};
 
-	FloatValueBuffer* valueBuffer{};		// ½ÇÁúÀûÀ¸·Î °ª µÎ°³¸¦ »ç¿ëÇÒ °ÍÀÓ(time, duration)
+	FloatValueBuffer* valueBuffer{};		// ì‹¤ì§ˆì ìœ¼ë¡œ ê°’ ë‘ê°œë¥¼ ì‚¬ìš©í•  ê²ƒì„(time, duration)
 	FloatValueBuffer* startColorBuffer{};
 	FloatValueBuffer* endColorBuffer{};
 

@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "BlendState.h"
 
 
@@ -26,8 +26,8 @@ BlendState::~BlendState()
 
 void BlendState::SetState()
 {
-	// Sample Mask -> 0xff ff ff ff / RGBA °¢ °ªÀÇ sampleÀ» Çã¿ëÇÏ´ÂÁö ¾ÈÇÏ´ÂÁö false, true (0, 1)
-	// ±×³É ´Ù Çã¿ëÇÑ´Ù°í º¸¸é µÊ
+	// Sample Mask -> 0xff ff ff ff / RGBA ê° ê°’ì˜ sampleì„ í—ˆìš©í•˜ëŠ”ì§€ ì•ˆí•˜ëŠ”ì§€ false, true (0, 1)
+	// ê·¸ëƒ¥ ë‹¤ í—ˆìš©í•œë‹¤ê³  ë³´ë©´ ë¨
 	DC->OMSetBlendState(state, nullptr, 0xFFFFFFFF);
 }
 

@@ -1,19 +1,19 @@
-#pragma once
+ï»¿#pragma once
 
 namespace Utility
 {
 	wstring GetExtension(wstring file);
 
-	// ÁÖÀÇ - ÇÑ±ÛÀº ±úÁú °Í
+	// ì£¼ì˜ - í•œê¸€ì€ ê¹¨ì§ˆ ê²ƒ
 	string ToString(wstring str);
 	wstring ToWString(string str);
 
 	bool StartsWith(string str, string start);
 	bool StartsWith(wstring str, wstring start);
 
-	string GetFileName(string file); // ÆÄÀÏ°ú È®ÀåÀÚ ÀÌ¸§¸¸
+	string GetFileName(string file); // íŒŒì¼ê³¼ í™•ì¥ì ì´ë¦„ë§Œ
 
-	void CreateFolder(string file); // Æ¯Á¤ °æ·Î¸¦ ³Ö¾î ÇØ´ç °æ·Î¿¡ Æú´õ°¡ ¾øÀ¸¸é Æú´õ¸¦ ¸¸µê
+	void CreateFolder(string file); // íŠ¹ì • ê²½ë¡œë¥¼ ë„£ì–´ í•´ë‹¹ ê²½ë¡œì— í´ë”ê°€ ì—†ìœ¼ë©´ í´ë”ë¥¼ ë§Œë“¦
 
 	vector<string> SplitString(string origin, string token);
 

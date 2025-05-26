@@ -1,8 +1,8 @@
-#pragma once
+ï»¿#pragma once
 class Spring
 {
 public:
-	Spring(); // Instancing¿ë ±âº» »ı¼ºÀÚ
+	Spring(); // Instancingìš© ê¸°ë³¸ ìƒì„±ì
 	Spring(RigidSphere* p1, RigidSphere* p2, float k = DEFAULT_K_SPRING, Vector4 color = {1, 0, 0, 1});
 	~Spring();
 
@@ -32,6 +32,6 @@ private:
 	RigidSphere* particle2{};
 
 	float r{}; 
-	float k{}; // ½ºÇÁ¸µ »ó¼ö
+	float k{}; // ìŠ¤í”„ë§ ìƒìˆ˜
 
 };

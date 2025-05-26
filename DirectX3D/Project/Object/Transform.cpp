@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Transform.h"
 
 UINT Transform::index = 0;
@@ -106,14 +106,14 @@ void Transform::UpdateWorldMatrix()
 	up		= Vector3(fWorld._21, fWorld._22, fWorld._23).GetNormalized();
 	forward = Vector3(fWorld._31, fWorld._32, fWorld._33).GetNormalized();
 
-	// Global Transform ±¸ÇÏ±â
+	// Global Transform êµ¬í•˜ê¸°
 
 	XMVECTOR outS, outR, outT;
 
 	XMMatrixDecompose(&outS, &outR, &outT, world);
 
 	globalScale		= outS;
-	globalRotation	= outR; // ÁÖÀÇ outRÀº QuaternionÀÇ °ª (¿ÀÀÏ·¯ °¢ÀÌ ¾Æ´Ô)
+	globalRotation	= outR; // ì£¼ì˜ outRì€ Quaternionì˜ ê°’ (ì˜¤ì¼ëŸ¬ ê°ì´ ì•„ë‹˜)
 	globalPosition	= outT;
 
 	isCustomRotSet = false;

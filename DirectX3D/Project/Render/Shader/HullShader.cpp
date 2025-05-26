@@ -1,4 +1,4 @@
-#include "Framework.h"
+﻿#include "Framework.h"
 #include "HullShader.h"
 
 HullShader::HullShader(wstring file)

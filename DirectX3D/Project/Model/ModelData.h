@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 typedef VertexTextureNormalTangentBlend ModelVertex;
 
@@ -66,7 +66,7 @@ struct KeyTransform
 	Vector3 translation{};
 };
 
-// 1Â÷¿ø ¹è¿­ data | Æ¯Á¤ bone¿¡ ÇØ´çµÇ´Â keyFrame
+// 1ì°¨ì› ë°°ì—´ data | íŠ¹ì • boneì— í•´ë‹¹ë˜ëŠ” keyFrame
 struct KeyFrame
 {
 	string boneName{};
@@ -89,7 +89,7 @@ struct Clip
 
 	float ticksPerSecond{};
 
-	vector<KeyFrame*> keyFrame{}; // 2Â÷¿ø ¹è¿­
+	vector<KeyFrame*> keyFrame{}; // 2ì°¨ì› ë°°ì—´
 };
 
 struct ClipTransform

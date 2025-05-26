@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "TextureCube.h"
 
 
@@ -56,8 +56,8 @@ void TextureCube::SetShader(wstring file)
 void TextureCube::CreateQuads()
 {
 	// STL : resize, reserve
-	// resize - ¸Ş¸ğ¸®¸¦ ÇØ´ç »çÀÌÁî¸¸Å­ ÇÒ´çÇÏ°í °¢ Ä­À» ÃÊ±âÈ­ÇØÁÜ
-	// reserve - ½ÇÁ¦ ¸Ş¸ğ¸® °ø°£ÀÌ ÀâÈ÷´Â °ÍÀÌ ¾Æ´Ô
+	// resize - ë©”ëª¨ë¦¬ë¥¼ í•´ë‹¹ ì‚¬ì´ì¦ˆë§Œí¼ í• ë‹¹í•˜ê³  ê° ì¹¸ì„ ì´ˆê¸°í™”í•´ì¤Œ
+	// reserve - ì‹¤ì œ ë©”ëª¨ë¦¬ ê³µê°„ì´ ì¡íˆëŠ” ê²ƒì´ ì•„ë‹˜
 
 	quads.resize(6);
 

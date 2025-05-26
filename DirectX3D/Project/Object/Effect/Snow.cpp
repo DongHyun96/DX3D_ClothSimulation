@@ -1,4 +1,4 @@
-#include "Framework.h"
+﻿#include "Framework.h"
 #include "Snow.h"
 
 Snow::Snow(wstring file)

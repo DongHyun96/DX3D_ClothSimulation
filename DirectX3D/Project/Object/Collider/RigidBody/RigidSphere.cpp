@@ -1,4 +1,4 @@
-#include "Framework.h"
+Ôªø#include "Framework.h"
 #include "RigidSphere.h"
 
 RigidSphere::RigidSphere(float mass, float radius, UINT stackCount, UINT sliceCount)
@@ -33,10 +33,10 @@ bool RigidSphere::Collision(const Quad* other)
 
 bool RigidSphere::Collision(const ColliderSphere* other)
 {
-	// z fighting ∂ßπÆø° radiusø° ø©¿Ø∏¶ µ“
+	// z fighting ÎïåÎ¨∏Ïóê radiusÏóê Ïó¨Ïú†Î•º Îë†
 	float otherRadius = other->Radius() + SPHERE_COLLISION_MARGIN;
 
-	// pos = ColliderSphere∑Œ ∫Œ≈Õ RigidSphere∑Œ «‚«œ¥¬ πÊ«‚ø° ∏¬¥Í¥¬ ColliderSphere¿ß¿« ¡°
+	// pos = ColliderSphereÎ°ú Î∂ÄÌÑ∞ RigidSphereÎ°ú Ìñ•ÌïòÎäî Î∞©Ìñ•Ïóê ÎßûÎãøÎäî ColliderSphereÏúÑÏùò Ï†ê
 	Vector3 pos = other->GetGlobalPosition() + (this->globalPosition - other->GetGlobalPosition()).GetNormalized() * otherRadius;
 	Vector3 n	= (this->globalPosition - other->GetGlobalPosition()).GetNormalized();
 
@@ -85,10 +85,10 @@ void RigidSphere::ResolveContact(const Quad* other, const UINT& timeStep)
 
 void RigidSphere::ResolveCollision(const ColliderSphere* other)
 {
-	// z fighting πÆ¡¶∑Œ Ω«¡˙¿˚¿Œ radiusø° æ‡∞£¿« margin¿ª ¥ı«‘
+	// z fighting Î¨∏Ï†úÎ°ú Ïã§ÏßàÏ†ÅÏù∏ radiusÏóê ÏïΩÍ∞ÑÏùò marginÏùÑ ÎçîÌï®
 	float otherRadius = other->Radius() + SPHERE_COLLISION_MARGIN;
 
-	// other sphere ¿ßƒ°∑Œ∫Œ≈Õ ≥™ ¿⁄Ω≈¿∏∑Œ «‚«œ¥¬ πÊ«‚
+	// other sphere ÏúÑÏπòÎ°úÎ∂ÄÌÑ∞ ÎÇò ÏûêÏã†ÏúºÎ°ú Ìñ•ÌïòÎäî Î∞©Ìñ•
 	Vector3 n = (this->globalPosition - other->GetGlobalPosition()).GetNormalized();
 
 	// Velocity update
@@ -96,7 +96,7 @@ void RigidSphere::ResolveCollision(const ColliderSphere* other)
 	Vector3 vT	= velocity - vN;
 	velocity	= vT - vN * COR;
 	
-	// Translation ∫∏¡§
+	// Translation Î≥¥Ï†ï
 	Vector3 contactVec = otherRadius * n;
 	Vector3 contactPos = other->GetGlobalPosition() + contactVec;
 	this->translation -= Vector3::Dot(this->translation - contactPos, n) * n;
@@ -114,7 +114,7 @@ void RigidSphere::ResolveCollision(const Quad* other)
 	Vector3 vT = velocity - vN;
 	velocity   = vT - vN * COR;
 
-	// Translation ∫∏¡§
+	// Translation Î≥¥Ï†ï
 	translation -= Vector3::Dot(translation - other->GetGlobalPosition(), other->GetNormal()) * other->GetNormal();
 }
 
@@ -122,7 +122,7 @@ void RigidSphere::ResolveCollision(const Terrain* terrain)
 {
 }
 
-void RigidSphere::SolveCurrentPosition(const UINT& timeStep)
+void RigidSphere::SolveCurrentPosition(const UINT& timeStep, const DifferentialEquationSolver& SolverType)
 {
 	if (fixed)
 	{
@@ -131,21 +131,29 @@ void RigidSphere::SolveCurrentPosition(const UINT& timeStep)
 	}
 
 	Vector3 forcePerMass = force / mass;
-	float dt			 = DELTA_TIME / timeStep;
+	float dt = DELTA_TIME / timeStep;
 
-	// Euler integration
-	// translation(t + dt) = translation(t) + curVelocity * dt;
-	// dt∏¶ √÷¥Î«— ¡Ÿ¿”¿∏∑ŒΩ·(timeStep¿∏∑Œ) ø¿¬˜ ¡Ÿ¿Ã±‚ Ω√µµ
-	//velocity	+= forcePerMass * dt;
-	//translation += velocity     * dt;
-
-	// Runge-Kutta integration
-	Vector3 k1 = forcePerMass * dt;
-	Vector3 k2 = (forcePerMass + 0.5f * k1) * dt;
-	Vector3 k3 = (forcePerMass + 0.5f * k2) * dt;
-	Vector3 k4 = (forcePerMass + k3) * dt;
+	switch (SolverType)
+	{
+	case EULER:
+		/*Euler integration
+		translation(t + dt) = translation(t) + curVelocity * dt;
+		dtÎ•º ÏµúÎåÄÌïú Ï§ÑÏûÑÏúºÎ°úÏç®(timeStepÏúºÎ°ú) Ïò§Ï∞® Ï§ÑÏù¥Í∏∞ ÏãúÎèÑ*/
+		velocity	+= forcePerMass * dt;
+		translation += velocity     * dt;
+		break;
+	case RUNGE_KUTTA:
+	{
+		// Runge-Kutta integration
+		Vector3 k1 = forcePerMass * dt;
+		Vector3 k2 = (forcePerMass + 0.5f * k1) * dt;
+		Vector3 k3 = (forcePerMass + 0.5f * k2) * dt;
+		Vector3 k4 = (forcePerMass + k3) * dt;
 	
-	velocity	+= (k1 + 2.f * k2 + 2.f * k3 + k4) / 6.f;
-	translation += velocity * dt;
-
+		velocity	+= (k1 + 2.f * k2 + 2.f * k3 + k4) / 6.f;
+		translation += velocity * dt;
+	}
+		break;
+	default: break;
+	}
 }

@@ -1,4 +1,4 @@
-#include "Framework.h"
+﻿#include "Framework.h"
 #include "GameMath.h"
 
 float GameMath::Clamp(const float& value, const float& minValue, const float& maxValue)

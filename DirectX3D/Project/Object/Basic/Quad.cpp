@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Quad.h"
 
 Quad::Quad(Vector2 size)
@@ -66,7 +66,7 @@ void Quad::CreateMesh()
 	};
 
 	// Create Normal Vector
-	for (UINT i = 0; i < indices.size() / 3; i++) // Æú¸®°ïÀÇ °³¼ö¸¸Å­ normal »ý¼º
+	for (UINT i = 0; i < indices.size() / 3; i++) // í´ë¦¬ê³¤ì˜ ê°œìˆ˜ë§Œí¼ normal ìƒì„±
 	{
 		UINT index0 = indices[i * 3 + 0];
 		UINT index1 = indices[i * 3 + 1];
@@ -77,7 +77,7 @@ void Quad::CreateMesh()
 
 		Vector3 normal = Vector3::Cross(v01, v02).GetNormalized();
 
-		// ÃßÈÄ Æò±ÕÀ» ³¿
+		// ì¶”í›„ í‰ê· ì„ ëƒ„
 		vertices[index0].normal += normal;
 		vertices[index1].normal += normal;
 		vertices[index2].normal += normal;
@@ -123,7 +123,7 @@ void Quad::CalculateTangent()
 		vertices[index2].tangent += tangent;
 	}
 
-	// Tangent±æÀÌ º¸Á¤
+	// Tangentê¸¸ì´ ë³´ì •
 	for (VertexType& vertex : vertices)
 	{
 		Vector3 T = vertex.tangent;

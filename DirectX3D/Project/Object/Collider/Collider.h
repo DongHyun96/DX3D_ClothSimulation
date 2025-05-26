@@ -1,13 +1,13 @@
-#pragma once
+ï»¿#pragma once
 
 
 struct Ray
 {
-	Vector3 origin{};	 // ½ÃÀÛÁ¡
-	Vector3 direction{}; // ¹æÇâ
+	Vector3 origin{};	 // ì‹œì‘ì 
+	Vector3 direction{}; // ë°©í–¥
 };
 
-struct HitResult // RayÀÇ Ãæµ¹Á¤º¸
+struct HitResult // Rayì˜ ì¶©ëŒì •ë³´
 {
 	Vector3 impactPoint{};
 	float	distance{};

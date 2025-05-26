@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "ModelExporter.h"
 
 
@@ -141,7 +141,7 @@ void ModelExporter::ReadMesh(aiNode* node)
 
         UINT startVertex = mesh->vertices.size();
 
-        ///////////////////////////////// -> Animation °ü·Ã ºÎºÐ
+        ///////////////////////////////// -> Animation ê´€ë ¨ ë¶€ë¶„
         vector<VertexWeights> vertexWeights;
         vertexWeights.resize(srcMesh->mNumVertices);
 
@@ -267,7 +267,7 @@ void ModelExporter::ReadNode(aiNode* node, int index, int parent)
 
     aiMatrix4x4 aiMatrix = node->mTransformation.Transpose();
 
-    // float ¹è¿­ÀÇ ÁÖ¼Ò¸¦ ³ÖÀ¸¸é Matrix·Î º¯È¯ÇØÁÖ´Â Matrix»ý¼ºÀÚ
+    // float ë°°ì—´ì˜ ì£¼ì†Œë¥¼ ë„£ìœ¼ë©´ Matrixë¡œ ë³€í™˜í•´ì£¼ëŠ” Matrixìƒì„±ìž
     Matrix matrix = Matrix(aiMatrix[0]);
 
     nodeData->transform = matrix;
@@ -514,12 +514,12 @@ wstring ModelExporter::CreateTexture(string file)
     if (texture == nullptr)
         return L"";
     
-    if (texture->mHeight < 1) // Texture ÇÑÀå
+    if (texture->mHeight < 1) // Texture í•œìž¥
     {
         BinaryWriter data(ToWString(path));
         data.WriteData(texture->pcData, texture->mWidth);
     }
-    else // ¿©·¯Àå (Shader-Texture2DArrayÇü½ÄÀ¸·Î µÇ¾îÀÖÀ¸¸é ¿©±â·Î µé¾î¿È)
+    else // ì—¬ëŸ¬ìž¥ (Shader-Texture2DArrayí˜•ì‹ìœ¼ë¡œ ë˜ì–´ìžˆìœ¼ë©´ ì—¬ê¸°ë¡œ ë“¤ì–´ì˜´)
     {
         Image image;
         image.width      = texture->mWidth;

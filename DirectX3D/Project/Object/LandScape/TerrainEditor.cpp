@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "TerrainEditor.h"
 
 
@@ -81,7 +81,7 @@ void TerrainEditor::ComputePicking()
 
 	UINT x = ceilf(polygonCount / 64.f);
 
-	DC->Dispatch(x, 1, 1); // dispatch - º¸³»´Ù, ¾Ë¸®´Ù -> Compute shaderÀÇ draw call
+	DC->Dispatch(x, 1, 1); // dispatch - ë³´ë‚´ë‹¤, ì•Œë¦¬ë‹¤ -> Compute shaderì˜ draw call
 
 	structuredBuffer->Copy(output.data(), sizeof(OutputDesc) * polygonCount);
 
@@ -170,7 +170,7 @@ void TerrainEditor::Update()
 		switch (type)
 		{
 		case HEIGHT:
-			// Normal°ú Tangentµµ ¼öÁ¤µÇ±â ¶§¹®¿¡ ´Ù½Ã±İ °è»ê -> ³ôÀÌ adjustÇÒ ¶§¿¡´Â normal°ú tangent¸¦ Àç°è»ê ÇÏÁö ¾ÊÀ½
+			// Normalê³¼ Tangentë„ ìˆ˜ì •ë˜ê¸° ë•Œë¬¸ì— ë‹¤ì‹œê¸ˆ ê³„ì‚° -> ë†’ì´ adjustí•  ë•Œì—ëŠ” normalê³¼ tangentë¥¼ ì¬ê³„ì‚° í•˜ì§€ ì•ŠìŒ
 			if (KEY_PRESS(VK_LBUTTON))
 				AdjustHeight();
 
@@ -251,7 +251,7 @@ void TerrainEditor::CreateMesh()
 	} 
 
 	// Create Normal Vector
-	for (UINT i = 0; i < indices.size() / 3; i++) // Æú¸®°ïÀÇ °³¼ö¸¸Å­ normal »ı¼º
+	for (UINT i = 0; i < indices.size() / 3; i++) // í´ë¦¬ê³¤ì˜ ê°œìˆ˜ë§Œí¼ normal ìƒì„±
 	{
 		UINT index0 = indices[i * 3 + 0];
 		UINT index1 = indices[i * 3 + 1];
@@ -262,7 +262,7 @@ void TerrainEditor::CreateMesh()
 
 		Vector3 normal = Vector3::Cross(v01, v02).GetNormalized();
 
-		// ÃßÈÄ Æò±ÕÀ» ³¿
+		// ì¶”í›„ í‰ê· ì„ ëƒ„
 		vertices[index0].normal += normal;
 		vertices[index1].normal += normal;
 		vertices[index2].normal += normal;
@@ -296,7 +296,7 @@ void TerrainEditor::AdjustHeight()
 
 			vertex.pos.y = Clamp(vertex.pos.y, 0.f, MAX_HEIGHT);
 
-			// NormalÀÌ ¹Ù²î±â ¶§¹®¿¡ ÃÊ±âÈ­ ÇÑ µÚ, UpdateMesh¿¡¼­ Normal ´Ù½Ã±İ ¼öÁ¤
+			// Normalì´ ë°”ë€Œê¸° ë•Œë¬¸ì— ì´ˆê¸°í™” í•œ ë’¤, UpdateMeshì—ì„œ Normal ë‹¤ì‹œê¸ˆ ìˆ˜ì •
 			vertex.normal = Vector3(0, 1, 0);
 			vertex.tangent = Vector3(1, 0, 0);
 		}
@@ -364,7 +364,7 @@ void TerrainEditor::CalculateTangent()
 		vertices[index2].tangent += tangent;
 	}
 
-	// Tangent±æÀÌ º¸Á¤
+	// Tangentê¸¸ì´ ë³´ì •
 	for (VertexType& vertex : vertices)
 	{
 		Vector3 T = vertex.tangent;
@@ -533,7 +533,7 @@ void TerrainEditor::LoadAlphaMap()
 
 void TerrainEditor::UpdateMesh()
 {
-	for (UINT i = 0; i < indices.size() / 3; i++) // Æú¸®°ïÀÇ °³¼ö¸¸Å­ normal »ı¼º
+	for (UINT i = 0; i < indices.size() / 3; i++) // í´ë¦¬ê³¤ì˜ ê°œìˆ˜ë§Œí¼ normal ìƒì„±
 	{
 		// Update Normal
 		UINT index0 = indices[i * 3 + 0];
@@ -545,7 +545,7 @@ void TerrainEditor::UpdateMesh()
 
 		Vector3 normal = Vector3::Cross(v01, v02).GetNormalized();
 
-		// ÃßÈÄ Æò±ÕÀ» ³¿
+		// ì¶”í›„ í‰ê· ì„ ëƒ„
 		vertices[index0].normal += normal;
 		vertices[index1].normal += normal;
 		vertices[index2].normal += normal;
@@ -582,7 +582,7 @@ void TerrainEditor::UpdateMesh()
 		vertices[index2].tangent += tangent;
 	}
 
-	// Tangent±æÀÌ º¸Á¤
+	// Tangentê¸¸ì´ ë³´ì •
 	for (VertexType& vertex : vertices)
 	{
 		Vector3 T = vertex.tangent;

@@ -1,4 +1,4 @@
-#include "Framework.h"
+﻿#include "Framework.h"
 #include "BinaryWriter.h"
 
 BinaryWriter::BinaryWriter(string path)

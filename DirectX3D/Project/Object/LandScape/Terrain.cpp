@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Terrain.h"
 
 
@@ -58,12 +58,12 @@ float Terrain::GetHeight(Vector3 position)
 
 	if (u + v <= 1.f)
 	{
-		// 0, 1, 2 »ç¿ë
+		// 0, 1, 2 ì‚¬ìš©
 		result = vertex[0] + (vertex[2] - vertex[0]) * u + (vertex[1] - vertex[0]) * v;
 	}
 	else
 	{
-		// 1, 2, 3 »ç¿ë
+		// 1, 2, 3 ì‚¬ìš©
 		result = vertex[3] + (vertex[2] - vertex[3]) * u + (vertex[1] - vertex[3]) * v;
 	}
 
@@ -126,7 +126,7 @@ void Terrain::CreateMesh()
 	}
 
     // Create Normal Vector
-    for (UINT i = 0; i < indices.size() / 3; i++) // Æú¸®°ïÀÇ °³¼ö¸¸Å­ normal »ý¼º
+    for (UINT i = 0; i < indices.size() / 3; i++) // í´ë¦¬ê³¤ì˜ ê°œìˆ˜ë§Œí¼ normal ìƒì„±
     {
         UINT index0 = indices[i * 3 + 0];
         UINT index1 = indices[i * 3 + 1];
@@ -137,7 +137,7 @@ void Terrain::CreateMesh()
 
         Vector3 normal = Vector3::Cross(v01, v02).GetNormalized();
 
-        // ÃßÈÄ Æò±ÕÀ» ³¿
+        // ì¶”í›„ í‰ê· ì„ ëƒ„
         vertices[index0].normal += normal;
         vertices[index1].normal += normal;
         vertices[index2].normal += normal;
@@ -182,7 +182,7 @@ void Terrain::CalculateTangent()
 		vertices[index2].tangent += tangent;
 	}
 
-	// Tangent±æÀÌ º¸Á¤
+	// Tangentê¸¸ì´ ë³´ì •
 	for (VertexType& vertex : vertices)
 	{
 		Vector3 T = vertex.tangent;

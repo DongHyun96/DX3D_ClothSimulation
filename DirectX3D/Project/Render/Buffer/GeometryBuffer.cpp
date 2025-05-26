@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "GeometryBuffer.h"
 
 
@@ -21,7 +21,7 @@ GeometryBuffer::GeometryBuffer()
 
 		Texture* texture = Texture::Add(L"G" + to_wstring(i), srvs[i]);
 		quads[i]->GetMaterial()->SetDiffuseMap(texture);
-		quads[i]->Update(); // À§Ä¡¸¸ ÇÑ¹ø ¼ÂÆÃÇØÁÖ¸é µÊ
+		quads[i]->Update(); // ìœ„ì¹˜ë§Œ í•œë²ˆ ì…‹íŒ…í•´ì£¼ë©´ ë¨
 	}
 }
 

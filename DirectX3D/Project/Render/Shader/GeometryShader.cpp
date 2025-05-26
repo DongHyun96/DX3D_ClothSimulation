@@ -1,11 +1,11 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "GeometryShader.h"
 
 GeometryShader::GeometryShader(wstring file)
 {
     DWORD flags = D3DCOMPILE_ENABLE_STRICTNESS | D3DCOMPILE_DEBUG;
 
-    // ¿©±â¿¡ GS°¡ shaderÀÇ ÁøÀÔÁ¡ ÇÔ¼ö ÀÌ¸§
+    // ì—¬ê¸°ì— GSê°€ shaderì˜ ì§„ìž…ì  í•¨ìˆ˜ ì´ë¦„
     D3DCompileFromFile(file.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, "GS", "gs_5_0", flags, 0, &blob, nullptr);
 
     DEVICE->CreateGeometryShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, &geometryShader);

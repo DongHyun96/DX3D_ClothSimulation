@@ -1,8 +1,8 @@
-#pragma once
+ï»¿#pragma once
 
-/*ÁÖÀÇ -
+/*ì£¼ì˜ -
 
-ÁÖ¼Ò°ªÀº ÀúÀå x
+ì£¼ì†Œê°’ì€ ì €ì¥ x
 
 */
 class BinaryWriter

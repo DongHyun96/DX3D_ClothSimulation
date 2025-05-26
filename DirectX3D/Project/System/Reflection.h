@@ -1,8 +1,8 @@
-#pragma once
+ï»¿#pragma once
 class Reflection
 {
 public:
-	Reflection(Transform* target); // ¾î¶² °É ¹Ý»ç½ÃÅ³Áö ÁöÁ¤
+	Reflection(Transform* target); // ì–´ë–¤ ê±¸ ë°˜ì‚¬ì‹œí‚¬ì§€ ì§€ì •
 	~Reflection();
 
 	void Update();

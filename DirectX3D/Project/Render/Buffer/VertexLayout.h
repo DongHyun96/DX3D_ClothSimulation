@@ -1,4 +1,4 @@
-#pragma once
+Ôªø#pragma once
 
 struct Vertex
 {
@@ -77,7 +77,7 @@ struct VertexTextureNormalTangentBlend
     Vector3 normal{};
     Vector3 tangent{};
 
-    // Bone ∞¸∑√ µ•¿Ã≈Õ
+    // Bone Í¥ÄÎ†® Îç∞Ïù¥ÌÑ∞
     int     indices[4]{};
     float   weights[4]{};
     

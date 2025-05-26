@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Material.h"
 
 UINT Material::index{};
@@ -21,7 +21,7 @@ Material::Material(wstring file)
 
 Material::~Material()
 {
-	// Shader¿¡¼­ delete Ã³¸®
+	// Shaderì—ì„œ delete ì²˜ë¦¬
 	delete buffer;
 }
 

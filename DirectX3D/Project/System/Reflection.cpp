@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Reflection.h"
 
 UINT Reflection::index{};
@@ -17,7 +17,7 @@ Reflection::Reflection(Transform* target)
 	Texture* texture = Texture::Add(L"Reflection_" + to_wstring(index++), renderTarget->GetSRV());
 
 	quad->GetMaterial()->SetDiffuseMap(texture);
-	quad->Update(); // µð¹ö±ë¿ëÀÌ¶ó ÃÖÃÊ ¾÷µ¥ÀÌÆ® ÇÑ¹ø¸¸ µ¹¸²
+	quad->Update(); // ë””ë²„ê¹…ìš©ì´ë¼ ìµœì´ˆ ì—…ë°ì´íŠ¸ í•œë²ˆë§Œ ëŒë¦¼
 }
 
 Reflection::~Reflection()
@@ -51,7 +51,7 @@ void Reflection::SetPreRender()
 
 void Reflection::SetRender()
 {
-	// ¹Ý»ç¿ë Ä«¸Þ¶ó¸¦ µû·Î view MatÀ» ¼¼ÆÃÇØ¼­ ³Ñ°ÜÁÜ
+	// ë°˜ì‚¬ìš© ì¹´ë©”ë¼ë¥¼ ë”°ë¡œ view Matì„ ì„¸íŒ…í•´ì„œ ë„˜ê²¨ì¤Œ
 	camera->GetViewBuffer()->SetVSBuffer(10);
 
 	DC->PSSetShaderResources(10, 1, &renderTarget->GetSRV());

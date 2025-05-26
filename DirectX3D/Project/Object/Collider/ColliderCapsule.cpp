@@ -1,4 +1,4 @@
-#include "Framework.h"
+﻿#include "Framework.h"
 #include "ColliderCapsule.h"
 
 ColliderCapsule::ColliderCapsule(float radius, float height, UINT sliceCount, UINT stackCount)

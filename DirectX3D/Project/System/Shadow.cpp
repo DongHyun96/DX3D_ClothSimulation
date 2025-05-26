@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Shadow.h"
 
 
@@ -16,7 +16,7 @@ Shadow::Shadow(UINT width, UINT height)
 	Texture* texture = Texture::Add(L"Shadow_" + to_wstring(index++), renderTarget->GetSRV());
 
 	quad->GetMaterial()->SetDiffuseMap(texture);
-	quad->Update(); // µð¹ö±ë¿ëÀÌ¶ó ÃÖÃÊ ¾÷µ¥ÀÌÆ® ÇÑ¹ø¸¸ µ¹¸²
+	quad->Update(); // ë””ë²„ê¹…ìš©ì´ë¼ ìµœì´ˆ ì—…ë°ì´íŠ¸ í•œë²ˆë§Œ ëŒë¦¼
 
 	viewBuffer = new ViewBuffer;
 	projBuffer = new MatrixBuffer;
@@ -54,7 +54,7 @@ void Shadow::PostRender()
 
 void Shadow::SetViewProjection()
 {
-	// 0¹ø light ÇÏ³ª¸¸ shadow °è»ê
+	// 0ë²ˆ light í•˜ë‚˜ë§Œ shadow ê³„ì‚°
 	LightData& data = ENVIRONMENT->GetLightBuffer()->data.lights[0];
 
 	Matrix view = XMMatrixLookAtLH(data.position, Vector3(0, 0, 0), Vector3(0, 1, 0));

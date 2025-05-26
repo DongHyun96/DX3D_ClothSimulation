@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 class ModelAnimatorInstancing : public ModelAnimator
 {
 
@@ -20,12 +20,12 @@ protected:
 		}
 
 		float takeTime = 0.2f;
-		float tweenTime{}; // clip°ú clip »çÀÌÀÇ tween time
+		float tweenTime{}; // clipê³¼ clip ì‚¬ì´ì˜ tween time
 		float runningTime{};
 		float padding{};
 
 		Frame curFrame{};
-		Frame nextFrame{}; // ´ÙÀ½ ¸ğ¼ÇÀÇ Frame
+		Frame nextFrame{}; // ë‹¤ìŒ ëª¨ì…˜ì˜ Frame
 	};
 
 	struct Data

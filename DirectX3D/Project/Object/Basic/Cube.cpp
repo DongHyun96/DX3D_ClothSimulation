@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Cube.h"
 
 
@@ -20,7 +20,7 @@ void Cube::Render()
 void Cube::CreateMesh()
 {
     // Create Vertex
-   // Back-Face Culling (cull ¾ø¾Ö´Ù, Àı´ÜÇÏ´Ù, µµÅÂ½ÃÅ°´Ù)
+   // Back-Face Culling (cull ì—†ì• ë‹¤, ì ˆë‹¨í•˜ë‹¤, ë„íƒœì‹œí‚¤ë‹¤)
     vertices =
     {
         {XMFLOAT3(-0.5f, +0.5f, -0.5f), color},
@@ -62,7 +62,7 @@ void Cube::CreateMesh()
     };
 
     // Create Normal Vector
-    for (UINT i = 0; i < indices.size() / 3; i++) // Æú¸®°ïÀÇ °³¼ö¸¸Å­ normal »ı¼º
+    for (UINT i = 0; i < indices.size() / 3; i++) // í´ë¦¬ê³¤ì˜ ê°œìˆ˜ë§Œí¼ normal ìƒì„±
     {
         UINT index0 = indices[i * 3 + 0];
         UINT index1 = indices[i * 3 + 1];
@@ -73,7 +73,7 @@ void Cube::CreateMesh()
 
         Vector3 normal = Vector3::Cross(v01, v02).GetNormalized();
         
-        // ÃßÈÄ Æò±ÕÀ» ³¿
+        // ì¶”í›„ í‰ê· ì„ ëƒ„
         vertices[index0].normal += normal;
         vertices[index1].normal += normal;
         vertices[index2].normal += normal;

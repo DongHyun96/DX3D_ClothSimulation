@@ -1,4 +1,4 @@
-#include "Framework.h"
+﻿#include "Framework.h"
 #include "Rain.h"
 
 Rain::Rain(wstring file)

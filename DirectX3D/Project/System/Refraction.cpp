@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Refraction.h"
 
 
@@ -17,7 +17,7 @@ Refraction::Refraction(wstring file)
 	Texture* texture = Texture::Add(L"Refraction_" + to_wstring(index++), renderTarget->GetSRV());
 
 	quad->GetMaterial()->SetDiffuseMap(texture);
-	quad->Update(); // µğ¹ö±ë¿ëÀÌ¶ó ÃÖÃÊ ¾÷µ¥ÀÌÆ® ÇÑ¹ø¸¸ µ¹¸²
+	quad->Update(); // ë””ë²„ê¹…ìš©ì´ë¼ ìµœì´ˆ ì—…ë°ì´íŠ¸ í•œë²ˆë§Œ ëŒë¦¼
 
 	buffer = new WaterBuffer;
 }

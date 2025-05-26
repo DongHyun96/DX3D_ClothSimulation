@@ -1,11 +1,11 @@
-#pragma once
+ï»¿#pragma once
 class Texture
 {
 public:
 	Texture(ID3D11ShaderResourceView* srv, ScratchImage& image);
 	~Texture();
 
-	// ±âÁ¸ Add´Â fileÀ» ¹Ş¾Æ¿Í¼­ srv¸¦ ¸¸µé¾î ³¿
+	// ê¸°ì¡´ AddëŠ” fileì„ ë°›ì•„ì™€ì„œ srvë¥¼ ë§Œë“¤ì–´ ëƒ„
 	static Texture* Add(wstring file);
 	static Texture* Add(wstring file, wstring key);
 
@@ -16,7 +16,7 @@ public:
 	void PSSetShaderResources(UINT slot);
 	void DSSetShaderResources(UINT slot);
 
-	// Height mapÀ» ÀĞÀ» ¶§ »ç¿ë
+	// Height mapì„ ì½ì„ ë•Œ ì‚¬ìš©
 	vector<Vector4> ReadPixels();
 
 	Vector2 GetSize() const { return Vector2(image.GetMetadata().width, image.GetMetadata().height); }

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 class Cloth : public GameObject<VertexColorNormal>
 {
 	typedef VertexColorNormal VertexType;
@@ -42,7 +42,7 @@ private:
 	Vector4				 color{ 1, 0, 0, 1 };
 
 	vector<RigidSphere*> particles{};
-	vector<Spring*>		 springs{}; // Update¿ë springµé
+	vector<Spring*>		 springs{}; // Updateìš© springë“¤
 
 	const UINT			 FIXED_LEFT_IDX  = 0;
 	const UINT			 FIXED_RIGHT_IDX = 19;
@@ -53,17 +53,17 @@ private: // Instancing
 
 	UINT					instanceCount{};
 
-	Spring*					springBase{}; // Instancing °ø¿ë spring
+	Spring*					springBase{}; // Instancing ê³µìš© spring
 	vector<InstanceData>	instanceData{};
 	VertexBuffer*			instanceBuffer{};
 
 
-private: // Ãæµ¹ Ã³¸® °Ë»ç¿ë
+private: // ì¶©ëŒ ì²˜ë¦¬ ê²€ì‚¬ìš©
 
 	vector<Quad*>			quadObstacles{};
 	vector<ColliderSphere*> sphereObstacles{};
 	
-private: // ¹Ù¶÷ °ü·Ã
+private: // ë°”ëŒ ê´€ë ¨
 
 	bool		isWindActive{};
 	

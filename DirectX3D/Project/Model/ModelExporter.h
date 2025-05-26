@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 class ModelExporter
 {
@@ -19,14 +19,14 @@ private:
 	void ReadMesh(aiNode* node);
 	void WriteMesh();
 
-	// Animation °ü·Ã
+	// Animation ê´€ë ¨
 	void ReadNode(aiNode* node, int index, int parent);
 	void ReadBone(aiMesh* mesh, OUT vector<VertexWeights>& vertexWeights);
 
 	Clip* ReadClip(aiAnimation* animation);
 	void WriteClip(Clip* clip, string file);
 
-	// ¸ğµç bone¿¡ ¸ğµç frameº° transform(keyFrame)À» ÀĞÀ½
+	// ëª¨ë“  boneì— ëª¨ë“  frameë³„ transform(keyFrame)ì„ ì½ìŒ
 	void ReadKeyFrame(Clip* clip, aiNode* node, vector<ClipNode>& clipNodes);
 
 	////////////////////////////////////////////////////////////////////////////

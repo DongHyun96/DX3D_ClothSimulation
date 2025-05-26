@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 class StructuredBuffer
 {
 public:
@@ -17,7 +17,7 @@ public:
 
 	void UpdateInput(void* data);
 
-	ID3D11ShaderResourceView*&	GetSRV() { return srv; } // PointerÀÇ Reference
+	ID3D11ShaderResourceView*&	GetSRV() { return srv; } // Pointerì˜ Reference
 	ID3D11UnorderedAccessView*&	GetUAV() { return uav; }
 
 private:
@@ -25,7 +25,7 @@ private:
 	void CreateInput();
 	void CreateSRV();
 	void CreateOutput();
-	void CreateUAV(); // Unordered Access View ( GPU°¡ CPU¿¡ µ¥ÀÌÅÍ¸¦ ³Ñ±æ ¶§ÀÇ view)
+	void CreateUAV(); // Unordered Access View ( GPUê°€ CPUì— ë°ì´í„°ë¥¼ ë„˜ê¸¸ ë•Œì˜ view)
 	void CreateResult();
 
 private:

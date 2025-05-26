@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 struct MatrixBuffer : public ConstBuffer<Matrix>
 {
@@ -97,7 +97,7 @@ struct Lights
 
 	int lightCount			= 1;
 	Vector3 ambientLight	= Vector3(0.1f, 0.1f, 0.1f);
-	Vector3 ambientCeil		= Vector3(0.1f, 0.1f, 0.1f); // Á¦ÇÑ ¹à±â
+	Vector3 ambientCeil		= Vector3(0.1f, 0.1f, 0.1f); // ì œí•œ ë°ê¸°
 	float padding{};
 
 };
@@ -156,7 +156,7 @@ struct MaterialData
 	Vector4 diffuse  = Vector4(1, 1, 1, 1);
 	Vector4 specular = Vector4(0, 0, 0, 1);
 	Vector4 ambient  = Vector4(0.1f, 0.1f, 0.1f, 1.f);
-	Vector4 emissive = Vector4(0, 0, 0, 0); //// Material ÀÚÃ¼°¡ ºûÀ» ³»´Â ¿ä¼Ò (¹«µåµî°°Àº ´À³¦)
+	Vector4 emissive = Vector4(0, 0, 0, 0); //// Material ìì²´ê°€ ë¹›ì„ ë‚´ëŠ” ìš”ì†Œ (ë¬´ë“œë“±ê°™ì€ ëŠë‚Œ)
 
 	float shininess = 24.f;
 
@@ -238,7 +238,7 @@ struct WaterData
 	float waveScale = 0.1f;
 	float waveShininess = 24.f;
 
-	float fresnel = 0.5f; // ÇÁ·¹³Ú °è¼ö
+	float fresnel = 0.5f; // í”„ë ˆë„¬ ê³„ìˆ˜
 
 	float padding[3]{};
 };

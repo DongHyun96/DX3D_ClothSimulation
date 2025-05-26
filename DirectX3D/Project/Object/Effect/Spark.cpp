@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Spark.h"
 
 
@@ -79,7 +79,7 @@ void Spark::Play(Vector3 position)
 
 void Spark::SetVertex()
 {
-	vertices.resize(MAX_COUNT); // VertexBuffer¿¡¼­ dataÀÇ Å©±â°¡ 0À¸·Î ÀâÈ÷Áö ¾Ê±â À§ÇÔ(ByteWidth)
+	vertices.resize(MAX_COUNT); // VertexBufferì—ì„œ dataì˜ í¬ê¸°ê°€ 0ìœ¼ë¡œ ì¡íˆì§€ ì•Šê¸° ìœ„í•¨(ByteWidth)
 
 	vertexBuffer = new VertexBuffer(vertices);
 
@@ -105,7 +105,7 @@ void Spark::UpdateParticle()
 
 		float radius = Random(minRadius, maxRadius);
 
-		// ±âº» velocity ¹æÇâ¿¡ rotMatÀ» °öÇØ¼­ ·£´ıÇÑ ¹æ¸éÀ¸·Î º¸³¾°ÍÀÓ
+		// ê¸°ë³¸ velocity ë°©í–¥ì— rotMatì„ ê³±í•´ì„œ ëœë¤í•œ ë°©ë©´ìœ¼ë¡œ ë³´ë‚¼ê²ƒì„
 		Vector3 velocity = Vector3(0, 0, radius);
 
 		Matrix rotMatrix = XMMatrixRotationRollPitchYawFromVector(rot);

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 class Terrain : public GameObject<VertexTextureNormalTangent>
 {
 
@@ -31,7 +31,7 @@ private:
 	
 	Texture* heightMap{};
 
-	// heightMap ÀÇ ÃÖ´ë³ôÀÌ´Â 1, scaleÀ» °öÇØ¼­ ´õ Å°¿ò
+	// heightMap ì˜ ìµœëŒ€ë†’ì´ëŠ” 1, scaleì„ ê³±í•´ì„œ ë” í‚¤ì›€
 	const float HEIGHT_SCALE = 20.f;
 
 	Texture* alphaMap{};
