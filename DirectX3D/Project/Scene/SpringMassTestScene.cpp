@@ -25,7 +25,7 @@ void SpringMassTestScene::Update()
 {
 	DEFAULT_FLOOR->Update();
 
-	cloth->Update(PHYSICS_TIMESTEP);
+	cloth->Update();
 
 	for (auto& p : obstacles)
 	{
@@ -58,7 +58,7 @@ void SpringMassTestScene::PostRender()
 	}
 
 
-	DEFAULT_FLOOR->Debug();
+	// DEFAULT_FLOOR->Debug();
 
 	cloth->PostRender();
 

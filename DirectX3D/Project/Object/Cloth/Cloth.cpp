@@ -1,6 +1,10 @@
-﻿#include "Framework.h"
+#include "Framework.h"
 #include "Cloth.h"
 
+const UINT Cloth::FIXED_LEFT_IDX = 0;
+const UINT Cloth::FIXED_RIGHT_IDX = 19;
+
+const float Cloth::ACCEL_AMOUNT = 1.5f;
 
 Cloth::Cloth(Vector4 color)
 	:GameObject<VertexType>(L"02_DiffuseColor"), color(color)
@@ -10,7 +14,7 @@ Cloth::Cloth(Vector4 color)
 
 	CreateMesh();
 
-	this->Update(1);
+	this->Update();
 
 	isPlaying = false;
 }
@@ -98,21 +102,33 @@ void Cloth::CreateMesh()
 		Particle steps(UpdateRigidBody)
 		ResolveCollisions
 */
-void Cloth::Update(const UINT& PhysicsTimeStep)
+void Cloth::Update()
 {
-	if (DELTA_TIME > 0.01f) return;
+	
+	// Differential equation 풀이용 timeStep -> 한 Update tick 안에서 dt를 작게 쪼개는 용도
+	// Euler method으로 입자의 현 velocity와 위치를 계산할 때, raw한 delta time 사용 시 오차가 상당히 커서 시뮬레이션이 터져버림
+#ifdef NDEBUG // Release mode
+	const UINT physicsTimeStep = (SolverType == RUNGE_KUTTA) ? 1 : 100;
+#else // Debug mode
+	const UINT physicsTimeStep = (SolverType == RUNGE_KUTTA) ? 20 : 50;
+#endif
+	
+	// Delta Time이 너무 큰 경우, 미분방정식 근사해의 오차율의 증가로 Simulation이 터질 수 있음
+	// 위의 상황을 방지하기 위함
+	// if (DELTA_TIME > 0.018f) return;
 
 	HandleInput();
-
+	UpdateWindActive();
+	
 	if (!isPlaying) return;
 
-	for (UINT i = 0; i < PhysicsTimeStep; i++)
+	for (UINT i = 0; i < physicsTimeStep; i++)
 	{
 		if (isWindActive)
 		{
-			windVelocity.z += ACCEL_AMOUNT * accelSign * DELTA_TIME / PhysicsTimeStep;
+			windVelocity.z += ACCEL_AMOUNT * accelSign * DELTA_TIME / physicsTimeStep;
 
-			accelSignTimer += DELTA_TIME / PhysicsTimeStep;
+			accelSignTimer += DELTA_TIME / physicsTimeStep;
 
 			if (accelSignTimer >= 1.f)
 			{
@@ -142,7 +158,7 @@ void Cloth::Update(const UINT& PhysicsTimeStep)
 
 		for (auto& particle : particles)
 		{
-			particle->SolveCurrentPosition(PhysicsTimeStep, RUNGE_KUTTA);
+			particle->SolveCurrentPosition(physicsTimeStep, RUNGE_KUTTA);
 			particle->Update();
 			
 			for (Quad*& quad : quadObstacles)
@@ -163,7 +179,7 @@ void Cloth::Update(const UINT& PhysicsTimeStep)
 
 	switch (mode)
 	{
-	case Cloth::RAW_SPRING:
+	case RAW_SPRING:
 		// Updating spring transforms
 		for (auto& spring : springs)
 			spring->Update();
@@ -171,7 +187,7 @@ void Cloth::Update(const UINT& PhysicsTimeStep)
 		// Update instance data
 		UpdateSpringInstanceData();
 		break;
-	case Cloth::FABRIC: // Update fabric's vertices pos and normal
+	case FABRIC: // Update fabric's vertices pos and normal
 
 		UpdateFabricMesh();
 
@@ -210,15 +226,24 @@ void Cloth::PostRender()
 {
 	ImGui::Text("Cloth Options");
 	ImGui::Text("Input Keys:");
-	ImGui::Text("0 : Init | 1 : ToggleLeftFixed | 2 : ToggleRightFixed");
-	ImGui::Text("SpaceBar : TogglePlaying");
+	ImGui::Text("0 : Init Simulation | 1 : ToggleLeftFixed | 2 : ToggleRightFixed");
+	ImGui::Text("SpaceBar : Toggle Play/Pause");
+	
+	if (ImGui::Button("Init Simulation", ImVec2(200, 20))) InitSimulation();
+	
+	const char* clothTypeList[] = { "Raw Spring", "Fabric" };
+	ImGui::Combo("ClothType", (int*)&mode, clothTypeList, 2);
 
-	ImGui::Checkbox("IsPlaying",  &isPlaying);
+	bool isPaused = !isPlaying;
+	ImGui::Checkbox("Paused",  &isPaused);
 	ImGui::Checkbox("WindActive", &isWindActive);
+	ImGui::Checkbox("Left fixed", particles[FIXED_LEFT_IDX]->GetFixedPointer());
+	ImGui::Checkbox("Right fixed", particles[FIXED_RIGHT_IDX]->GetFixedPointer());
 
-	const char* list[] = { "Raw Spring", "Fabric" };
-
-	ImGui::Combo("ClothType", (int*)&mode, list, 2);
+	const char* solverTypeList[] = {"Euler", "Runge-Kutta"};
+	ImGui::Combo("SolverType", (int*)&SolverType, solverTypeList, 2);
+	
+	isPlaying = !isPaused;
 }
 
 void Cloth::AddObstacles(Transform* obstacle)
@@ -290,30 +315,32 @@ void Cloth::InitSpringInstancing()
 	instanceBuffer = new VertexBuffer(instanceData);
 }
 
+void Cloth::InitSimulation()
+{
+	for (int y = 0; y < 20; y++)
+	{
+		for (int x = 0; x < 20; x++)
+			particles[x + y * 20]->translation = { (x - 10) * 2.f, 200.f - (y - 1) * 2.f, Random(0.f, 1.f) };
+	}
+
+	particles[FIXED_LEFT_IDX]->SetFixed(true);
+	particles[FIXED_RIGHT_IDX]->SetFixed(true);
+
+	for (RigidSphere* particle : particles) particle->Update();
+	for (Spring* spring : springs)			spring->Update();
+
+	UpdateSpringInstanceData();
+	UpdateFabricMesh();
+
+	isPlaying = false;
+	isWindActive = false;
+}
+
 void Cloth::HandleInput()
 {
 	if (KEY_DOWN(VK_SPACE)) isPlaying = !isPlaying;
 
-	if (KEY_DOWN('0'))
-	{
-		for (int y = 0; y < 20; y++)
-		{
-			for (int x = 0; x < 20; x++)
-				particles[x + y * 20]->translation = { (x - 10) * 2.f, 200.f - (y - 1) * 2.f, Random(0.f, 1.f) };
-		}
-
-		particles[FIXED_LEFT_IDX]->SetFixed(true);
-		particles[FIXED_RIGHT_IDX]->SetFixed(true);
-
-		for (RigidSphere* particle : particles) particle->Update();
-		for (Spring* spring : springs)			spring->Update();
-
-		UpdateSpringInstanceData();
-		UpdateFabricMesh();
-
-		isPlaying = false;
-	}
-
+	if (KEY_DOWN('0'))	InitSimulation();
 	if (KEY_DOWN('1'))	particles[FIXED_LEFT_IDX]->ToggleFixed();
 	if (KEY_DOWN('2'))	particles[FIXED_RIGHT_IDX]->ToggleFixed();
 }
@@ -359,4 +386,10 @@ void Cloth::UpdateFabricMesh()
 	}
 
 	mesh->UpdateVertex(vertices.data(), vertices.size());
+}
+
+void Cloth::UpdateWindActive()
+{
+	if ( !particles[FIXED_LEFT_IDX]->GetFixed() && !particles[FIXED_RIGHT_IDX]->GetFixed() )
+		isWindActive = false;
 }

@@ -32,7 +32,9 @@ public:
 	void SolveCurrentPosition(const UINT& timeStep = 1, const DifferentialEquationSolver& SolverType = RUNGE_KUTTA); // Step
 
 	void SetFixed(const bool& fixed) { this->fixed = fixed; }
+	bool GetFixed() const { return fixed; }
 	void ToggleFixed() { fixed = !fixed; }
+	bool* GetFixedPointer() { return &fixed; }
 
 	Vector3 GetVelocity() const { return velocity; }
 
@@ -63,6 +65,6 @@ private:
 
 private:
 
-	const float SPHERE_COLLISION_MARGIN = 0.5f;
+	static const float SPHERE_COLLISION_MARGIN;
 
 };

@@ -72,7 +72,7 @@ MainGame::MainGame()
 
 
     //SCENE->Add("Tutorial");
-    SCENE->Add("Grid");
+    // SCENE->Add("Grid");
     SCENE->Add("Sky");
     SCENE->Add("Start");
 
@@ -125,16 +125,15 @@ void MainGame::PostRender()
 
     TIME->Render();
 
-    static bool isWireFrame = false;
+    /*static bool isWireFrame = false;
 
     ImGui::Checkbox("WireFrame", &isWireFrame);
 
-    if (isWireFrame)
-        STATE->EnableWireFrame();
-    else
-        STATE->DisableWireFrame();
+    if (isWireFrame)    STATE->EnableWireFrame();
+    else                STATE->DisableWireFrame();*/
+        
 
-    static bool isGrid = true;
+    /*static bool isGrid = true;
 
     if (ImGui::Checkbox("Grid", &isGrid))
     {
@@ -142,7 +141,7 @@ void MainGame::PostRender()
             SCENE->Add("Grid");
         else
             SCENE->Remove("Grid");
-    }
+    }*/
 
     ENVIRONMENT->PostSet();
 

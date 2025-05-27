@@ -20,7 +20,7 @@ public:
 	Cloth(Vector4 color = Vector4(1, 0, 0, 1));
 	~Cloth();
 
-	void Update(const UINT& PhysicsTimeStep);
+	void Update() override;;
 	void Render(D3D11_PRIMITIVE_TOPOLOGY topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST) override;
 	void PostRender();
 
@@ -30,12 +30,15 @@ private:
 
 	void InitObjects();
 	void InitSpringInstancing();
+	void InitSimulation();
 
 	void HandleInput();
 
 	void UpdateSpringInstanceData();
 
 	void UpdateFabricMesh();
+
+	void UpdateWindActive();
 
 private:
 
@@ -44,8 +47,8 @@ private:
 	vector<RigidSphere*> particles{};
 	vector<Spring*>		 springs{}; // Update용 spring들
 
-	const UINT			 FIXED_LEFT_IDX  = 0;
-	const UINT			 FIXED_RIGHT_IDX = 19;
+	static const UINT	FIXED_LEFT_IDX;
+	static const UINT	FIXED_RIGHT_IDX;
 
 	bool				 isPlaying = true;
 
@@ -70,15 +73,20 @@ private: // 바람 관련
 	Vector3		windVelocity	= Vector3(0, 0, 3.f);
 	float		accelSignTimer{};
 	int			accelSign		= 1;
-	const float ACCEL_AMOUNT	= 1.5f;
 	float		windBias		= 1.f;
 
+	static const float ACCEL_AMOUNT;
+	
 private:
 
 	enum Mode
 	{
 		RAW_SPRING,
 		FABRIC
-	} mode{};
+	} mode = FABRIC;
 
+private:
+
+	DifferentialEquationSolver SolverType = RUNGE_KUTTA;
+	
 };

@@ -1,6 +1,8 @@
 ﻿#include "Framework.h"
 #include "RigidSphere.h"
 
+const float RigidSphere::SPHERE_COLLISION_MARGIN = 0.5f;
+
 RigidSphere::RigidSphere(float mass, float radius, UINT stackCount, UINT sliceCount)
 	:ColliderSphere(radius, stackCount, sliceCount), mass(mass)
 {
